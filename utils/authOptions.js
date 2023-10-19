@@ -7,7 +7,7 @@ const authOptions = {
     providers: [GithubProvider({ clientId: process.env.GITHUB_ID, clientSecret: process.env.GITHUB_SECRET })],
     callbacks: {
         async session({ session, user }) {
-            if (session?.user) session.user._id = user.id;
+            if (session?.user) session.user.id = user.id;
 
             return session;
         },
