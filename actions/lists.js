@@ -16,6 +16,16 @@ export async function getLists() {
     return lists;
 }
 
+export async function getList(id) {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    const list = await List.findOne({ _id: id, user: user?.id });
+
+    return list;
+}
+
 export async function createList(formData) {
     await connectToDB();
 
