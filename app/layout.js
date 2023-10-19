@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 export const metadata = {
     title: "Create Next App",
@@ -9,14 +10,8 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body>
-                <ul>
-                    <li>
-                        <Link href="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link href="/api/auth/signout">Sign Out</Link>
-                    </li>
-                </ul>
+                <Navbar />
+                <Sidebar />
                 {children}
             </body>
         </html>
