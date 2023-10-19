@@ -59,3 +59,44 @@ export async function createTask(formData) {
         return data;
     }
 }
+
+export async function updateTaskCompleted(formData) {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    const list = formData.get("list");
+    const task = formData.get("task");
+    const completed = formData.get("completed");
+
+    try {
+        await List.findOneAndUpdate(
+            { _id: list, user: user?.id, "tasks._id": task },
+            {
+                $set: {
+                    "tasks.$.completed": completed,
+                },
+            },
+            { new: true, runValidators: true }
+        );
+
+        revalidatePath(`/lists/${list}`);
+
+        const data = {
+            action: "completeTask",
+            success: true,
+            task,
+        };
+        console.log(data);
+        return data;
+    } catch (err) {
+        const validationError = formatValidationError(err);
+        const data = {
+            action: "completeTask",
+            success: false,
+            errors: validationError,
+        };
+        console.error(data);
+        return data;
+    }
+}
