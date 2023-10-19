@@ -10,6 +10,7 @@ const taskSchema = new Schema(
         my_day: {
             type: Boolean,
             default: false,
+            required: true,
         },
         due_date: Date,
         repeat: Number,
