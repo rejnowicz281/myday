@@ -83,7 +83,7 @@ export async function updateTaskCompleted(formData) {
         revalidatePath(`/lists/${list}`);
 
         const data = {
-            action: "completeTask",
+            action: "updateTaskCompleted",
             success: true,
             task,
         };
@@ -92,7 +92,48 @@ export async function updateTaskCompleted(formData) {
     } catch (err) {
         const validationError = formatValidationError(err);
         const data = {
-            action: "completeTask",
+            action: "updateTaskCompleted",
+            success: false,
+            errors: validationError,
+        };
+        console.error(data);
+        return data;
+    }
+}
+
+export async function updateTaskMyDay(formData) {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    const list = formData.get("list");
+    const task = formData.get("task");
+    const my_day = formData.get("my_day");
+
+    try {
+        await List.findOneAndUpdate(
+            { _id: list, user: user?.id, "tasks._id": task },
+            {
+                $set: {
+                    "tasks.$.my_day": my_day,
+                },
+            },
+            { new: true, runValidators: true }
+        );
+
+        revalidatePath(`/lists/${list}`);
+
+        const data = {
+            action: "updateTaskMyDay",
+            success: true,
+            task,
+        };
+        console.log(data);
+        return data;
+    } catch (err) {
+        const validationError = formatValidationError(err);
+        const data = {
+            action: "updateTaskMyDay",
             success: false,
             errors: validationError,
         };
