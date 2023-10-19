@@ -12,6 +12,11 @@ const taskSchema = new Schema(
             default: false,
             required: true,
         },
+        completed: {
+            type: Boolean,
+            default: false,
+            required: true,
+        },
         due_date: Date,
         repeat: Number,
         priority: Number,

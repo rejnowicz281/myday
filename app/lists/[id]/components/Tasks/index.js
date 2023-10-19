@@ -10,6 +10,7 @@ export default function Tasks({ listId, tasks }) {
                         <div>Name: {task.name}</div>
                         <div>Created at: {task.createdAt.toString()}</div>
                         <div>Last updated: {task.updatedAt.toString()}</div>
+                        <div>Completed: {task.my_day.toString()}</div>
                         <div>My day: {task.my_day.toString()}</div>
                         {task.due_date && <div>Due: {task.due_date}</div>}
                         {task.repeat && <div>Repeating: every {task.repeat} day(s)</div>}

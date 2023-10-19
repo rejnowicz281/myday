@@ -27,6 +27,7 @@ export async function createTask(formData) {
         repeat: repeat || undefined,
         priority: priority || undefined,
         note: note || undefined,
+        completed: false,
     });
 
     try {
