@@ -5,6 +5,7 @@ const listSchema = new Schema(
         name: {
             type: String,
             default: "Untitled List",
+            required: true,
         },
         user: {
             type: Schema.Types.ObjectId,
