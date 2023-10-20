@@ -20,6 +20,10 @@ export default function AddTask({ listId }) {
             <div>
                 <textarea name="note" placeholder="optional note"></textarea>
             </div>
+            <div>
+                <label htmlFor="my_day">My Day</label>
+                <input type="checkbox" name="my_day" />
+            </div>
             <SubmitButton content="Add Task" loading="Submitting..." />
         </form>
     );

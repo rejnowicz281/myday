@@ -5,6 +5,7 @@ import Task from "@models/task";
 import { connectToDB } from "@utils/database";
 import formatValidationError from "@utils/formatValidationError";
 import getCurrentUser from "@utils/getServerSession";
+import { DateTime } from "luxon";
 import { revalidatePath } from "next/cache";
 import repeatTask from "./helpers/repeatTask";
 
@@ -12,22 +13,22 @@ export async function createTask(formData) {
     await connectToDB();
 
     const user = await getCurrentUser();
-
     const list = formData.get("list");
-    const name = formData.get("name");
-    const my_day = formData.get("my_day");
-    const due_date = formData.get("due_date");
-    const repeat = formData.get("repeat");
-    const priority = formData.get("priority");
-    const note = formData.get("note");
+    const name = formData.get("name") || undefined;
+    const due_date = formData.get("due_date") || undefined;
+    const my_day = // if my_day is on, assign true, else check if due_date is today, if no due_date assign false
+        formData.get("my_day") == "on" ? true : due_date ? DateTime.now().toFormat("yyyy-MM-dd") == due_date : false;
+    const repeat = formData.get("repeat") || undefined;
+    const priority = formData.get("priority") || undefined;
+    const note = formData.get("note") || undefined;
 
     const task = new Task({
-        name: name || undefined,
-        my_day: my_day || undefined,
-        due_date: due_date || undefined,
-        repeat: repeat || undefined,
-        priority: priority || undefined,
-        note: note || undefined,
+        name,
+        my_day,
+        due_date,
+        repeat,
+        priority,
+        note,
         completed: false,
     });
 
