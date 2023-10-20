@@ -17,10 +17,18 @@ const taskSchema = new Schema(
             default: false,
             required: true,
         },
-        due_date: Date,
-        repeat: Number,
-        priority: Number,
+        priority: {
+            type: Number,
+            default: 0,
+            required: true,
+        },
+        repeat: {
+            type: Number,
+            default: 0,
+            required: true,
+        },
         note: String,
+        due_date: Date,
     },
     { timestamps: true }
 );

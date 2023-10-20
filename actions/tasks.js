@@ -217,3 +217,29 @@ export async function updateTaskNote(note, listId, taskId) {
         return data;
     }
 }
+
+export async function deleteTask(formData) {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    const list = formData.get("list");
+    const task = formData.get("task");
+
+    await List.findOneAndUpdate(
+        { _id: list, user: user?.id },
+        {
+            $pull: { tasks: { _id: task } },
+        },
+        { new: true }
+    );
+
+    revalidatePath(`/lists/${list}`);
+
+    const data = {
+        action: "deleteTask",
+        success: true,
+    };
+    console.log(data);
+    return data;
+}
