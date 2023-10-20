@@ -63,6 +63,39 @@ export async function createList(formData) {
     }
 }
 
+export async function updateListName(new_name, id) {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    try {
+        const newList = await List.findOneAndUpdate(
+            { _id: id, user: user?.id },
+            { name: new_name || undefined },
+            { new: true, runValidators: true }
+        );
+
+        revalidatePath(`/lists/${id}`);
+
+        const data = {
+            action: "updateListName",
+            success: true,
+            newList: JSON.stringify(newList),
+        };
+        console.log(data);
+        return data;
+    } catch (err) {
+        const validationError = formatValidationError(err);
+        const data = {
+            action: "updateListName",
+            success: false,
+            errors: validationError,
+        };
+        console.error(data);
+        return data;
+    }
+}
+
 export async function deleteList(formData) {
     await connectToDB();
 
