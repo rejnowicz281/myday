@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import css from "./index.module.css";
 
 export default function EditableName({ action, name, listId, taskId }) {
     const [nameInput, setNameInput] = useState(name);
@@ -22,6 +23,7 @@ export default function EditableName({ action, name, listId, taskId }) {
         return (
             <form onSubmit={handleSubmit}>
                 <input
+                    className={css.nameInput}
                     type="text"
                     name="name"
                     placeholder="Type in name here"
@@ -33,8 +35,8 @@ export default function EditableName({ action, name, listId, taskId }) {
         );
     else
         return (
-            <button onClick={() => setEditing(true)}>
-                <div>{nameDisplay}</div>
+            <button className={css.nameDisplay} onClick={() => setEditing(true)}>
+                {nameDisplay}
             </button>
         );
 }
