@@ -145,3 +145,39 @@ export async function updateTaskMyDay(formData) {
         return data;
     }
 }
+
+export async function updateTaskName(new_name, listId, taskId) {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    try {
+        await List.findOneAndUpdate(
+            { _id: listId, user: user?.id, "tasks._id": taskId },
+            {
+                $set: {
+                    "tasks.$.name": new_name,
+                },
+            },
+            { new: true, runValidators: true }
+        );
+
+        revalidatePath(`/lists/${listId}`);
+
+        const data = {
+            action: "updateTaskName",
+            success: true,
+        };
+        console.log(data);
+        return data;
+    } catch (err) {
+        const validationError = formatValidationError(err);
+        const data = {
+            action: "updateTaskName",
+            success: false,
+            errors: validationError,
+        };
+        console.error(data);
+        return data;
+    }
+}

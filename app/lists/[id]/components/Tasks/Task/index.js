@@ -1,10 +1,12 @@
+import { updateTaskName } from "@actions/tasks";
 import Completed from "./Completed";
+import EditableName from "./EditableName";
 import MyDay from "./MyDay";
 
 export default function Task({ listId, task }) {
     return (
         <div>
-            <div>Name: {task.name}</div>
+            <EditableName action={updateTaskName} name={task.name} listId={listId} taskId={task.id} />
             <div>Created at: {task.createdAt.toString()}</div>
             <div>Last updated: {task.updatedAt.toString()}</div>
             <Completed listId={listId} taskId={task.id} completed={task.completed} />
