@@ -5,6 +5,7 @@ import { connectToDB } from "@utils/database";
 import formatValidationError from "@utils/formatValidationError";
 import getCurrentUser from "@utils/getServerSession";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function getLists() {
     await connectToDB();
@@ -60,4 +61,21 @@ export async function createList(formData) {
         console.error(data);
         return data;
     }
+}
+
+export async function deleteList(formData) {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    const list = formData.get("list");
+
+    await List.findOneAndDelete({ _id: list, user: user?.id });
+
+    const data = {
+        action: "deleteList",
+        success: true,
+    };
+    console.log(data);
+    redirect("/");
 }

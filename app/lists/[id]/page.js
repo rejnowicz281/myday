@@ -1,4 +1,5 @@
 import { getList } from "@actions/lists";
+import DeleteButton from "./components/DeleteButton";
 import Tasks from "./components/Tasks";
 
 export default async function ListPage({ params: { id } }) {
@@ -7,6 +8,7 @@ export default async function ListPage({ params: { id } }) {
     return (
         <>
             <h1>{list.name}</h1>
+            <DeleteButton listId={id} />
             <p>{list.createdAt.toString()}</p>
             <Tasks listId={id} tasks={list.tasks} />
         </>
