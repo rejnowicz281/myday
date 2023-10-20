@@ -218,6 +218,42 @@ export async function updateTaskNote(note, listId, taskId) {
     }
 }
 
+export async function updateTaskRepeat(repeat, listId, taskId) {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    try {
+        await List.findOneAndUpdate(
+            { _id: listId, user: user?.id, "tasks._id": taskId },
+            {
+                $set: {
+                    "tasks.$.repeat": repeat,
+                },
+            },
+            { new: true, runValidators: true }
+        );
+
+        revalidatePath(`/lists/${listId}`);
+
+        const data = {
+            action: "updateTaskRepeat",
+            success: true,
+        };
+        console.log(data);
+        return data;
+    } catch (err) {
+        const validationError = formatValidationError(err);
+        const data = {
+            action: "updateTaskRepeat",
+            success: false,
+            errors: validationError,
+        };
+        console.error(data);
+        return data;
+    }
+}
+
 export async function deleteTask(formData) {
     await connectToDB();
 

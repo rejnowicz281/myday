@@ -1,9 +1,10 @@
-import { updateTaskName, updateTaskNote } from "@actions/tasks";
+import { updateTaskName, updateTaskNote, updateTaskRepeat } from "@actions/tasks";
 import Completed from "./Completed";
 import DeleteButton from "./DeleteButton";
 import EditableName from "./EditableName";
 import MyDay from "./MyDay";
 import Note from "./Note";
+import Repeat from "./Repeat";
 
 export default function Task({ listId, task }) {
     return (
@@ -15,9 +16,9 @@ export default function Task({ listId, task }) {
             <div>Last updated: {task.updatedAt.toString()}</div>
             <Completed listId={listId} taskId={task.id} completed={task.completed} />
             <MyDay listId={listId} taskId={task.id} my_day={task.my_day} />
-            {task.due_date && <div>Due: {task.due_date.toString()}</div>}
-            <div>Repeating: every {task.repeat} day(s)</div>
+            <Repeat action={updateTaskRepeat} listId={listId} taskId={task.id} repeat={task.repeat} />
             <div>Priority: {task.priority}</div>
+            {task.due_date && <div>Due: {task.due_date.toString()}</div>}
             <hr />
         </div>
     );
