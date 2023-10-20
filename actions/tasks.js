@@ -6,6 +6,7 @@ import { connectToDB } from "@utils/database";
 import formatValidationError from "@utils/formatValidationError";
 import getCurrentUser from "@utils/getServerSession";
 import { revalidatePath } from "next/cache";
+import repeatTask from "./helpers/repeatTask";
 
 export async function createTask(formData) {
     await connectToDB();
@@ -79,6 +80,8 @@ export async function updateTaskCompleted(formData) {
             },
             { new: true, runValidators: true }
         );
+
+        if (completed == "true") await repeatTask(list, task, user);
 
         revalidatePath(`/lists/${list}`);
 
