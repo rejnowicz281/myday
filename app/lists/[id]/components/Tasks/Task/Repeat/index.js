@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { experimental_useOptimistic as useOptimistic } from "react";
 import Display from "./Display";
 import Options from "./Options";
 
 export default function Repeat({ repeat, action, listId, taskId }) {
-    const [optimisticRepeat, setOptimisticRepeat] = useState(repeat);
+    const [optimisticRepeat, setOptimisticRepeat] = useOptimistic(repeat);
 
     function handleChange(amount) {
         if (amount > -1 && amount != optimisticRepeat) {

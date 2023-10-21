@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { experimental_useOptimistic as useOptimistic, useState } from "react";
 
 export default function ToggleEditable({
     action,
@@ -12,18 +12,18 @@ export default function ToggleEditable({
     defaultDisplay,
     inputType,
 }) {
-    const [input, setInput] = useState(initial);
-    const [display, setDisplay] = useState(initial);
+    const [display, setDisplay] = useOptimistic(initial);
+    const [input, setInput] = useOptimistic(display);
     const [editing, setEditing] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
         setEditing(false);
-        if (input != "") {
+
+        if (input == "") setInput(display);
+        else {
             setDisplay(input);
             action(input);
-        } else {
-            setInput(display);
         }
     }
 
