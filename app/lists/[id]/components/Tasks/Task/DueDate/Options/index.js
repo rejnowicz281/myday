@@ -1,10 +1,10 @@
 "use client";
 
 import { DateTime } from "luxon";
-import { useState } from "react";
+import { experimental_useOptimistic as useOptimistic } from "react";
 
 export default function Options({ listId, taskId, action, dueDate, setDueDate }) {
-    const [input, setInput] = useState(DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd"));
+    const [input, setInput] = useOptimistic(DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd"));
 
     function handleSubmit(e) {
         e.preventDefault();
