@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Display from "./Display";
 import Options from "./Options";
 
 export default function Repeat({ repeat, action, listId, taskId }) {
@@ -15,7 +16,7 @@ export default function Repeat({ repeat, action, listId, taskId }) {
 
     return (
         <div>
-            Repeating: every {optimisticRepeat} day(s)
+            <Display repeat={optimisticRepeat} />
             <button onClick={() => handleChange(0)}>No Repeat</button>
             <button onClick={() => handleChange(1)}>Daily</button>
             <button onClick={() => handleChange(7)}>Weekly</button>
