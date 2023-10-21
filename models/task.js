@@ -31,6 +31,14 @@ const taskSchema = new Schema(
         },
         note: String,
         due_date: Date,
+        list: {
+            type: Schema.Types.ObjectId,
+            ref: "List",
+        },
+        owner: {
+            type: Schema.Types.ObjectId,
+            required: true,
+        },
     },
     { timestamps: true }
 );

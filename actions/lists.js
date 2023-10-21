@@ -1,6 +1,7 @@
 "use server";
 
 import List from "@models/list";
+import Task from "@models/task";
 import { connectToDB } from "@utils/database";
 import formatValidationError from "@utils/formatValidationError";
 import getCurrentUser from "@utils/getServerSession";
@@ -12,7 +13,7 @@ export async function getLists() {
 
     const user = await getCurrentUser();
 
-    const lists = await List.find({ user: user?.id });
+    const lists = await List.find({ owner: user?.id });
 
     return lists;
 }
@@ -22,9 +23,14 @@ export async function getList(id) {
 
     const user = await getCurrentUser();
 
-    const list = await List.findOne({ _id: id, user: user?.id });
+    const [list, tasks] = await Promise.all([
+        List.findOne({ _id: id, owner: user?.id }),
+        Task.find({ list: id }).select("-list"),
+    ]);
 
-    return list;
+    const data = { ...list._doc, tasks };
+
+    return data;
 }
 
 export async function createList(formData) {
@@ -35,7 +41,7 @@ export async function createList(formData) {
     const name = formData.get("name");
 
     const list = new List({
-        user: user?.id,
+        owner: user?.id,
         name: name || undefined,
     });
 
@@ -70,7 +76,7 @@ export async function updateListName(new_name, id) {
 
     try {
         const newList = await List.findOneAndUpdate(
-            { _id: id, user: user?.id },
+            { _id: id, owner: user?.id },
             { name: new_name || undefined },
             { new: true, runValidators: true }
         );
@@ -80,7 +86,7 @@ export async function updateListName(new_name, id) {
         const data = {
             action: "updateListName",
             success: true,
-            newList: JSON.stringify(newList),
+            list: JSON.stringify(newList),
         };
         console.log(data);
         return data;
@@ -103,11 +109,15 @@ export async function deleteList(formData) {
 
     const list = formData.get("list");
 
-    await List.findOneAndDelete({ _id: list, user: user?.id });
+    await Promise.all([
+        List.findOneAndDelete({ _id: list, owner: user?.id }),
+        Task.deleteMany({ list, owner: user?.id }),
+    ]);
 
     const data = {
         action: "deleteList",
         success: true,
+        list,
     };
     console.log(data);
     redirect("/");
