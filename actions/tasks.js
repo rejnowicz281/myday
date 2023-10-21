@@ -297,16 +297,23 @@ export async function updateTaskDueDate(due_date, listId, taskId) {
     const user = await getCurrentUser();
 
     try {
-        await List.findOneAndUpdate(
-            { _id: listId, user: user?.id, "tasks._id": taskId },
-            {
-                $set: {
-                    "tasks.$.due_date": due_date,
-                    "tasks.$.my_day": isDateToday(due_date),
-                },
-            },
-            { new: true, runValidators: true }
-        );
+        const updateQuery = isDateToday(due_date)
+            ? {
+                  $set: {
+                      "tasks.$.due_date": due_date,
+                      "tasks.$.my_day": true,
+                  },
+              }
+            : {
+                  $set: {
+                      "tasks.$.due_date": due_date,
+                  },
+              };
+
+        await List.findOneAndUpdate({ _id: listId, user: user?.id, "tasks._id": taskId }, updateQuery, {
+            new: true,
+            runValidators: true,
+        });
 
         revalidatePath(`/lists/${listId}`);
 
