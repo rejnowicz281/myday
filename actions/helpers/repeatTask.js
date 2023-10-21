@@ -1,7 +1,7 @@
 import List from "@models/list";
 import Task from "@models/task";
-import isDateToday from "@utils/isDateToday";
 import { DateTime } from "luxon";
+import isDateToday from "./isDateToday";
 
 export default async function repeatTask(listId, taskId, user) {
     const list = await List.findById(listId);
