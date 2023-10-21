@@ -1,9 +1,18 @@
-import { createTask } from "@actions/tasks";
-import SubmitButton from "@components/SubmitButton";
+"use client";
 
-export default function AddTask({ listId }) {
+import SubmitButton from "@components/SubmitButton";
+import { useRef } from "react";
+
+export default function AddTask({ listId, action }) {
+    const formRef = useRef(null);
+
+    async function handleAction(formData) {
+        await action(formData);
+        formRef.current.reset();
+    }
+
     return (
-        <form action={createTask}>
+        <form action={handleAction} ref={formRef}>
             <input type="hidden" name="list" value={listId} />
             <div>
                 <input type="text" name="name" placeholder="Task name here" />

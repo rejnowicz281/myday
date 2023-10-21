@@ -1,4 +1,4 @@
-import { getLists } from "@actions/lists";
+import { createList, getLists } from "@actions/lists";
 import Link from "next/link";
 import AddList from "./AddList";
 
@@ -7,7 +7,7 @@ export default async function Sidebar() {
 
     return (
         <>
-            <AddList />
+            <AddList action={createList} />
             <ul>
                 {lists.map((list) => (
                     <li key={list.id}>
