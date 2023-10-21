@@ -20,11 +20,13 @@ const taskSchema = new Schema(
         priority: {
             type: Number,
             default: 0,
+            min: 0,
             required: true,
         },
         repeat: {
             type: Number,
             default: 0,
+            min: 0,
             required: true,
         },
         note: String,
