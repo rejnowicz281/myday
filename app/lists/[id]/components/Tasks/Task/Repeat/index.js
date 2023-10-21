@@ -1,19 +1,13 @@
 "use client";
 
-import { experimental_useOptimistic as useOptimistic } from "react";
+import { useState } from "react";
+import Options from "./Options";
 
 export default function Repeat({ repeat, action, listId, taskId }) {
-    const [optimisticRepeat, setOptimisticRepeat] = useOptimistic(repeat);
+    const [optimisticRepeat, setOptimisticRepeat] = useState(repeat);
 
-    function handleChange(e) {
-        let amount = e.target.value;
-
-        if (amount == "") return setOptimisticRepeat(0);
-
-        // if amount has 0 at the beginning, remove it
-        if (amount.toString().length > 1 && amount.toString()[0] == "0") amount = amount.substring(1);
-
-        if (amount > -1) {
+    function handleChange(amount) {
+        if (amount > -1 && amount != optimisticRepeat) {
             setOptimisticRepeat(amount);
             action(amount, listId, taskId);
         }
@@ -21,9 +15,19 @@ export default function Repeat({ repeat, action, listId, taskId }) {
 
     return (
         <div>
-            Repeating: every
-            <input type="number" value={optimisticRepeat} onChange={handleChange} />
-            day(s)
+            Repeating: every {optimisticRepeat} day(s)
+            <button onClick={() => handleChange(0)}>No Repeat</button>
+            <button onClick={() => handleChange(1)}>Daily</button>
+            <button onClick={() => handleChange(7)}>Weekly</button>
+            <button onClick={() => handleChange(30)}>Monthly</button>
+            <button onClick={() => handleChange(365)}>Yearly</button>
+            <Options
+                action={action}
+                listId={listId}
+                taskId={taskId}
+                repeat={optimisticRepeat}
+                setRepeat={setOptimisticRepeat}
+            />
         </div>
     );
 }
