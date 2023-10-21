@@ -21,7 +21,7 @@ export default function ToggleEditable({
         setEditing(false);
         if (input != "") {
             setDisplay(input);
-            action();
+            action(input);
         } else {
             setInput(display);
         }

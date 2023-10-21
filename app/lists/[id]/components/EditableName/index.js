@@ -6,7 +6,7 @@ import css from "./index.module.css";
 export default function EditableName({ action, name, listId }) {
     return (
         <ToggleEditable
-            action={() => action(name, listId)}
+            action={(input) => action(input, listId)}
             initial={name}
             submitContent="Update name"
             displayClass={css.display}
