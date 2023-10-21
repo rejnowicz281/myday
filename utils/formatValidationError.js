@@ -1,5 +1,5 @@
 export default function formatValidationError(err) {
-    if (err.name !== "validationError") return err;
+    if (err.name !== "ValidationError") return err.message;
 
     const formattedErrors = {};
 
