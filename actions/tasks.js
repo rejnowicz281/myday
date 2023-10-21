@@ -3,6 +3,7 @@
 import List from "@models/list";
 import Task from "@models/task";
 import { connectToDB } from "@utils/database";
+import { isDateToday } from "@utils/date";
 import formatValidationError from "@utils/formatValidationError";
 import getCurrentUser from "@utils/getServerSession";
 import { DateTime } from "luxon";
@@ -282,6 +283,43 @@ export async function updateTaskPriority(priority, listId, taskId) {
         const validationError = formatValidationError(err);
         const data = {
             action: "updateTaskPriority",
+            success: false,
+            errors: validationError,
+        };
+        console.error(data);
+        return data;
+    }
+}
+
+export async function updateTaskDueDate(due_date, listId, taskId) {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    try {
+        await List.findOneAndUpdate(
+            { _id: listId, user: user?.id, "tasks._id": taskId },
+            {
+                $set: {
+                    "tasks.$.due_date": due_date,
+                    "tasks.$.my_day": isDateToday(due_date),
+                },
+            },
+            { new: true, runValidators: true }
+        );
+
+        revalidatePath(`/lists/${listId}`);
+
+        const data = {
+            action: "updateTaskDueDate",
+            success: true,
+        };
+        console.log(data);
+        return data;
+    } catch (err) {
+        const validationError = formatValidationError(err);
+        const data = {
+            action: "updateTaskDueDate",
             success: false,
             errors: validationError,
         };
