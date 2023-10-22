@@ -1,5 +1,6 @@
 import { getList, updateListName } from "@actions/lists";
 import { createTask } from "@actions/tasks";
+import { formatDate } from "@utils/date";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 import DeleteButton from "./components/DeleteButton";
@@ -12,7 +13,7 @@ export default async function ListPage({ params: { id } }) {
         <>
             <EditableName action={updateListName} listId={id} name={list.name} />
             <DeleteButton listId={id} />
-            <p>{list.createdAt.toString()}</p>
+            <div>Created {formatDate(list.createdAt)}</div>
             <AddTask listId={id} action={createTask} />
             <Tasks listId={id} tasks={list.tasks} />
         </>
