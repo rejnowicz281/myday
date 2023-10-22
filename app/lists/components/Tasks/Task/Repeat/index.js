@@ -4,13 +4,13 @@ import { experimental_useOptimistic as useOptimistic } from "react";
 import Display from "./Display";
 import Options from "./Options";
 
-export default function Repeat({ repeat, action, listId, taskId }) {
+export default function Repeat({ repeat, action, taskId }) {
     const [optimisticRepeat, setOptimisticRepeat] = useOptimistic(repeat);
 
     function handleChange(amount) {
         if (amount > -1 && amount != optimisticRepeat) {
             setOptimisticRepeat(amount);
-            action(amount, listId, taskId);
+            action(amount, taskId);
         }
     }
 
@@ -22,13 +22,7 @@ export default function Repeat({ repeat, action, listId, taskId }) {
             <button onClick={() => handleChange(7)}>Weekly</button>
             <button onClick={() => handleChange(30)}>Monthly</button>
             <button onClick={() => handleChange(365)}>Yearly</button>
-            <Options
-                action={action}
-                listId={listId}
-                taskId={taskId}
-                repeat={optimisticRepeat}
-                setRepeat={setOptimisticRepeat}
-            />
+            <Options action={action} taskId={taskId} repeat={optimisticRepeat} setRepeat={setOptimisticRepeat} />
         </div>
     );
 }

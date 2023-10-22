@@ -9,6 +9,12 @@ export default async function Sidebar() {
         <>
             <AddList action={createList} />
             <ul>
+                <li>
+                    <Link href="/lists/my_day">My Day</Link>
+                </li>
+                <li>
+                    <Link href="/lists/tasks">Tasks</Link>
+                </li>
                 {lists.map((list) => (
                     <li key={list.id}>
                         <Link href={`/lists/${list.id}`}>{list.name}</Link>

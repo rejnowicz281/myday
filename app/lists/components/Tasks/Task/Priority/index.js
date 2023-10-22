@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 
-export default function Priority({ priority, action, listId, taskId }) {
+export default function Priority({ priority, action, taskId }) {
     const [optimisticPriority, setOptimisticPriority] = useState(priority);
 
     async function handleChange(priority) {
         if (priority > -1) {
             setOptimisticPriority(priority);
-            await action(priority, listId, taskId);
+            await action(priority, taskId);
         }
     }
 

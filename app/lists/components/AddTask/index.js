@@ -3,11 +3,11 @@
 import SubmitButton from "@components/SubmitButton";
 import { useRef } from "react";
 
-export default function AddTask({ listId, action }) {
+export default function AddTask({ listId, action, forceMyDay = false }) {
     const formRef = useRef(null);
 
     async function handleAction(formData) {
-        await action(formData);
+        await action(formData, forceMyDay);
         formRef.current.reset();
     }
 

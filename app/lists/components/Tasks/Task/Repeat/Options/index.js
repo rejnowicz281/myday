@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { experimental_useOptimistic as useOptimistic, useState } from "react";
 
-export default function Options({ listId, taskId, action, repeat, setRepeat }) {
-    const [input, setInput] = useState(repeat);
+export default function Options({ taskId, action, repeat, setRepeat }) {
+    const [input, setInput] = useOptimistic(repeat);
     const [everyX, setEveryX] = useState(1);
 
     function handleInputChange(e) {
@@ -21,7 +21,7 @@ export default function Options({ listId, taskId, action, repeat, setRepeat }) {
             const final = input * everyX;
 
             setRepeat(final);
-            action(final, listId, taskId);
+            action(final, taskId);
         }
     }
 

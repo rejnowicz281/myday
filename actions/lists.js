@@ -18,6 +18,26 @@ export async function getLists() {
     return lists;
 }
 
+export async function getMyDayList() {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    const tasks = await Task.find({ my_day: true, owner: user?.id }).populate("list");
+
+    return tasks;
+}
+
+export async function getListlessTasks() {
+    await connectToDB();
+
+    const user = await getCurrentUser();
+
+    const tasks = await Task.find({ list: undefined || null, owner: user?.id });
+
+    return tasks;
+}
+
 export async function getList(id) {
     await connectToDB();
 

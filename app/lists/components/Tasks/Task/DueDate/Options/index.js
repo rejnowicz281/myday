@@ -3,7 +3,7 @@
 import { DateTime } from "luxon";
 import { experimental_useOptimistic as useOptimistic } from "react";
 
-export default function Options({ listId, taskId, action, dueDate, setDueDate }) {
+export default function Options({ taskId, action, dueDate, setDueDate }) {
     const [input, setInput] = useOptimistic(DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd"));
 
     function handleSubmit(e) {
@@ -11,7 +11,7 @@ export default function Options({ listId, taskId, action, dueDate, setDueDate })
         const newDate = DateTime.fromISO(input).toJSDate();
         setDueDate(newDate);
 
-        action(newDate, listId, taskId);
+        action(newDate, taskId);
     }
 
     return (

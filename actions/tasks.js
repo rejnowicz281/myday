@@ -9,7 +9,7 @@ import { DateTime } from "luxon";
 import { revalidatePath } from "next/cache";
 import repeatTask from "./helpers/repeatTask";
 
-export async function createTask(formData) {
+export async function createTask(formData, forceMyDay = false) {
     await connectToDB();
 
     const user = await getCurrentUser();
@@ -17,8 +17,12 @@ export async function createTask(formData) {
     const list = formData.get("list") || undefined;
     const name = formData.get("name") || undefined;
     const due_date = formData.get("due_date") || undefined;
-    const my_day = // if my_day is on, assign true, else check if due_date is today, if no due_date assign false
-        formData.get("my_day") == "on" ? true : due_date ? DateTime.now().toFormat("yyyy-MM-dd") == due_date : false;
+    const my_day = // if my_day is on or forceMyDay is true, assign true, else check if due_date is today, if no due_date assign false
+        formData.get("my_day") == "on" || forceMyDay
+            ? true
+            : due_date
+            ? DateTime.now().toFormat("yyyy-MM-dd") == due_date
+            : false;
     const repeat = formData.get("repeat") || undefined;
     const priority = formData.get("priority") || undefined;
     const note = formData.get("note") || undefined;
@@ -33,10 +37,11 @@ export async function createTask(formData) {
         priority,
         note,
         completed: false,
-    }).populate("list", "owner -_id");
+    }).populate("list");
 
     try {
-        if (task.list.owner != user?.id) throw new Error("You are not allowed to create tasks for this list");
+        if (task.list && task.list.owner != user?.id)
+            throw new Error("You are not allowed to create tasks for this list");
 
         await task.save();
 
@@ -66,7 +71,6 @@ export async function updateTaskCompleted(formData) {
 
     const user = await getCurrentUser();
 
-    const list = formData.get("list");
     const task = formData.get("task");
     const completed = formData.get("completed");
 
@@ -81,7 +85,7 @@ export async function updateTaskCompleted(formData) {
 
         await repeatTask(updatedTask); // repeat task if possible
 
-        revalidatePath(`/lists/${list}`);
+        revalidatePath(`/lists/${updatedTask.list}`);
 
         const data = {
             action: "updateTaskCompleted",
@@ -107,7 +111,6 @@ export async function updateTaskMyDay(formData) {
 
     const user = await getCurrentUser();
 
-    const list = formData.get("list");
     const task = formData.get("task");
     const my_day = formData.get("my_day");
 
@@ -120,7 +123,7 @@ export async function updateTaskMyDay(formData) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${list}`);
+        revalidatePath(`/lists/${updatedTask.list}`);
 
         const data = {
             action: "updateTaskMyDay",
@@ -141,7 +144,7 @@ export async function updateTaskMyDay(formData) {
     }
 }
 
-export async function updateTaskName(name, listId, taskId) {
+export async function updateTaskName(name, taskId) {
     await connectToDB();
 
     const user = await getCurrentUser();
@@ -155,7 +158,7 @@ export async function updateTaskName(name, listId, taskId) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${listId}`);
+        revalidatePath(`/lists/${updatedTask.list}`);
 
         const data = {
             action: "updateTaskName",
@@ -176,7 +179,7 @@ export async function updateTaskName(name, listId, taskId) {
     }
 }
 
-export async function updateTaskNote(note, listId, taskId) {
+export async function updateTaskNote(note, taskId) {
     await connectToDB();
 
     const user = await getCurrentUser();
@@ -190,7 +193,7 @@ export async function updateTaskNote(note, listId, taskId) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${listId}`);
+        revalidatePath(`/lists/${updatedTask.list}`);
 
         const data = {
             action: "updateTaskNote",
@@ -211,7 +214,7 @@ export async function updateTaskNote(note, listId, taskId) {
     }
 }
 
-export async function updateTaskRepeat(repeat, listId, taskId) {
+export async function updateTaskRepeat(repeat, taskId) {
     await connectToDB();
 
     const user = await getCurrentUser();
@@ -225,7 +228,7 @@ export async function updateTaskRepeat(repeat, listId, taskId) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${listId}`);
+        revalidatePath(`/lists/${updatedTask.list}`);
 
         const data = {
             action: "updateTaskRepeat",
@@ -246,7 +249,7 @@ export async function updateTaskRepeat(repeat, listId, taskId) {
     }
 }
 
-export async function updateTaskPriority(priority, listId, taskId) {
+export async function updateTaskPriority(priority, taskId) {
     await connectToDB();
 
     const user = await getCurrentUser();
@@ -260,7 +263,7 @@ export async function updateTaskPriority(priority, listId, taskId) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${listId}`);
+        revalidatePath(`/lists/${updatedTask.list}`);
 
         const data = {
             action: "updateTaskPriority",
@@ -281,7 +284,7 @@ export async function updateTaskPriority(priority, listId, taskId) {
     }
 }
 
-export async function updateTaskDueDate(due_date, listId, taskId) {
+export async function updateTaskDueDate(due_date, taskId) {
     await connectToDB();
 
     const user = await getCurrentUser();
@@ -296,7 +299,7 @@ export async function updateTaskDueDate(due_date, listId, taskId) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${listId}`);
+        revalidatePath(`/lists/${updatedTask.list}`);
 
         const data = {
             action: "updateTaskDueDate",
@@ -322,12 +325,11 @@ export async function deleteTask(formData) {
 
     const user = await getCurrentUser();
 
-    const list = formData.get("list");
     const task = formData.get("task");
 
-    await Task.findOneAndDelete({ _id: task, owner: user?.id });
+    const deletedTask = await Task.findOneAndDelete({ _id: task, owner: user?.id });
 
-    revalidatePath(`/lists/${list}`);
+    revalidatePath(`/lists/${deletedTask.list}`);
 
     const data = {
         action: "deleteTask",
