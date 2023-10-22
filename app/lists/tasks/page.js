@@ -3,7 +3,7 @@ import { createTask } from "@actions/tasks";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 
-export default async function MyDayPage() {
+export default async function TasksPage() {
     const tasks = await getListlessTasks();
 
     return (
