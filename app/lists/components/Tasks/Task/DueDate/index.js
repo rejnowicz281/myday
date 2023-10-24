@@ -1,7 +1,7 @@
 "use client";
 
 import { updateTaskDueDate } from "@actions/tasks";
-import TasksContext from "@app/lists/providers/TasksContext";
+import TasksContext from "@providers/TasksContext";
 import { DateTime } from "luxon";
 import { useContext } from "react";
 import Display from "./Display";

@@ -1,7 +1,7 @@
 "use client";
 
 import { updateTaskCompleted } from "@actions/tasks";
-import TasksContext from "@app/lists/providers/TasksContext";
+import TasksContext from "@providers/TasksContext";
 import { useContext } from "react";
 
 export default function Completed({ taskId, completed }) {

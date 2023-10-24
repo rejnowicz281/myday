@@ -1,8 +1,8 @@
 import { getList } from "@actions/lists";
+import { TasksProvider } from "@providers/TasksContext";
 import { formatDate } from "@utils/date";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
-import { TasksProvider } from "../providers/TasksContext";
 import DeleteButton from "./components/DeleteButton";
 import EditableName from "./components/EditableName";
 

@@ -1,8 +1,8 @@
 "use client";
 
 import { updateTaskNote } from "@actions/tasks";
-import TasksContext from "@app/lists/providers/TasksContext";
 import ToggleEditable from "@components/ToggleEditable";
+import TasksContext from "@providers/TasksContext";
 import { useContext } from "react";
 import css from "./index.module.css";
 

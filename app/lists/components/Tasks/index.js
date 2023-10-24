@@ -1,7 +1,7 @@
 "use client";
 
+import TasksContext from "@providers/TasksContext";
 import { useContext } from "react";
-import TasksContext from "../../providers/TasksContext";
 import Task from "./Task";
 
 export default function Tasks({ showList = false }) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { updateTaskRepeat } from "@actions/tasks";
-import TasksContext from "@app/lists/providers/TasksContext";
+import TasksContext from "@providers/TasksContext";
 import { useContext } from "react";
 import Display from "./Display";
 import Options from "./Options";
