@@ -1,13 +1,14 @@
 "use client";
 
+import { createTask } from "@actions/tasks";
 import SubmitButton from "@components/SubmitButton";
 import { useRef } from "react";
 
-export default function AddTask({ listId, action, forceMyDay = false }) {
+export default function AddTask({ listId, forceMyDay = false }) {
     const formRef = useRef(null);
 
     async function handleAction(formData) {
-        await action(formData, forceMyDay);
+        await createTask(formData, forceMyDay);
         formRef.current.reset();
     }
 

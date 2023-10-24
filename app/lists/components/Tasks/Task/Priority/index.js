@@ -1,22 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { updateTaskPriority } from "@actions/tasks";
+import TasksContext from "@app/lists/providers/TasksContext";
+import { useContext } from "react";
 
-export default function Priority({ priority, action, taskId }) {
-    const [optimisticPriority, setOptimisticPriority] = useState(priority);
+export default function Priority({ priority, taskId }) {
+    const { setPriority } = useContext(TasksContext);
 
     async function handleChange(priority) {
         if (priority > -1) {
-            setOptimisticPriority(priority);
-            await action(priority, taskId);
+            setPriority(taskId, priority);
+            updateTaskPriority(taskId, priority);
         }
     }
 
     return (
         <div>
-            Priority: {optimisticPriority}
-            <button onClick={() => handleChange(optimisticPriority + 1)}>+1</button>
-            <button onClick={() => handleChange(optimisticPriority - 1)}>-1</button>
+            Priority: {priority}
+            <button onClick={() => handleChange(priority + 1)}>+1</button>
+            <button onClick={() => handleChange(priority - 1)}>-1</button>
         </div>
     );
 }

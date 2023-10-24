@@ -1,15 +1,19 @@
 import { updateTaskMyDay } from "@actions/tasks";
-import SubmitButton from "@components/SubmitButton";
+import TasksContext from "@app/lists/providers/TasksContext";
+import { useContext } from "react";
 
 export default function MyDay({ taskId, my_day }) {
+    const { setMyDay } = useContext(TasksContext);
+
+    function handleAction() {
+        setMyDay(taskId, !my_day);
+        updateTaskMyDay(taskId, !my_day);
+    }
+
     return (
         <div>
             My Day:
-            <form action={updateTaskMyDay}>
-                <input type="hidden" name="task" value={taskId} />
-                <input type="hidden" name="my_day" value={!my_day} />
-                <SubmitButton content={my_day.toString()} loading={`${my_day.toString()}...`} />
-            </form>
+            <button onClick={handleAction}>{my_day.toString()}</button>
         </div>
     );
 }

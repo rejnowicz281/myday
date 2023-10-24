@@ -2,7 +2,7 @@
 import SubmitButton from "@components/SubmitButton";
 import { useRef } from "react";
 
-export default function AddList({ action }) {
+export default function AddList() {
     const formRef = useRef(null);
 
     async function handleAction(formData) {

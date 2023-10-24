@@ -1,4 +1,4 @@
-import { createList, getLists } from "@actions/lists";
+import { getLists } from "@actions/lists";
 import Link from "next/link";
 import AddList from "./AddList";
 
@@ -7,7 +7,7 @@ export default async function Sidebar() {
 
     return (
         <>
-            <AddList action={createList} />
+            <AddList />
             <ul>
                 <li>
                     <Link href="/lists/my_day">My Day</Link>

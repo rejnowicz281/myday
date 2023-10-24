@@ -1,7 +1,7 @@
 import { getListlessTasks } from "@actions/lists";
-import { createTask } from "@actions/tasks";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
+import { TasksProvider } from "../providers/TasksContext";
 
 export default async function TasksPage() {
     const tasks = await getListlessTasks();
@@ -9,8 +9,10 @@ export default async function TasksPage() {
     return (
         <>
             <h1>Tasks</h1>
-            <AddTask action={createTask} />
-            <Tasks tasks={tasks} />
+            <TasksProvider tasks={tasks}>
+                <AddTask />
+                <Tasks />
+            </TasksProvider>
         </>
     );
 }

@@ -1,7 +1,7 @@
 import { getMyDayList } from "@actions/lists";
-import { createTask } from "@actions/tasks";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
+import { TasksProvider } from "../providers/TasksContext";
 
 export default async function MyDayPage() {
     const tasks = await getMyDayList();
@@ -9,8 +9,10 @@ export default async function MyDayPage() {
     return (
         <>
             <h1>My Day</h1>
-            <AddTask action={createTask} forceMyDay={true} />
-            <Tasks tasks={tasks} showList={true} forceMyDay={true} />
+            <TasksProvider tasks={tasks}>
+                <AddTask forceMyDay={true} />
+                <Tasks showList={true} />
+            </TasksProvider>
         </>
     );
 }

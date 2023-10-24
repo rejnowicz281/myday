@@ -1,15 +1,21 @@
+"use client";
+
 import { updateTaskCompleted } from "@actions/tasks";
-import SubmitButton from "@components/SubmitButton";
+import TasksContext from "@app/lists/providers/TasksContext";
+import { useContext } from "react";
 
 export default function Completed({ taskId, completed }) {
+    const { setCompleted } = useContext(TasksContext);
+
+    function handleAction() {
+        setCompleted(taskId, !completed);
+        updateTaskCompleted(taskId, !completed);
+    }
+
     return (
         <div>
             Completed:
-            <form action={updateTaskCompleted}>
-                <input type="hidden" name="task" value={taskId} />
-                <input type="hidden" name="completed" value={!completed} />
-                <SubmitButton content={completed.toString()} loading={`${completed.toString()}...`} />
-            </form>
+            <button onClick={handleAction}>{completed.toString()}</button>
         </div>
     );
 }

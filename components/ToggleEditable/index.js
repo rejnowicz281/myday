@@ -4,7 +4,7 @@ import { experimental_useOptimistic as useOptimistic, useState } from "react";
 
 export default function ToggleEditable({
     action,
-    initial,
+    display,
     inputClass,
     submitClass,
     submitContent,
@@ -12,7 +12,6 @@ export default function ToggleEditable({
     defaultDisplay,
     inputType,
 }) {
-    const [display, setDisplay] = useOptimistic(initial);
     const [input, setInput] = useOptimistic(display);
     const [editing, setEditing] = useState(false);
 
@@ -21,10 +20,7 @@ export default function ToggleEditable({
         setEditing(false);
 
         if (input == "") setInput(display);
-        else {
-            setDisplay(input);
-            action(input);
-        }
+        else action(input);
     }
 
     if (editing)

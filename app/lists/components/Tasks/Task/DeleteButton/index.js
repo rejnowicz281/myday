@@ -1,12 +1,16 @@
+"use client";
+
 import { deleteTask } from "@actions/tasks";
-import SubmitButton from "@components/SubmitButton";
+import TasksContext from "@app/lists/providers/TasksContext";
+import { useContext } from "react";
 
 export default function DeleteButton({ taskId }) {
-    return (
-        <form action={deleteTask}>
-            <input type="hidden" name="task" value={taskId} />
+    const { removeTask } = useContext(TasksContext);
 
-            <SubmitButton content="Delete Task" loading="Deleting..." />
-        </form>
-    );
+    function handleDelete() {
+        removeTask(taskId);
+        deleteTask(taskId);
+    }
+
+    return <button onClick={handleDelete}>Delete Task</button>;
 }

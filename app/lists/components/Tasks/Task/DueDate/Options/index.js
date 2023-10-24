@@ -1,17 +1,20 @@
 "use client";
 
+import { updateTaskDueDate } from "@actions/tasks";
+import TasksContext from "@app/lists/providers/TasksContext";
 import { DateTime } from "luxon";
-import { experimental_useOptimistic as useOptimistic } from "react";
+import { useContext, experimental_useOptimistic as useOptimistic } from "react";
 
-export default function Options({ taskId, action, dueDate, setDueDate }) {
+export default function Options({ taskId, dueDate }) {
+    const { setDueDate } = useContext(TasksContext);
     const [input, setInput] = useOptimistic(DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd"));
 
     function handleSubmit(e) {
         e.preventDefault();
         const newDate = DateTime.fromISO(input).toJSDate();
-        setDueDate(newDate);
 
-        action(newDate, taskId);
+        setDueDate(taskId, newDate);
+        updateTaskDueDate(taskId, newDate);
     }
 
     return (

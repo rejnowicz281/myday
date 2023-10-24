@@ -1,8 +1,8 @@
-import { getList, updateListName } from "@actions/lists";
-import { createTask } from "@actions/tasks";
+import { getList } from "@actions/lists";
 import { formatDate } from "@utils/date";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
+import { TasksProvider } from "../providers/TasksContext";
 import DeleteButton from "./components/DeleteButton";
 import EditableName from "./components/EditableName";
 
@@ -11,11 +11,13 @@ export default async function ListPage({ params: { id } }) {
 
     return (
         <>
-            <EditableName action={updateListName} listId={id} name={list.name} />
+            <EditableName listId={id} name={list.name} />
             <DeleteButton listId={id} />
             <div>Created {formatDate(list.createdAt)}</div>
-            <AddTask listId={id} action={createTask} />
-            <Tasks listId={id} tasks={list.tasks} />
+            <TasksProvider tasks={list.tasks}>
+                <AddTask listId={id} />
+                <Tasks listId={id} />
+            </TasksProvider>
         </>
     );
 }
