@@ -1,4 +1,5 @@
 "use client";
+import { createList } from "@actions/lists";
 import SubmitButton from "@components/SubmitButton";
 import { useRef } from "react";
 
@@ -6,7 +7,7 @@ export default function AddList() {
     const formRef = useRef(null);
 
     async function handleAction(formData) {
-        await action(formData);
+        await createList(formData);
         formRef.current.reset();
     }
 
