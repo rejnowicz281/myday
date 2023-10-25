@@ -1,11 +1,13 @@
 "use client";
 
-import { createContext, experimental_useOptimistic as useOptimistic } from "react";
+import { createContext, experimental_useOptimistic as useOptimistic, useState } from "react";
 
 const TasksContext = createContext();
 
 export function TasksProvider({ children, tasks }) {
     const [optimisticTasks, setOptimisticTasks] = useOptimistic(tasks);
+    const [currentSortKey, setCurrentSortKey] = useState("created_at");
+    const [currentSortOrder, setCurrentSortOrder] = useState("Desc");
 
     function removeTask(id) {
         setOptimisticTasks((prevTasks) => {
@@ -97,6 +99,10 @@ export function TasksProvider({ children, tasks }) {
                 setNote,
                 setPriority,
                 setRepeat,
+                currentSortKey,
+                currentSortOrder,
+                setCurrentSortKey,
+                setCurrentSortOrder,
             }}
         >
             {children}
