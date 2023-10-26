@@ -7,7 +7,8 @@ import { useContext } from "react";
 export default function Completed({ taskId, completed }) {
     const { setCompleted } = useContext(TasksContext);
 
-    function handleAction() {
+    function handleAction(e) {
+        e.stopPropagation();
         setCompleted(taskId, !completed);
         updateTaskCompleted(taskId, !completed);
     }

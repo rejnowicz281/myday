@@ -5,7 +5,8 @@ import { useContext } from "react";
 export default function MyDay({ taskId, my_day }) {
     const { setMyDay } = useContext(TasksContext);
 
-    function handleAction() {
+    function handleAction(e) {
+        e.stopPropagation();
         setMyDay(taskId, !my_day);
         updateTaskMyDay(taskId, !my_day);
     }

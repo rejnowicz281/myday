@@ -2,11 +2,11 @@
 
 import Completed from "@components/tasks/Completed";
 import DueDateDisplay from "@components/tasks/DueDateDisplay";
+import MyDay from "@components/tasks/MyDay";
 import RepeatDisplay from "@components/tasks/RepeatDisplay";
 import TasksContext from "@providers/TasksContext";
 import Link from "next/link";
 import { useContext } from "react";
-import MyDay from "../../CustomizeTaskBar/MyDay";
 import css from "./index.module.css";
 
 export default function Task({ task, showList }) {

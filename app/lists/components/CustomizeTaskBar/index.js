@@ -1,10 +1,10 @@
 import Completed from "@components/tasks/Completed";
+import MyDay from "@components/tasks/MyDay";
 import { formatDate } from "@utils/date";
 import Link from "next/link";
 import DeleteButton from "./DeleteButton";
 import DueDate from "./DueDate";
 import EditableName from "./EditableName";
-import MyDay from "./MyDay";
 import Note from "./Note";
 import Priority from "./Priority";
 import Repeat from "./Repeat";
