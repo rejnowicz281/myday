@@ -1,9 +1,9 @@
 "use client";
 
 import { updateTaskRepeat } from "@actions/tasks";
+import RepeatDisplay from "@components/tasks/RepeatDisplay";
 import TasksContext from "@providers/TasksContext";
 import { useContext } from "react";
-import Display from "./Display";
 import Options from "./Options";
 
 export default function Repeat({ repeat, taskId }) {
@@ -18,7 +18,7 @@ export default function Repeat({ repeat, taskId }) {
 
     return (
         <div>
-            <Display repeat={repeat} />
+            <RepeatDisplay repeat={repeat} />
             <button onClick={() => handleChange(0)}>No Repeat</button>
             <button onClick={() => handleChange(1)}>Daily</button>
             <button onClick={() => handleChange(7)}>Weekly</button>

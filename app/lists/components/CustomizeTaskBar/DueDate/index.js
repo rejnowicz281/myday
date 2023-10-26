@@ -1,10 +1,10 @@
 "use client";
 
 import { updateTaskDueDate } from "@actions/tasks";
+import DueDateDisplay from "@components/tasks/DueDateDisplay";
 import TasksContext from "@providers/TasksContext";
 import { DateTime } from "luxon";
 import { useContext } from "react";
-import Display from "./Display";
 import Options from "./Options";
 
 export default function DueDate({ dueDate, taskId }) {
@@ -26,7 +26,7 @@ export default function DueDate({ dueDate, taskId }) {
 
     return (
         <div>
-            <Display dueDate={dueDate} />
+            <DueDateDisplay dueDate={dueDate} />
             <button onClick={today}>Today</button>
             <button onClick={tomorrow}>Tomorrow</button>
             <Options taskId={taskId} dueDate={dueDate} />

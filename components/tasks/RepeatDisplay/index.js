@@ -1,4 +1,4 @@
-export default function Display({ repeat }) {
+export default function RepeatDisplay({ repeat }) {
     return (
         <span>
             Repeating:

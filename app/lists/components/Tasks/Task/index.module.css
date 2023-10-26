@@ -1,0 +1,11 @@
+.container {
+    cursor: pointer;
+}
+
+.container:hover {
+    background-color: lightblue;
+}
+
+.editing {
+    background-color: rgb(152, 229, 255);
+}

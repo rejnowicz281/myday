@@ -9,9 +9,9 @@ export default async function MyDayPage() {
     return (
         <>
             <h1>My Day</h1>
-            <TasksProvider tasks={tasks}>
+            <TasksProvider tasks={tasks} showList={true}>
                 <AddTask forceMyDay={true} />
-                <Tasks showList={true} />
+                <Tasks />
             </TasksProvider>
         </>
     );

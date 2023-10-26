@@ -1,20 +1,23 @@
-import { formatDate } from "@utils/date";
+"use client";
+
+import Completed from "@components/tasks/Completed";
+import DueDateDisplay from "@components/tasks/DueDateDisplay";
+import RepeatDisplay from "@components/tasks/RepeatDisplay";
+import TasksContext from "@providers/TasksContext";
 import Link from "next/link";
-import Completed from "./Completed";
-import DeleteButton from "./DeleteButton";
-import DueDate from "./DueDate";
-import EditableName from "./EditableName";
-import MyDay from "./MyDay";
-import Note from "./Note";
-import Priority from "./Priority";
-import Repeat from "./Repeat";
+import { useContext } from "react";
+import MyDay from "../../CustomizeTaskBar/MyDay";
+import css from "./index.module.css";
 
 export default function Task({ task, showList }) {
+    const { editingTask, setEditingTask } = useContext(TasksContext);
+
     return (
-        <div>
-            <EditableName name={task.name} taskId={task._id} />
-            <Note taskId={task._id} note={task.note} />
-            <DeleteButton taskId={task._id} />
+        <div
+            className={`${css.container}${editingTask?._id == task._id ? ` ${css.editing}` : ""}`}
+            onClick={() => setEditingTask(task)}
+        >
+            <h2>{task.name}</h2>
             {showList && (
                 <div>
                     List:
@@ -25,13 +28,13 @@ export default function Task({ task, showList }) {
                     )}
                 </div>
             )}
-            <div>Created: {formatDate(task.createdAt)}</div>
-            <div>Last updated: {formatDate(task.updatedAt)}</div>
             <Completed taskId={task._id} completed={task.completed} />
             <MyDay taskId={task._id} my_day={task.my_day} />
-            <Repeat taskId={task._id} repeat={task.repeat} />
-            <Priority priority={task.priority} taskId={task._id} />
-            <DueDate dueDate={task.due_date} taskId={task._id} />
+
+            <RepeatDisplay repeat={task.repeat} />
+
+            <div>Priority: {task.priority}</div>
+            {task.due_date && <DueDateDisplay dueDate={task.due_date} taskId={task._id} />}
             <hr />
         </div>
     );

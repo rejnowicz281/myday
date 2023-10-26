@@ -1,13 +1,15 @@
 "use client";
 
+import CustomizeTaskBar from "@app/lists/components/CustomizeTaskBar";
 import { createContext, experimental_useOptimistic as useOptimistic, useState } from "react";
 
 const TasksContext = createContext();
 
-export function TasksProvider({ children, tasks }) {
+export function TasksProvider({ children, tasks, showList = false }) {
     const [optimisticTasks, setOptimisticTasks] = useOptimistic(tasks);
     const [currentSortKey, setCurrentSortKey] = useState("created_at");
     const [currentSortOrder, setCurrentSortOrder] = useState("Desc");
+    const [editingTask, setEditingTask] = useState(null);
 
     function removeTask(id) {
         setOptimisticTasks((prevTasks) => {
@@ -103,8 +105,11 @@ export function TasksProvider({ children, tasks }) {
                 currentSortOrder,
                 setCurrentSortKey,
                 setCurrentSortOrder,
+                editingTask,
+                setEditingTask,
             }}
         >
+            {editingTask && <CustomizeTaskBar task={editingTask} showList={showList} />}
             {children}
         </TasksContext.Provider>
     );

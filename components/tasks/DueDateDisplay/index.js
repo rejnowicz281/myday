@@ -1,6 +1,6 @@
 import { formatDate, isOverdue } from "@utils/date";
 
-export default function Display({ dueDate }) {
+export default function DueDateDisplay({ dueDate }) {
     return (
         <span>
             {isOverdue(dueDate) ? "Overdue: " : "Due: "}
