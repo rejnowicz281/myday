@@ -1,6 +1,6 @@
 "use server";
 
-import List from "@//models/list";
+import List from "@/models/list";
 import Task from "@/models/task";
 import { connectToDB } from "@/utils/database";
 import formatValidationError from "@/utils/formatValidationError";
