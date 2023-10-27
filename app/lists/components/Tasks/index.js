@@ -1,21 +1,23 @@
 "use client";
 
 import TasksContext from "@providers/TasksContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import SortBy from "./SortBy";
 import Task from "./Task";
 
-export default function Tasks({ showList = false }) {
-    const { tasks, currentSortKey, currentSortOrder } = useContext(TasksContext);
+export default function Tasks() {
+    const { tasks } = useContext(TasksContext);
+    const [sortKey, setSortKey] = useState("created_at");
+    const [sortOrder, setSortOrder] = useState("Desc");
 
     return (
         <>
-            <SortBy />
+            <SortBy sortKey={sortKey} setSortKey={setSortKey} sortOrder={sortOrder} setSortOrder={setSortOrder} />
             {tasks
                 .sort((a, b) => {
                     // Define a comparison function based on the sorting key
                     let result;
-                    switch (currentSortKey) {
+                    switch (sortKey) {
                         case "created_at":
                             result = new Date(a.createdAt) - new Date(b.createdAt);
                             break;
@@ -36,13 +38,13 @@ export default function Tasks({ showList = false }) {
                             result = 0;
                     }
 
-                    // Adjust the comparison result based on the currentSortOrder
-                    if (currentSortOrder == "Desc") result *= -1; // Reverse the order for descending
+                    // Adjust the comparison result based on the sort order
+                    if (sortOrder == "Desc") result *= -1; // Reverse the order for descending
 
                     return result;
                 })
                 .map((task) => (
-                    <Task key={task._id} task={task} showList={showList} />
+                    <Task key={task._id} task={task} />
                 ))}
         </>
     );

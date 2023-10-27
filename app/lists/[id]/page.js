@@ -16,7 +16,7 @@ export default async function ListPage({ params: { id } }) {
             <div>Created {formatDate(list.createdAt)}</div>
             <TasksProvider tasks={list.tasks}>
                 <AddTask listId={id} />
-                <Tasks listId={id} />
+                <Tasks />
             </TasksProvider>
         </>
     );

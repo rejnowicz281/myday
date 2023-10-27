@@ -1,7 +1,11 @@
+"use client";
+
 import Completed from "@components/tasks/Completed";
 import MyDay from "@components/tasks/MyDay";
+import TasksContext from "@providers/TasksContext";
 import { formatDate } from "@utils/date";
 import Link from "next/link";
+import { useContext } from "react";
 import DeleteButton from "./DeleteButton";
 import DueDate from "./DueDate";
 import EditableName from "./EditableName";
@@ -9,7 +13,9 @@ import Note from "./Note";
 import Priority from "./Priority";
 import Repeat from "./Repeat";
 
-export default function CustomizeTaskBar({ task, showList }) {
+export default function CustomizeTaskBar({ task }) {
+    const { showList } = useContext(TasksContext);
+
     return (
         <div>
             <EditableName name={task.name} taskId={task._id} />

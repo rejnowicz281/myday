@@ -11,7 +11,7 @@ export default async function MyDayPage() {
             <h1>My Day</h1>
             <TasksProvider tasks={tasks} showList={true}>
                 <AddTask forceMyDay={true} />
-                <Tasks showList={true} />
+                <Tasks />
             </TasksProvider>
         </>
     );

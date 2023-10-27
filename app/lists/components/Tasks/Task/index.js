@@ -4,13 +4,15 @@ import Completed from "@components/tasks/Completed";
 import DueDateDisplay from "@components/tasks/DueDateDisplay";
 import MyDay from "@components/tasks/MyDay";
 import RepeatDisplay from "@components/tasks/RepeatDisplay";
+import CustomizeContext from "@providers/CustomizeContext";
 import TasksContext from "@providers/TasksContext";
 import Link from "next/link";
 import { useContext } from "react";
 import css from "./index.module.css";
 
-export default function Task({ task, showList }) {
-    const { editingTaskId, setEditingTaskId } = useContext(TasksContext);
+export default function Task({ task }) {
+    const { editingTaskId, setEditingTaskId } = useContext(CustomizeContext);
+    const { showList } = useContext(TasksContext);
 
     return (
         <div
@@ -30,9 +32,7 @@ export default function Task({ task, showList }) {
             )}
             <Completed taskId={task._id} completed={task.completed} />
             <MyDay taskId={task._id} my_day={task.my_day} />
-
             <RepeatDisplay repeat={task.repeat} />
-
             <div>Priority: {task.priority}</div>
             {task.due_date && <DueDateDisplay dueDate={task.due_date} taskId={task._id} />}
             <hr />

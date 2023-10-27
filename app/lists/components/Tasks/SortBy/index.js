@@ -1,30 +1,25 @@
 "use client";
 
-import TasksContext from "@providers/TasksContext";
-import { useContext } from "react";
-
-export default function SortBy() {
-    const { setCurrentSortKey, setCurrentSortOrder, currentSortKey, currentSortOrder } = useContext(TasksContext);
-
+export default function SortBy({ sortKey, setSortKey, sortOrder, setSortOrder }) {
     function handleOrderChange() {
-        setCurrentSortOrder(currentSortOrder == "Desc" ? "Asc" : "Desc");
+        setSortOrder(sortOrder == "Desc" ? "Asc" : "Desc");
     }
 
     function handleKeyChange(e) {
-        setCurrentSortKey(e.target.value);
+        setSortKey(e.target.value);
     }
 
     return (
         <div>
             Sort by:
-            <select onChange={handleKeyChange} defaultValue={currentSortKey}>
+            <select onChange={handleKeyChange} defaultValue={sortKey}>
                 <option value="created_at">Created At</option>
                 <option value="due_date">Due Date</option>
                 <option value="priority">Priority</option>
                 <option value="complete">Complete</option>
                 <option value="name">Name</option>
             </select>
-            <button onClick={handleOrderChange}>{currentSortOrder}</button>
+            <button onClick={handleOrderChange}>{sortOrder}</button>
         </div>
     );
 }
