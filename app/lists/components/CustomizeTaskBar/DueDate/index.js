@@ -24,9 +24,15 @@ export default function DueDate({ dueDate, taskId }) {
         updateTaskDueDate(taskId, tomorrow);
     }
 
+    function none() {
+        setDueDate(taskId, null);
+        updateTaskDueDate(taskId, null);
+    }
+
     return (
         <div>
             <DueDateDisplay dueDate={dueDate} />
+            <button onClick={none}>None</button>
             <button onClick={today}>Today</button>
             <button onClick={tomorrow}>Tomorrow</button>
             <Options taskId={taskId} dueDate={dueDate} />
