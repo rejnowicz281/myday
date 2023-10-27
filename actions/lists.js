@@ -1,10 +1,10 @@
 "use server";
 
-import List from "@models/list";
-import Task from "@models/task";
-import { connectToDB } from "@utils/database";
-import formatValidationError from "@utils/formatValidationError";
-import getCurrentUser from "@utils/getServerSession";
+import List from "@//models/list";
+import Task from "@/models/task";
+import { connectToDB } from "@/utils/database";
+import formatValidationError from "@/utils/formatValidationError";
+import getCurrentUser from "@/utils/getServerSession";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 

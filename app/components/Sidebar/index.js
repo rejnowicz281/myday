@@ -1,4 +1,4 @@
-import { getLists } from "@actions/lists";
+import { getLists } from "@/actions/lists";
 import Link from "next/link";
 import AddList from "./AddList";
 

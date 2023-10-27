@@ -1,6 +1,6 @@
-import { getList } from "@actions/lists";
-import { TasksProvider } from "@providers/TasksContext";
-import { formatDate } from "@utils/date";
+import { getList } from "@/actions/lists";
+import { TasksProvider } from "@/providers/TasksContext";
+import { formatDate } from "@/utils/date";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 import DeleteButton from "./components/DeleteButton";

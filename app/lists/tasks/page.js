@@ -1,5 +1,5 @@
-import { getListlessTasks } from "@actions/lists";
-import { TasksProvider } from "@providers/TasksContext";
+import { getListlessTasks } from "@/actions/lists";
+import { TasksProvider } from "@/providers/TasksContext";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 

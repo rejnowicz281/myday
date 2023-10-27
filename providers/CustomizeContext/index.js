@@ -1,7 +1,7 @@
 "use client";
 
-import CustomizeTaskBar from "@app/lists/components/CustomizeTaskBar";
-import TasksContext from "@providers/TasksContext";
+import CustomizeTaskBar from "@/app/lists/components/CustomizeTaskBar";
+import TasksContext from "@/providers/TasksContext";
 import { createContext, useContext, useState } from "react";
 
 const CustomizeContext = createContext();

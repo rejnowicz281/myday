@@ -1,5 +1,5 @@
-import { deleteList } from "@actions/lists";
-import SubmitButton from "@components/SubmitButton";
+import { deleteList } from "@/actions/lists";
+import SubmitButton from "@/components/SubmitButton";
 
 export default function DeleteButton({ listId }) {
     return (

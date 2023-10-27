@@ -1,6 +1,6 @@
 "use client";
-import { createList } from "@actions/lists";
-import SubmitButton from "@components/SubmitButton";
+import { createList } from "@/actions/lists";
+import SubmitButton from "@/components/SubmitButton";
 import { useRef } from "react";
 
 export default function AddList() {

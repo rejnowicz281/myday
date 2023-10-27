@@ -1,6 +1,6 @@
 "use client";
 
-import { experimental_useOptimistic as useOptimistic, useState } from "react";
+import { useOptimistic, useState } from "react";
 
 export default function ToggleEditable({
     action,

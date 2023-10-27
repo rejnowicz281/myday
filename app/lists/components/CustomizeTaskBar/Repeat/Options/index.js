@@ -1,8 +1,8 @@
 "use client";
 
-import { updateTaskRepeat } from "@actions/tasks";
-import TasksContext from "@providers/TasksContext";
-import { useContext, experimental_useOptimistic as useOptimistic, useState } from "react";
+import { updateTaskRepeat } from "@/actions/tasks";
+import TasksContext from "@/providers/TasksContext";
+import { useContext, useOptimistic, useState } from "react";
 
 export default function Options({ taskId, repeat }) {
     const { setRepeat } = useContext(TasksContext);

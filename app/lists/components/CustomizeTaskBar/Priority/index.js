@@ -1,7 +1,7 @@
 "use client";
 
-import { updateTaskPriority } from "@actions/tasks";
-import TasksContext from "@providers/TasksContext";
+import { updateTaskPriority } from "@/actions/tasks";
+import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
 
 export default function Priority({ priority, taskId }) {

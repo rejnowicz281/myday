@@ -1,4 +1,4 @@
-import Task from "@models/task";
+import Task from "@/models/task";
 import { DateTime } from "luxon";
 import isDateToday from "./isDateToday";
 

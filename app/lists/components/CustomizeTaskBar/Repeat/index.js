@@ -1,8 +1,8 @@
 "use client";
 
-import { updateTaskRepeat } from "@actions/tasks";
-import RepeatDisplay from "@components/tasks/RepeatDisplay";
-import TasksContext from "@providers/TasksContext";
+import { updateTaskRepeat } from "@/actions/tasks";
+import RepeatDisplay from "@/components/tasks/RepeatDisplay";
+import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
 import Options from "./Options";
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { createTask } from "@actions/tasks";
-import SubmitButton from "@components/SubmitButton";
+import { createTask } from "@/actions/tasks";
+import SubmitButton from "@/components/SubmitButton";
 import { useRef } from "react";
 
 export default function AddTask({ listId, forceMyDay = false }) {

@@ -1,9 +1,9 @@
 "use client";
 
-import { updateTaskDueDate } from "@actions/tasks";
-import TasksContext from "@providers/TasksContext";
+import { updateTaskDueDate } from "@/actions/tasks";
+import TasksContext from "@/providers/TasksContext";
 import { DateTime } from "luxon";
-import { useContext, experimental_useOptimistic as useOptimistic } from "react";
+import { useContext, useOptimistic } from "react";
 
 export default function Options({ taskId, dueDate }) {
     const { setDueDate } = useContext(TasksContext);

@@ -1,8 +1,8 @@
 "use client";
 
-import { updateTaskDueDate } from "@actions/tasks";
-import DueDateDisplay from "@components/tasks/DueDateDisplay";
-import TasksContext from "@providers/TasksContext";
+import { updateTaskDueDate } from "@/actions/tasks";
+import DueDateDisplay from "@/components/tasks/DueDateDisplay";
+import TasksContext from "@/providers/TasksContext";
 import { DateTime } from "luxon";
 import { useContext } from "react";
 import Options from "./Options";

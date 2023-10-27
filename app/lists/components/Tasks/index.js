@@ -1,6 +1,6 @@
 "use client";
 
-import TasksContext from "@providers/TasksContext";
+import TasksContext from "@/providers/TasksContext";
 import { useContext, useState } from "react";
 import SortBy from "./SortBy";
 import Task from "./Task";

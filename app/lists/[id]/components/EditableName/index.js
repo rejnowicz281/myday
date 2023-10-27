@@ -1,7 +1,7 @@
 "use client";
 
-import { updateListName } from "@actions/lists";
-import ToggleEditable from "@components/ToggleEditable";
+import { updateListName } from "@/actions/lists";
+import ToggleEditable from "@/components/ToggleEditable";
 import css from "./index.module.css";
 
 export default function EditableName({ name, listId }) {

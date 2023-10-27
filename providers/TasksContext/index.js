@@ -1,7 +1,7 @@
 "use client";
 
-import { CustomizeProvider } from "@providers/CustomizeContext";
-import { createContext, experimental_useOptimistic as useOptimistic } from "react";
+import { CustomizeProvider } from "@/providers/CustomizeContext";
+import { createContext, useOptimistic } from "react";
 
 const TasksContext = createContext();
 

@@ -1,5 +1,5 @@
-import { updateTaskMyDay } from "@actions/tasks";
-import TasksContext from "@providers/TasksContext";
+import { updateTaskMyDay } from "@/actions/tasks";
+import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
 
 export default function MyDay({ taskId, my_day }) {

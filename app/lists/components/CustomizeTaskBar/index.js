@@ -1,9 +1,9 @@
 "use client";
 
-import Completed from "@components/tasks/Completed";
-import MyDay from "@components/tasks/MyDay";
-import TasksContext from "@providers/TasksContext";
-import { formatDate } from "@utils/date";
+import Completed from "@/components/tasks/Completed";
+import MyDay from "@/components/tasks/MyDay";
+import TasksContext from "@/providers/TasksContext";
+import { formatDate } from "@/utils/date";
 import Link from "next/link";
 import { useContext } from "react";
 import DeleteButton from "./DeleteButton";

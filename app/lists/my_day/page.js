@@ -1,5 +1,5 @@
-import { getMyDayList } from "@actions/lists";
-import { TasksProvider } from "@providers/TasksContext";
+import { getMyDayList } from "@/actions/lists";
+import { TasksProvider } from "@/providers/TasksContext";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 
