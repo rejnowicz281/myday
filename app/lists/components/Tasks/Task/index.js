@@ -10,12 +10,12 @@ import { useContext } from "react";
 import css from "./index.module.css";
 
 export default function Task({ task, showList }) {
-    const { editingTask, setEditingTask } = useContext(TasksContext);
+    const { editingTaskId, setEditingTaskId } = useContext(TasksContext);
 
     return (
         <div
-            className={`${css.container}${editingTask?._id == task._id ? ` ${css.editing}` : ""}`}
-            onClick={() => setEditingTask(task)}
+            className={`${css.container}${editingTaskId == task._id ? ` ${css.editing}` : ""}`}
+            onClick={() => setEditingTaskId(task._id)}
         >
             <h2>{task.name}</h2>
             {showList && (

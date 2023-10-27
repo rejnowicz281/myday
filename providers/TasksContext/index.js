@@ -9,7 +9,7 @@ export function TasksProvider({ children, tasks, showList = false }) {
     const [optimisticTasks, setOptimisticTasks] = useOptimistic(tasks);
     const [currentSortKey, setCurrentSortKey] = useState("created_at");
     const [currentSortOrder, setCurrentSortOrder] = useState("Desc");
-    const [editingTask, setEditingTask] = useState(null);
+    const [editingTaskId, setEditingTaskId] = useState(null);
 
     function removeTask(id) {
         setOptimisticTasks((prevTasks) => {
@@ -105,11 +105,16 @@ export function TasksProvider({ children, tasks, showList = false }) {
                 currentSortOrder,
                 setCurrentSortKey,
                 setCurrentSortOrder,
-                editingTask,
-                setEditingTask,
+                editingTaskId,
+                setEditingTaskId,
             }}
         >
-            {editingTask && <CustomizeTaskBar task={editingTask} showList={showList} />}
+            {editingTaskId && (
+                <CustomizeTaskBar
+                    task={optimisticTasks.find((task) => task._id == editingTaskId)}
+                    showList={showList}
+                />
+            )}
             {children}
         </TasksContext.Provider>
     );

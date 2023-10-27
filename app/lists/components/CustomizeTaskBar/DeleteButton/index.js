@@ -5,10 +5,10 @@ import TasksContext from "@providers/TasksContext";
 import { useContext } from "react";
 
 export default function DeleteButton({ taskId }) {
-    const { removeTask, setEditingTask } = useContext(TasksContext);
+    const { removeTask, setEditingTaskId } = useContext(TasksContext);
 
     function handleDelete() {
-        setEditingTask(null);
+        setEditingTaskId(null);
         removeTask(taskId);
         deleteTask(taskId);
     }
