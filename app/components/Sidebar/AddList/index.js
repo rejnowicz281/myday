@@ -3,6 +3,8 @@ import { createList } from "@/actions/lists";
 import SubmitButton from "@/components/SubmitButton";
 import { useRef } from "react";
 
+import css from "./index.module.css";
+
 export default function AddList() {
     const formRef = useRef(null);
 
@@ -12,9 +14,9 @@ export default function AddList() {
     }
 
     return (
-        <form action={handleAction} ref={formRef}>
-            <input type="text" name="name" placeholder="List name here" />
-            <SubmitButton content="Add List" loading="Submitting..." />
+        <form className={css.form} action={handleAction} ref={formRef}>
+            <input className={css.input} type="text" name="name" />
+            <SubmitButton className={css.submit} content="Add List" loading="..." />
         </form>
     );
 }

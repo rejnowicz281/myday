@@ -1,26 +1,34 @@
 import { getLists } from "@/actions/lists";
-import Link from "next/link";
+import NavLink from "@/components/NavLink";
 import AddList from "./AddList";
+import css from "./index.module.css";
 
 export default async function Sidebar() {
     const lists = await getLists();
 
     return (
-        <>
+        <div className={css.container}>
             <AddList />
-            <ul>
-                <li>
-                    <Link href="/lists/my_day">My Day</Link>
-                </li>
-                <li>
-                    <Link href="/lists/tasks">Tasks</Link>
-                </li>
-                {lists.map((list) => (
-                    <li key={list.id}>
-                        <Link href={`/lists/${list.id}`}>{list.name}</Link>
-                    </li>
-                ))}
-            </ul>
-        </>
+            <div className={css["lists-wrapper"]}>
+                <div className={css.lists}>
+                    <NavLink href="/lists/my_day" className={css.link} activeClassName={css["active-link"]}>
+                        My Day
+                    </NavLink>
+                    <NavLink href="/lists/tasks" className={css.link} activeClassName={css["active-link"]}>
+                        Tasks
+                    </NavLink>
+                    {lists.map((list) => (
+                        <NavLink
+                            key={list.id}
+                            href={`/lists/${list.id}`}
+                            className={css.link}
+                            activeClassName={css["active-link"]}
+                        >
+                            {list.name}
+                        </NavLink>
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 }

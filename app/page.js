@@ -1,3 +1,9 @@
+import css from "./page.module.css";
+
 export default function Home() {
-    return <h1>Home</h1>;
+    return (
+        <div className={css.container}>
+            <p className={css.text}>Welcome to myday. Organize your life.</p>
+        </div>
+    );
 }

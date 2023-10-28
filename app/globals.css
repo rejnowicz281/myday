@@ -1,0 +1,111 @@
+:root {
+    --color-primary: rgb(219, 223, 224);
+    --color-secondary: rgb(226, 242, 247);
+    --color-dimmed: rgb(148, 148, 148);
+
+    --bg-color-midnight: rgb(28, 27, 34);
+    --bg-color-taupe: rgb(34, 33, 41);
+    --bg-color-taupe-dimmed: rgba(34, 33, 41, 0.418);
+    --bg-color-graphite: rgb(38, 37, 44);
+
+    --line-height-headers: 1.1;
+    --line-height-body: 1.5;
+
+    --main-font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+
+    --font-size-xs: 12px;
+    --font-size-s: 14px;
+    --font-size-m: 18px;
+    --font-size-l: 25px;
+    --font-size-xl: 30px;
+    --font-size-xxl: 35px;
+    --font-size-xxxl: 45px;
+    --font-size-xxxxl: 55px;
+    --font-size-xxxxxl: 70px;
+
+    --space-xxxs: 4px;
+    --space-xxs: 6px;
+    --space-xs: 8px;
+    --space-s: 12px;
+    --space-m: 16px;
+    --space-l: 24px;
+    --space-xl: 32px;
+    --space-xxl: 40px;
+    --space-xxxl: 48px;
+    --space-xxxxl: 64px;
+
+    --border-grey: 1px solid #414141;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background-color: var(--bg-color-midnight);
+    color: var(--color-primary);
+    line-height: var(--line-height-body);
+    font-size: var(--font-size-m);
+    font-family: var(--main-font-family);
+}
+
+img,
+picture,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: var(--line-height-headers);
+}
+
+h1 {
+    font-size: var(--font-size-xxxxl);
+}
+
+h2 {
+    font-size: var(--font-size-xxxl);
+}
+
+h3 {
+    font-size: var(--font-size-xxl);
+}
+
+h4 {
+    font-size: var(--font-size-xl);
+}
+
+h5 {
+    font-size: var(--font-size-l);
+}
+
+h6 {
+    font-size: var(--font-size-m);
+}

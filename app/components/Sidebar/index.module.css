@@ -1,0 +1,36 @@
+.container {
+    background-color: var(--bg-color-graphite);
+    flex: 0 0 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lists-wrapper {
+    display: flex;
+    flex: 1;
+    position: relative;
+}
+
+.lists {
+    position: absolute;
+    overflow-y: auto;
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+}
+
+.link {
+    display: block;
+    font-size: var(--font-size-l);
+    text-decoration: none;
+    color: inherit;
+}
+
+.active-link {
+    background-color: var(--bg-color-midnight);
+}
+
+.lists > a:hover {
+    background-color: var(--bg-color-taupe-dimmed);
+}

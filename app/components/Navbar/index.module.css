@@ -1,0 +1,17 @@
+.container {
+    background-color: var(--bg-color-taupe);
+    border-bottom: var(--border-gray);
+    font-size: var(--font-size-l);
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-m);
+}
+
+.container a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.container a:hover {
+    color: var(--color-dimmed);
+}

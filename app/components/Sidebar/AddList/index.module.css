@@ -1,0 +1,32 @@
+.form {
+    display: flex;
+    padding: var(--space-l) var(--space-xs);
+}
+
+.input {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    outline: none;
+    border-bottom: var(--border-grey);
+}
+
+.submit {
+    background-color: var(--bg-color-taupe);
+    color: inherit;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: var(--space-s);
+    flex-grow: 0;
+    word-break: break-all;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: var(--bg-color-taupe-dimmed);
+}
+
+.submit:disabled {
+    background-color: var(--bg-color-midnight);
+}
