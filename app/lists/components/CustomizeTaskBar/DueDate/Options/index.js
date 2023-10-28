@@ -3,7 +3,7 @@
 import { updateTaskDueDate } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
 import { DateTime } from "luxon";
-import { useContext, useOptimistic } from "react";
+import { useContext, experimental_useOptimistic as useOptimistic } from "react";
 
 export default function Options({ taskId, dueDate }) {
     const { setDueDate } = useContext(TasksContext);
