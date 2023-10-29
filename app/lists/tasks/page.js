@@ -8,12 +8,14 @@ export default async function TasksPage() {
     const tasks = await getListlessTasks();
 
     return (
-        <div className={css.container}>
-            <h1>Tasks</h1>
-            <AddTask />
-            <TasksProvider tasks={tasks}>
-                <Tasks />
-            </TasksProvider>
+        <div className={css.wrapper}>
+            <div className={css.container}>
+                <h1>Tasks</h1>
+                <AddTask />
+                <TasksProvider tasks={tasks}>
+                    <Tasks />
+                </TasksProvider>
+            </div>
         </div>
     );
 }

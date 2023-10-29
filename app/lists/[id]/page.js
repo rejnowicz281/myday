@@ -11,14 +11,16 @@ export default async function ListPage({ params: { id } }) {
     const list = await getList(id);
 
     return (
-        <div className={css.container}>
-            <EditableName listId={id} name={list.name} />
-            <div className={css.createdAt}>Created {formatDate(list.createdAt)}</div>
-            <DeleteButton listId={id} />
-            <AddTask listId={id} />
-            <TasksProvider tasks={list.tasks}>
-                <Tasks />
-            </TasksProvider>
+        <div class={css.wrapper}>
+            <div className={css.container}>
+                <EditableName listId={id} name={list.name} />
+                <div className={css.createdAt}>Created {formatDate(list.createdAt)}</div>
+                <DeleteButton listId={id} />
+                <AddTask listId={id} />
+                <TasksProvider tasks={list.tasks}>
+                    <Tasks />
+                </TasksProvider>
+            </div>
         </div>
     );
 }
