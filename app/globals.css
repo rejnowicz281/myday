@@ -1,7 +1,12 @@
 :root {
     --color-primary: rgb(219, 223, 224);
+    --color-primary-dimmed: rgb(148, 148, 148);
+
     --color-secondary: rgb(226, 242, 247);
-    --color-dimmed: rgb(148, 148, 148);
+    --color-secondary-dimmed: rgb(191, 211, 218)
+
+    --color-danger: rgb(255, 120, 120);
+    --color-danger-dimmed: rgb(255, 156, 156);
 
     --bg-color-midnight: rgb(28, 27, 34);
     --bg-color-midnight-dimmed: rgba(28, 27, 34, 0.75);
@@ -11,6 +16,9 @@
 
     --bg-color-graphite: rgb(38, 37, 44);
     --bg-color-graphite-dimmed: rgba(38, 37, 44, 0.75);
+
+    --bg-color-success: rgb(116, 255, 116);
+    --bg-color-success-dimmed: rgb(142, 250, 142);
 
     --line-height-headers: 1.1;
     --line-height-body: 1.5;

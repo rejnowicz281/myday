@@ -1,0 +1,10 @@
+.submit {
+    background-color: inherit;
+    color: var(--color-danger);
+    border: none;
+    cursor: pointer;
+}
+
+.submit:hover {
+    color: var(--color-danger-dimmed);
+}

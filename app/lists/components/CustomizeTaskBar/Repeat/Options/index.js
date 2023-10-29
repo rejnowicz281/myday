@@ -3,6 +3,7 @@
 import { updateTaskRepeat } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
 import { useContext, experimental_useOptimistic as useOptimistic, useState } from "react";
+import css from "../index.module.css";
 
 export default function Options({ taskId, repeat }) {
     const { setRepeat } = useContext(TasksContext);
@@ -31,8 +32,15 @@ export default function Options({ taskId, repeat }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="number" value={input} placeholder="every x" onChange={handleInputChange} />
+            <input
+                className={css.input}
+                type="number"
+                value={input}
+                placeholder="every x"
+                onChange={handleInputChange}
+            />
             <select
+                className={css.button}
                 onChange={(e) => {
                     setEveryX(e.target.value);
                     console.log(e.target.value);
@@ -43,7 +51,7 @@ export default function Options({ taskId, repeat }) {
                 <option value={30}>Months</option>
                 <option value={365}>Years</option>
             </select>
-            <button>Save</button>
+            <button className={css.button}>Save</button>
         </form>
     );
 }

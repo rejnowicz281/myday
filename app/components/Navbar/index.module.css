@@ -13,5 +13,5 @@
 }
 
 .container a:hover {
-    color: var(--color-dimmed);
+    color: var(--color-primary-dimmed);
 }

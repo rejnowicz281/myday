@@ -4,6 +4,7 @@ import { updateTaskName } from "@/actions/tasks";
 import ToggleEditable from "@/components/ToggleEditable";
 import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
+import { FiCheck } from "react-icons/fi";
 import css from "./index.module.css";
 
 export default function EditableName({ name, taskId }) {
@@ -17,8 +18,10 @@ export default function EditableName({ name, taskId }) {
             }}
             display={name}
             inputClass={css.input}
-            submitContent="Update name"
+            submitContent={<FiCheck />}
             displayClass={css.display}
+            submitClass={css.submit}
+            formClass={css.form}
         />
     );
 }

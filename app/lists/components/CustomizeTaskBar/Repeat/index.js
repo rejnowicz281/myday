@@ -5,6 +5,7 @@ import RepeatDisplay from "@/components/tasks/RepeatDisplay";
 import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
 import Options from "./Options";
+import css from "./index.module.css";
 
 export default function Repeat({ repeat, taskId }) {
     const { setRepeat } = useContext(TasksContext);
@@ -19,11 +20,21 @@ export default function Repeat({ repeat, taskId }) {
     return (
         <div>
             <RepeatDisplay repeat={repeat} />
-            <button onClick={() => handleChange(0)}>No Repeat</button>
-            <button onClick={() => handleChange(1)}>Daily</button>
-            <button onClick={() => handleChange(7)}>Weekly</button>
-            <button onClick={() => handleChange(30)}>Monthly</button>
-            <button onClick={() => handleChange(365)}>Yearly</button>
+            <button className={css.button} onClick={() => handleChange(0)}>
+                No Repeat
+            </button>
+            <button className={css.button} onClick={() => handleChange(1)}>
+                Daily
+            </button>
+            <button className={css.button} onClick={() => handleChange(7)}>
+                Weekly
+            </button>
+            <button className={css.button} onClick={() => handleChange(30)}>
+                Monthly
+            </button>
+            <button className={css.button} onClick={() => handleChange(365)}>
+                Yearly
+            </button>
             <Options taskId={taskId} repeat={repeat} />
         </div>
     );

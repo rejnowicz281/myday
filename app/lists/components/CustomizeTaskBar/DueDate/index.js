@@ -6,6 +6,7 @@ import TasksContext from "@/providers/TasksContext";
 import { DateTime } from "luxon";
 import { useContext } from "react";
 import Options from "./Options";
+import css from "./index.module.css";
 
 export default function DueDate({ dueDate, taskId }) {
     const { setDueDate } = useContext(TasksContext);
@@ -32,9 +33,15 @@ export default function DueDate({ dueDate, taskId }) {
     return (
         <div>
             <DueDateDisplay dueDate={dueDate} />
-            <button onClick={none}>None</button>
-            <button onClick={today}>Today</button>
-            <button onClick={tomorrow}>Tomorrow</button>
+            <button className={css.button} onClick={none}>
+                None
+            </button>
+            <button className={css.button} onClick={today}>
+                Today
+            </button>
+            <button className={css.button} onClick={tomorrow}>
+                Tomorrow
+            </button>
             <Options taskId={taskId} dueDate={dueDate} />
         </div>
     );

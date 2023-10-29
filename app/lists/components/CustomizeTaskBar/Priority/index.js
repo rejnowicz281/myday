@@ -3,6 +3,7 @@
 import { updateTaskPriority } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
+import css from "./index.module.css";
 
 export default function Priority({ priority, taskId }) {
     const { setPriority } = useContext(TasksContext);
@@ -17,8 +18,12 @@ export default function Priority({ priority, taskId }) {
     return (
         <div>
             Priority: {priority}
-            <button onClick={() => handleChange(priority + 1)}>+1</button>
-            <button onClick={() => handleChange(priority - 1)}>-1</button>
+            <button className={css.button} onClick={() => handleChange(priority + 1)}>
+                +1
+            </button>
+            <button className={css.button} onClick={() => handleChange(priority - 1)}>
+                -1
+            </button>
         </div>
     );
 }

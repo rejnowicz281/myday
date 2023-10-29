@@ -9,6 +9,7 @@ export default function ToggleEditable({
     submitClass,
     submitContent,
     displayClass,
+    formClass,
     defaultDisplay,
     inputType,
 }) {
@@ -25,7 +26,7 @@ export default function ToggleEditable({
 
     if (editing)
         return (
-            <form onSubmit={handleSubmit}>
+            <form className={formClass} onSubmit={handleSubmit}>
                 {inputType == "textarea" ? (
                     <textarea
                         className={inputClass}

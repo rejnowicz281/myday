@@ -1,4 +1,5 @@
 "use client";
+import css from "./index.module.css";
 
 export default function SortBy({ sortKey, setSortKey, sortOrder, setSortOrder }) {
     function handleOrderChange() {
@@ -10,16 +11,18 @@ export default function SortBy({ sortKey, setSortKey, sortOrder, setSortOrder })
     }
 
     return (
-        <div>
+        <div className={css.container}>
             Sort by:
-            <select onChange={handleKeyChange} defaultValue={sortKey}>
+            <select className={css.button} onChange={handleKeyChange} defaultValue={sortKey}>
                 <option value="created_at">Created At</option>
                 <option value="due_date">Due Date</option>
                 <option value="priority">Priority</option>
                 <option value="complete">Complete</option>
                 <option value="name">Name</option>
             </select>
-            <button onClick={handleOrderChange}>{sortOrder}</button>
+            <button className={css.button} onClick={handleOrderChange}>
+                {sortOrder}
+            </button>
         </div>
     );
 }

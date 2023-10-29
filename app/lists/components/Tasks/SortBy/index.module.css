@@ -1,0 +1,23 @@
+.container {
+    margin: var(--space-m) 0;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.button {
+    display: block;
+    background-color: var(--bg-color-graphite);
+    border: none;
+    box-shadow: var(--shadow);
+    outline: none;
+    margin-left: var(--space-xs);
+    padding: var(--space-xs);
+    color: inherit;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: var(--bg-color-taupe-dimmed);
+}

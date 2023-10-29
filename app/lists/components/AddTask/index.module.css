@@ -1,0 +1,37 @@
+.form {
+    flex: 1;
+}
+
+.field {
+    display: block;
+    width: 100%;
+    background-color: var(--bg-color-taupe);
+    border: none;
+    box-shadow: var(--shadow);
+    outline: none;
+    padding: var(--space-xs);
+    margin: var(--space-xs) 0;
+    color: inherit;
+}
+
+.my_day {
+    margin-left: var(--space-xs);
+}
+
+.submit {
+    display: block;
+    width: 100%;
+    background-color: var(--bg-color-taupe);
+    border: none;
+    box-shadow: var(--shadow);
+    outline: none;
+    padding: var(--space-xs);
+    margin: var(--space-xs) 0;
+    color: inherit;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit:hover {
+    background-color: var(--bg-color-taupe-dimmed);
+}

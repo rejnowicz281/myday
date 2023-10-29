@@ -1,11 +1,24 @@
 .container {
     cursor: pointer;
+    box-shadow: var(--shadow);
+    margin: var(--space-xl) 0;
+    padding: var(--space-l);
 }
 
 .container:hover {
-    background-color: lightblue;
+    background-color: var(--bg-color-taupe-dimmed);
 }
 
 .editing {
-    background-color: rgb(152, 229, 255);
+    background-color: var(--bg-color-taupe);
+}
+
+.link-list {
+    padding-left: var(--space-xxs);
+    color: var(--color-secondary);
+    font-weight: bold;
+}
+
+.link-list:hover {
+    color: var(--color-secondary-dimmed);
 }

@@ -1,0 +1,9 @@
+.link-list {
+    color: var(--color-secondary);
+    font-weight: bold;
+    padding-left: var(--space-xxs);
+}
+
+.link-list:hover {
+    color: var(--color-secondary-dimmed);
+}

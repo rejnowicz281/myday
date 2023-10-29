@@ -24,9 +24,13 @@ export default function Task({ task }) {
                 <div>
                     List:
                     {task.list ? (
-                        <Link href={`/lists/${task.list._id}`}>{task.list.name}</Link>
+                        <Link className={css["link-list"]} href={`/lists/${task.list._id}`}>
+                            {task.list.name}
+                        </Link>
                     ) : (
-                        <Link href="/lists/tasks">Tasks</Link>
+                        <Link className={css["link-list"]} href="/lists/tasks">
+                            Tasks
+                        </Link>
                     )}
                 </div>
             )}
@@ -35,7 +39,6 @@ export default function Task({ task }) {
             <RepeatDisplay repeat={task.repeat} />
             <div>Priority: {task.priority}</div>
             {task.due_date && <DueDateDisplay dueDate={task.due_date} taskId={task._id} />}
-            <hr />
         </div>
     );
 }
