@@ -1,17 +1,24 @@
 .display {
     background-color: inherit;
     border: none;
-    font-size: 30px;
+    font-size: var(--font-size-xxxxl);
     padding: 0;
+    color: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
 }
 
 .display:hover {
-    background-color: rgb(223, 223, 223);
+    box-shadow: var(--shadow);
 }
 
 .input {
+    box-shadow: var(--shadow);
     padding: 0;
-    font-size: 30px;
+    color: inherit;
+    background-color: inherit;
+    font-size: var(--font-size-xxxxl);
+    font-weight: bold;
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }

@@ -10,14 +10,14 @@ export default async function ListPage({ params: { id } }) {
     const list = await getList(id);
 
     return (
-        <>
+        <div>
             <EditableName listId={id} name={list.name} />
             <DeleteButton listId={id} />
             <div>Created {formatDate(list.createdAt)}</div>
+            <AddTask listId={id} />
             <TasksProvider tasks={list.tasks}>
-                <AddTask listId={id} />
                 <Tasks />
             </TasksProvider>
-        </>
+        </div>
     );
 }

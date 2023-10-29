@@ -4,9 +4,13 @@
     --color-dimmed: rgb(148, 148, 148);
 
     --bg-color-midnight: rgb(28, 27, 34);
+    --bg-color-midnight-dimmed: rgba(28, 27, 34, 0.75);
+
     --bg-color-taupe: rgb(34, 33, 41);
-    --bg-color-taupe-dimmed: rgba(34, 33, 41, 0.418);
+    --bg-color-taupe-dimmed: rgba(34, 33, 41, 0.75);
+
     --bg-color-graphite: rgb(38, 37, 44);
+    --bg-color-graphite-dimmed: rgba(38, 37, 44, 0.75);
 
     --line-height-headers: 1.1;
     --line-height-body: 1.5;
@@ -35,6 +39,7 @@
     --space-xxxxl: 64px;
 
     --border-grey: 1px solid #414141;
+    --shadow: rgba(204, 204, 204, 0.02) 0px 1px 3px 0px, rgba(140, 151, 163, 0.15) 0px 0px 0px 1px;
 }
 
 *,

@@ -7,12 +7,12 @@ export default async function MyDayPage() {
     const tasks = await getMyDayList();
 
     return (
-        <>
+        <div>
             <h1>My Day</h1>
+            <AddTask forceMyDay={true} />
             <TasksProvider tasks={tasks} showList={true}>
-                <AddTask forceMyDay={true} />
                 <Tasks />
             </TasksProvider>
-        </>
+        </div>
     );
 }
