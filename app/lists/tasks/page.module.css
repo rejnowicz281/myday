@@ -12,4 +12,10 @@
     left: 0;
     padding: 50px;
     overflow-y: scroll;
+    display: flex;
+    gap: 20px;
+}
+
+.main {
+    flex: 1;
 }

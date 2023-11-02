@@ -10,10 +10,12 @@ export default async function TasksPage() {
     return (
         <div className={css.wrapper}>
             <div className={css.container}>
-                <h1>Tasks</h1>
-                <AddTask />
                 <TasksProvider tasks={tasks}>
-                    <Tasks />
+                    <div class={css.main}>
+                        <h1>Tasks</h1>
+                        <AddTask />
+                        <Tasks />
+                    </div>
                 </TasksProvider>
             </div>
         </div>

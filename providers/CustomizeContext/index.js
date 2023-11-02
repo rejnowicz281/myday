@@ -17,8 +17,8 @@ export function CustomizeProvider({ children }) {
                 setEditingTaskId,
             }}
         >
-            {editingTaskId && <CustomizeTaskBar task={tasks.find((task) => task._id == editingTaskId)} />}
             {children}
+            {editingTaskId && <CustomizeTaskBar task={tasks.find((task) => task._id == editingTaskId)} />}
         </CustomizeContext.Provider>
     );
 }

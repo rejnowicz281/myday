@@ -10,9 +10,9 @@ export default async function MyDayPage() {
     return (
         <div class={css.wrapper}>
             <div className={css.container}>
-                <h1>My Day</h1>
-                <AddTask forceMyDay={true} />
                 <TasksProvider tasks={tasks} showList={true}>
+                    <h1>My Day</h1>
+                    <AddTask forceMyDay={true} />
                     <Tasks />
                 </TasksProvider>
             </div>

@@ -7,3 +7,14 @@
 .link-list:hover {
     color: var(--color-secondary-dimmed);
 }
+
+.wrapper {
+    flex: 0 0 300px;
+    position: relative;
+}
+
+.container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+}
