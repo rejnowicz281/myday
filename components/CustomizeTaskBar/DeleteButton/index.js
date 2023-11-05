@@ -1,14 +1,12 @@
 "use client";
 
 import { deleteTask } from "@/actions/tasks";
-import CustomizeContext from "@/providers/CustomizeContext";
 import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
 import css from "./index.module.css";
 
 export default function DeleteButton({ taskId }) {
-    const { setEditingTaskId } = useContext(CustomizeContext);
-    const { removeTask } = useContext(TasksContext);
+    const { removeTask, setEditingTaskId } = useContext(TasksContext);
 
     function handleDelete() {
         setEditingTaskId(null);

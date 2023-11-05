@@ -4,15 +4,13 @@ import Completed from "@/components/tasks/Completed";
 import DueDateDisplay from "@/components/tasks/DueDateDisplay";
 import MyDay from "@/components/tasks/MyDay";
 import RepeatDisplay from "@/components/tasks/RepeatDisplay";
-import CustomizeContext from "@/providers/CustomizeContext";
 import TasksContext from "@/providers/TasksContext";
 import Link from "next/link";
 import { useContext } from "react";
 import css from "./index.module.css";
 
 export default function Task({ task }) {
-    const { editingTaskId, setEditingTaskId } = useContext(CustomizeContext);
-    const { showList } = useContext(TasksContext);
+    const { showList, editingTaskId, setEditingTaskId } = useContext(TasksContext);
 
     return (
         <div

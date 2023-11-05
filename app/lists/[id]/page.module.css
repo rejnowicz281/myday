@@ -12,8 +12,14 @@
     left: 0;
     padding: 50px;
     overflow-y: scroll;
+    display: flex;
+    gap: 20px;
 }
 
 .createdAt {
     color: var(--color-secondary);
+}
+
+.main {
+    flex: 1;
 }
