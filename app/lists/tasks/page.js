@@ -11,7 +11,7 @@ export default async function TasksPage() {
         <div className={css.wrapper}>
             <div className={css.container}>
                 <TasksProvider tasks={tasks}>
-                    <div class={css.main}>
+                    <div className={css.main}>
                         <h1>Tasks</h1>
                         <AddTaskButton />
                         <Tasks />
