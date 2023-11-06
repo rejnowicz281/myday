@@ -13,7 +13,7 @@ export async function getLists() {
 
     const user = await getCurrentUser();
 
-    const lists = await List.find({ owner: user?.id });
+    const lists = await List.find({ owner: user?.id }).sort({ createdAt: -1 });
 
     return lists;
 }
