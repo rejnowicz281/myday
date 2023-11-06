@@ -1,5 +1,4 @@
 import { ModalProvider } from "@/providers/ModalContext";
-import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import "./globals.css";
 import css from "./layout.module.css";
@@ -14,7 +13,6 @@ export default function RootLayout({ children }) {
         <html lang="en">
             <body>
                 <ModalProvider>
-                    <Navbar />
                     <div className={css.container}>
                         <Sidebar />
                         {children}

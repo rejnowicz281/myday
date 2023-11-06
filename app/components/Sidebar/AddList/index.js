@@ -2,7 +2,7 @@
 import { createList } from "@/actions/lists";
 import SubmitButton from "@/components/SubmitButton";
 import { useRef } from "react";
-
+import { VscAdd } from "react-icons/vsc";
 import css from "./index.module.css";
 
 export default function AddList() {
@@ -15,8 +15,8 @@ export default function AddList() {
 
     return (
         <form className={css.form} action={handleAction} ref={formRef}>
-            <input className={css.input} type="text" name="name" />
-            <SubmitButton className={css.submit} content="Add List" loading="..." />
+            <input placeholder="Add List" className={css.input} type="text" name="name" />
+            <SubmitButton className={css.submit} content={<VscAdd />} />
         </form>
     );
 }

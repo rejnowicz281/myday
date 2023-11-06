@@ -1,32 +1,42 @@
 .form {
     display: flex;
-    padding: var(--space-l) var(--space-xs);
+    padding: var(--space-l) 0;
+    gap: var(--space-xxs);
 }
 
 .input {
+    flex: 1;
     background-color: inherit;
     color: inherit;
     border: none;
     outline: none;
     border-bottom: var(--border-grey);
+    font-size: var(--font-size-l);
 }
 
 .submit {
-    background-color: var(--bg-color-taupe);
+    background-color: inherit;
     color: inherit;
-    font-weight: bold;
     border: none;
-    border-radius: 5px;
-    padding: var(--space-s);
-    flex-grow: 0;
-    word-break: break-all;
+    font-size: var(--font-size-xl);
     cursor: pointer;
+    transition: 0.1s;
 }
 
 .submit:hover {
-    background-color: var(--bg-color-taupe-dimmed);
+    color: rgb(189, 189, 189);
 }
 
 .submit:disabled {
-    background-color: var(--bg-color-midnight);
+    color: rgb(189, 189, 189);
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

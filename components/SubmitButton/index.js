@@ -7,7 +7,7 @@ function SubmitButton({ className, content, loading }) {
 
     return (
         <button className={className} disabled={pending} type="submit">
-            {pending ? loading : content}
+            {loading ? (pending ? loading : content) : content}
         </button>
     );
 }

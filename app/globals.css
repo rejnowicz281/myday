@@ -1,39 +1,18 @@
 :root {
-    --color-primary: rgb(219, 223, 224);
-    --color-primary-dimmed: rgb(148, 148, 148);
-
-    --color-secondary: rgb(226, 242, 247);
-    --color-secondary-dimmed: rgb(191, 211, 218)
-
-    --color-danger: rgb(255, 120, 120);
-    --color-danger-dimmed: rgb(255, 156, 156);
-
-    --bg-color-midnight: rgb(28, 27, 34);
-    --bg-color-midnight-dimmed: rgba(28, 27, 34, 0.75);
-
-    --bg-color-taupe: rgb(34, 33, 41);
-    --bg-color-taupe-dimmed: rgba(34, 33, 41, 0.75);
-
-    --bg-color-graphite: rgb(38, 37, 44);
-    --bg-color-graphite-dimmed: rgba(38, 37, 44, 0.75);
-
-    --bg-color-success: rgb(116, 255, 116);
-    --bg-color-success-dimmed: rgb(142, 250, 142);
-
     --line-height-headers: 1.1;
     --line-height-body: 1.5;
 
     --main-font-family: "Segoe UI", Arial, Helvetica, sans-serif;
 
-    --font-size-xs: 12px;
-    --font-size-s: 14px;
-    --font-size-m: 18px;
-    --font-size-l: 25px;
+    --font-size-xs: 8px;
+    --font-size-s: 10px;
+    --font-size-m: 15px;
+    --font-size-l: 20px;
     --font-size-xl: 30px;
-    --font-size-xxl: 35px;
-    --font-size-xxxl: 45px;
-    --font-size-xxxxl: 55px;
-    --font-size-xxxxxl: 70px;
+    --font-size-xxl: 40px;
+    --font-size-xxxl: 60px;
+    --font-size-xxxxl: 70px;
+    --font-size-xxxxxl: 100px;
 
     --space-xxxs: 4px;
     --space-xxs: 6px;
@@ -46,7 +25,7 @@
     --space-xxxl: 48px;
     --space-xxxxl: 64px;
 
-    --border-grey: 1px solid #414141;
+    --border-grey: 1px solid rgb(192, 192, 192);
     --shadow: rgba(204, 204, 204, 0.02) 0px 1px 3px 0px, rgba(140, 151, 163, 0.15) 0px 0px 0px 1px;
 }
 
@@ -69,8 +48,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    background-color: var(--bg-color-midnight);
-    color: var(--color-primary);
     line-height: var(--line-height-body);
     font-size: var(--font-size-m);
     font-family: var(--main-font-family);
