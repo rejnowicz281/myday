@@ -1,6 +1,6 @@
 import { getMyDayList } from "@/actions/lists";
 import { TasksProvider } from "@/providers/TasksContext";
-import AddTask from "../components/AddTask";
+import AddTaskButton from "../components/AddTaskButton";
 import Tasks from "../components/Tasks";
 import css from "../page.module.css";
 
@@ -13,7 +13,7 @@ export default async function MyDayPage() {
                 <TasksProvider tasks={tasks} showList={true}>
                     <div class={css.main}>
                         <h1>My Day</h1>
-                        <AddTask forceMyDay={true} />
+                        <AddTaskButton forceMyDay={true} />
                         <Tasks />
                     </div>
                 </TasksProvider>

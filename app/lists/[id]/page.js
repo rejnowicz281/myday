@@ -1,7 +1,7 @@
 import { getList } from "@/actions/lists";
 import { TasksProvider } from "@/providers/TasksContext";
 import { formatDate } from "@/utils/date";
-import AddTask from "../components/AddTask";
+import AddTaskButton from "../components/AddTaskButton";
 import Tasks from "../components/Tasks";
 import css from "../page.module.css";
 import DeleteButton from "./components/DeleteButton";
@@ -18,7 +18,7 @@ export default async function ListPage({ params: { id } }) {
                         <EditableName listId={id} name={list.name} />
                         <div className={css.createdAt}>Created {formatDate(list.createdAt)}</div>
                         <DeleteButton listId={id} />
-                        <AddTask listId={id} />
+                        <AddTaskButton listId={id} />
                         <Tasks />
                     </div>
                 </TasksProvider>

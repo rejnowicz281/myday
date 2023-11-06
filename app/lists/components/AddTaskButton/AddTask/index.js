@@ -2,15 +2,19 @@
 
 import { createTask } from "@/actions/tasks";
 import SubmitButton from "@/components/SubmitButton";
+import useModalContext from "@/providers/ModalContext";
 import { useRef } from "react";
 import css from "./index.module.css";
 
 export default function AddTask({ listId, forceMyDay = false }) {
+    const { closeModal } = useModalContext();
+
     const formRef = useRef(null);
 
     async function handleAction(formData) {
         await createTask(formData, forceMyDay);
         formRef.current.reset();
+        closeModal();
     }
 
     return (

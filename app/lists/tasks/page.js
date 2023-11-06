@@ -1,6 +1,6 @@
 import { getListlessTasks } from "@/actions/lists";
 import { TasksProvider } from "@/providers/TasksContext";
-import AddTask from "../components/AddTask";
+import AddTaskButton from "../components/AddTaskButton";
 import Tasks from "../components/Tasks";
 import css from "../page.module.css";
 
@@ -13,7 +13,7 @@ export default async function TasksPage() {
                 <TasksProvider tasks={tasks}>
                     <div class={css.main}>
                         <h1>Tasks</h1>
-                        <AddTask />
+                        <AddTaskButton />
                         <Tasks />
                     </div>
                 </TasksProvider>
