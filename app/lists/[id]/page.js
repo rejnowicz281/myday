@@ -11,7 +11,7 @@ export default async function ListPage({ params: { id } }) {
     const list = await getList(id);
 
     return (
-        <div class={css.wrapper}>
+        <div className={css.wrapper}>
             <div className={css.container}>
                 <TasksProvider tasks={list.tasks}>
                     <div className={css.main}>

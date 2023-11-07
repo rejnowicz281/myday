@@ -8,10 +8,10 @@ export default async function MyDayPage() {
     const tasks = await getMyDayList();
 
     return (
-        <div class={css.wrapper}>
+        <div className={css.wrapper}>
             <div className={css.container}>
                 <TasksProvider tasks={tasks} showList={true}>
-                    <div class={css.main}>
+                    <div className={css.main}>
                         <h1>My Day</h1>
                         <AddTaskButton forceMyDay={true} />
                         <Tasks />
