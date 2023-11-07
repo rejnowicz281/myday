@@ -1,19 +1,16 @@
 const { Schema, models, model } = require("mongoose");
 
-const listSchema = new Schema(
-    {
-        name: {
-            type: String,
-            default: "Untitled List",
-            required: true,
-        },
-        owner: {
-            type: Schema.Types.ObjectId,
-            required: true,
-        },
+const listSchema = new Schema({
+    name: {
+        type: String,
+        default: "Untitled List",
+        required: true,
     },
-    { timestamps: { createdAt: true, updatedAt: false } }
-);
+    owner: {
+        type: Schema.Types.ObjectId,
+        required: true,
+    },
+});
 
 const List = models.List || model("List", listSchema);
 
