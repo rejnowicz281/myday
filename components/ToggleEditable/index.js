@@ -1,6 +1,6 @@
 "use client";
 
-import { experimental_useOptimistic as useOptimistic, useState } from "react";
+import { useEffect, experimental_useOptimistic as useOptimistic, useRef, useState } from "react";
 
 export default function ToggleEditable({
     action,
@@ -13,8 +13,13 @@ export default function ToggleEditable({
     defaultDisplay,
     inputType,
 }) {
+    const inputRef = useRef(null);
     const [input, setInput] = useOptimistic(display);
     const [editing, setEditing] = useState(false);
+
+    useEffect(() => {
+        if (editing) inputRef.current.focus();
+    }, [editing]);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -32,6 +37,7 @@ export default function ToggleEditable({
                         className={inputClass}
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
+                        ref={inputRef}
                     ></textarea>
                 ) : (
                     <input
@@ -39,6 +45,7 @@ export default function ToggleEditable({
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
+                        ref={inputRef}
                     />
                 )}
                 <button className={submitClass}>{submitContent}</button>
