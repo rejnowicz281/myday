@@ -1,6 +1,6 @@
 "use client";
 
-import Completed from "@/components/tasks/Completed";
+import CompleteButton from "@/components/tasks/CompleteButton";
 import MyDay from "@/components/tasks/MyDay";
 import TasksContext from "@/providers/TasksContext";
 import { formatDate } from "@/utils/date";
@@ -38,7 +38,7 @@ export default function CustomizeTaskBar({ task }) {
                 <div>Created: {formatDate(task.createdAt)}</div>
                 <div>Last updated: {formatDate(task.updatedAt)}</div>
                 <DeleteButton taskId={task._id} />
-                <Completed taskId={task._id} completed={task.completed} />
+                <CompleteButton taskId={task._id} completed={task.completed} />
                 <MyDay taskId={task._id} my_day={task.my_day} />
                 <Repeat taskId={task._id} repeat={task.repeat} />
                 <Priority priority={task.priority} taskId={task._id} />

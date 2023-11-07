@@ -1,7 +1,6 @@
 export default function RepeatDisplay({ repeat }) {
     return (
         <span>
-            Repeating:
             {repeat == 0
                 ? "Not"
                 : repeat == 1

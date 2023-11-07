@@ -5,7 +5,7 @@ import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
 import css from "./index.module.css";
 
-export default function Completed({ taskId, completed }) {
+export default function CompleteButton({ taskId, completed }) {
     const { setCompleted } = useContext(TasksContext);
 
     function handleAction(e) {
@@ -14,12 +14,5 @@ export default function Completed({ taskId, completed }) {
         updateTaskCompleted(taskId, !completed);
     }
 
-    return (
-        <div>
-            Completed:
-            <button className={css.button} onClick={handleAction}>
-                {completed.toString()}
-            </button>
-        </div>
-    );
+    return <input type="checkbox" className={css.checkbox} onClick={handleAction} checked={completed} />;
 }

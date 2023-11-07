@@ -8,7 +8,7 @@ import Task from "./Task";
 export default function Tasks() {
     const { tasks } = useContext(TasksContext);
     const [sortKey, setSortKey] = useState("created_at");
-    const [sortOrder, setSortOrder] = useState("Desc");
+    const [sortOrder, setSortOrder] = useState("Descending");
 
     return (
         <>
@@ -39,7 +39,15 @@ export default function Tasks() {
                     }
 
                     // Adjust the comparison result based on the sort order
-                    if (sortOrder == "Desc") result *= -1; // Reverse the order for descending
+                    if (sortOrder == "Descending") result *= -1; // Reverse the order for descending
+
+                    // Sort by "completed" status, with completed tasks at the end
+                    if (sortKey != "complete")
+                        if (a.completed && !b.completed) {
+                            return 1;
+                        } else if (!a.completed && b.completed) {
+                            return -1;
+                        }
 
                     return result;
                 })

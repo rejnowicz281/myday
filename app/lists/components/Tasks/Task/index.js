@@ -1,8 +1,7 @@
 "use client";
 
-import Completed from "@/components/tasks/Completed";
+import CompleteButton from "@/components/tasks/CompleteButton";
 import DueDateDisplay from "@/components/tasks/DueDateDisplay";
-import MyDay from "@/components/tasks/MyDay";
 import RepeatDisplay from "@/components/tasks/RepeatDisplay";
 import TasksContext from "@/providers/TasksContext";
 import Link from "next/link";
@@ -14,13 +13,18 @@ export default function Task({ task }) {
 
     return (
         <div
-            className={`${css.container}${editingTaskId == task._id ? ` ${css.editing}` : ""}`}
+            className={`${css.container}${editingTaskId == task._id ? ` ${css.editing}` : ""}${
+                task.completed ? ` ${css.completed}` : ""
+            }`}
             onClick={() => setEditingTaskId(task._id)}
         >
-            <h2>{task.name}</h2>
+            <div className={css["top-box"]}>
+                <CompleteButton taskId={task._id} completed={task.completed} />
+                <h3 className={css.name}>{task.name}</h3>
+            </div>
             {showList && (
-                <div>
-                    List:
+                <li>
+                    From{" "}
                     {task.list ? (
                         <Link className={css["link-list"]} href={`/lists/${task.list._id}`}>
                             {task.list.name}
@@ -30,13 +34,19 @@ export default function Task({ task }) {
                             Tasks
                         </Link>
                     )}
-                </div>
+                </li>
             )}
-            <Completed taskId={task._id} completed={task.completed} />
-            <MyDay taskId={task._id} my_day={task.my_day} />
-            <RepeatDisplay repeat={task.repeat} />
-            <div>Priority: {task.priority}</div>
-            {task.due_date && <DueDateDisplay dueDate={task.due_date} taskId={task._id} />}
+            {task.repeat > 0 && (
+                <li className={css.repeat}>
+                    Repeating <RepeatDisplay repeat={task.repeat} />
+                </li>
+            )}
+            {task.priority > 0 && <li>{task.priority} Priority</li>}
+            {task.due_date && (
+                <li>
+                    <DueDateDisplay dueDate={task.due_date} taskId={task._id} />
+                </li>
+            )}
         </div>
     );
 }

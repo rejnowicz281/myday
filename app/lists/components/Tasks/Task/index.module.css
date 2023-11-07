@@ -1,24 +1,37 @@
 .container {
     cursor: pointer;
-    box-shadow: var(--shadow);
-    margin: var(--space-xl) 0;
     padding: var(--space-l);
+    border-radius: var(--space-xs);
+    font-size: var(--font-size-l);
 }
 
-.container:hover {
-    background-color: var(--bg-color-taupe-dimmed);
+.container:hover .name {
+    color: grey;
 }
 
 .editing {
-    background-color: var(--bg-color-taupe);
+    background-color: rgb(240, 250, 250);
+}
+
+.completed {
+    color: rgb(184, 184, 184);
+}
+
+.completed .name {
+    text-decoration: line-through;
+}
+
+.top-box {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
 }
 
 .link-list {
-    padding-left: var(--space-xxs);
-    color: var(--color-secondary);
+    color: inherit;
     font-weight: bold;
 }
 
 .link-list:hover {
-    color: var(--color-secondary-dimmed);
+    color: grey;
 }

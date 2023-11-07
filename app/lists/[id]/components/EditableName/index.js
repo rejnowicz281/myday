@@ -19,8 +19,6 @@ export default function EditableName({ name, listId }) {
             submitContent={<FiCheck />}
             displayClass={css.display}
             inputClass={css.input}
-            submitClass={css.submit}
-            formClass={css.form}
         />
     );
 }

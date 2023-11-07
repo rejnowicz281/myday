@@ -1,12 +1,16 @@
-import { deleteList } from "@/actions/lists";
-import SubmitButton from "@/components/SubmitButton";
+"use client";
+
+import useModalContext from "@/providers/ModalContext";
+import { BsTrash } from "react-icons/bs";
+import Confirm from "./Confirm";
 import css from "./index.module.css";
 
 export default function DeleteButton({ listId }) {
+    const { setModalContent } = useModalContext();
+
     return (
-        <form action={deleteList}>
-            <input type="hidden" name="list" value={listId} />
-            <SubmitButton className={css.submit} content="Delete List" loading="Deleting..." />
-        </form>
+        <button onClick={() => setModalContent(<Confirm listId={listId} />)} className={css.button}>
+            <BsTrash />
+        </button>
     );
 }

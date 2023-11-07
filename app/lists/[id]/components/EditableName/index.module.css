@@ -1,45 +1,25 @@
-.form {
-    display: flex;
-    width: 100%;
-}
-
 .display {
     background-color: inherit;
     border: none;
     font-size: var(--font-size-xxxxl);
-    padding: 0;
     color: inherit;
     font-weight: bold;
-    cursor: pointer;
+    line-height: var(--line-height-headers);
     display: block;
 }
 
 .display:hover {
-    box-shadow: var(--shadow);
+    color: rgb(75, 75, 75);
 }
 
 .input {
-    box-shadow: var(--shadow);
+    line-height: var(--line-height-headers);
     padding: 0;
+    outline: none;
     color: inherit;
     background-color: inherit;
     font-size: var(--font-size-xxxxl);
     font-weight: bold;
     border: none;
-    width: max-content;
-}
-
-.submit {
-    background-color: var(--bg-color-success);
-    cursor: pointer;
-    font-size: var(--font-size-xl);
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-}
-
-.submit:hover {
-    background-color: var(--bg-color-success-dimmed);
+    width: 100%;
 }

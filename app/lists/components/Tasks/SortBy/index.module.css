@@ -1,23 +1,24 @@
 .container {
-    margin: var(--space-m) 0;
-    display: flex;
-    justify-content: right;
+    margin: var(--space-m) 0 var(--space-m) var(--space-xl);
+}
+
+.buttons {
+    margin-left: var(--space-xs);
+    display: inline-flex;
     align-items: center;
 }
 
 .button {
-    display: block;
-    background-color: var(--bg-color-graphite);
     border: none;
-    box-shadow: var(--shadow);
     outline: none;
-    margin-left: var(--space-xs);
     padding: var(--space-xs);
     color: inherit;
     cursor: pointer;
     font-weight: bold;
+    line-height: var(--line-height-headers);
+    background-color: inherit;
 }
 
 .button:hover {
-    background-color: var(--bg-color-taupe-dimmed);
+    color: rgb(182, 182, 182);
 }

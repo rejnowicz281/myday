@@ -14,10 +14,14 @@ export default async function ListPage({ params: { id } }) {
             <div className={css.container}>
                 <TasksProvider tasks={list.tasks}>
                     <div className={css.main}>
-                        <EditableName listId={id} name={list.name} />
-                        <DeleteButton listId={id} />
-                        <AddTaskButton listId={id} />
-                        <Tasks />
+                        <div className={css["main-top"]}>
+                            <EditableName listId={id} name={list.name} />
+                            <div className={css.buttons}>
+                                <DeleteButton listId={id} />
+                                <AddTaskButton listId={id} />
+                            </div>
+                        </div>
+                        {list.tasks.length > 0 && <Tasks />}
                     </div>
                 </TasksProvider>
             </div>

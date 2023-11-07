@@ -1,0 +1,15 @@
+.checkbox {
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: inherit;
+    margin: 0;
+    padding: var(--space-m);
+    border: 1px solid rgb(112, 255, 136);
+    transition: 0.1s;
+}
+
+.checkbox:checked {
+    box-shadow: inset 0 0 0 4px white;
+    background-color: rgb(79, 255, 109);
+}

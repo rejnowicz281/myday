@@ -3,22 +3,18 @@
 import { createTask } from "@/actions/tasks";
 import SubmitButton from "@/components/SubmitButton";
 import useModalContext from "@/providers/ModalContext";
-import { useRef } from "react";
 import css from "./index.module.css";
 
 export default function AddTask({ listId, forceMyDay = false }) {
     const { closeModal } = useModalContext();
 
-    const formRef = useRef(null);
-
     async function handleAction(formData) {
         await createTask(formData, forceMyDay);
-        formRef.current.reset();
         closeModal();
     }
 
     return (
-        <form className={css.form} action={handleAction} ref={formRef}>
+        <form className={css.form} action={handleAction}>
             <input className={css.field} type="hidden" name="list" value={listId} />
             <input className={css.field} type="text" name="name" placeholder="Name" />
             <input className={css.field} type="date" name="due_date" placeholder="Due Date" />

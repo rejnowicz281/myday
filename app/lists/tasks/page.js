@@ -12,9 +12,11 @@ export default async function TasksPage() {
             <div className={css.container}>
                 <TasksProvider tasks={tasks}>
                     <div className={css.main}>
-                        <h1>Tasks</h1>
-                        <AddTaskButton />
-                        <Tasks />
+                        <div className={css["main-top"]}>
+                            <h1>Tasks</h1>
+                            <AddTaskButton />
+                        </div>
+                        {tasks.length > 0 && <Tasks />}
                     </div>
                 </TasksProvider>
             </div>
