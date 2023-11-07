@@ -6,6 +6,7 @@ const taskSchema = new Schema(
             type: String,
             default: "Untitled Task",
             required: true,
+            maxLength: 255,
         },
         my_day: {
             type: Boolean,
