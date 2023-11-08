@@ -39,7 +39,6 @@ export function formatDateWithTime(date) {
     if (typeof date != "string") date = date.toISOString();
 
     const temp = DateTime.fromISO(date);
-    console.log(date, DateTime.fromISO(date).startOf("day"));
     const time = `${temp.hour < 10 ? "0" : ""}${temp.hour}:${temp.minute < 10 ? "0" : ""}${temp.minute}`;
 
     const new_date = DateTime.fromISO(date).toFormat("yyyy-MM-dd");
