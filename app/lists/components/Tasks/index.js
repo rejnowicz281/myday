@@ -22,7 +22,11 @@ export default function Tasks() {
                             result = new Date(a.createdAt) - new Date(b.createdAt);
                             break;
                         case "due_date":
-                            result = new Date(a.due_date) - new Date(b.due_date);
+                            // Handle tasks without a due date
+                            const dateA = a.due_date ? new Date(a.due_date) : new Date(0);
+                            const dateB = b.due_date ? new Date(b.due_date) : new Date(0);
+
+                            result = dateA - dateB;
                             break;
                         case "priority":
                             result = a.priority - b.priority;
