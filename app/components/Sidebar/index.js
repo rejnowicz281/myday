@@ -16,12 +16,16 @@ export default async function Sidebar() {
             <div className={css["lists-wrapper"]}>
                 <div className={css.lists}>
                     <NavLink href="/lists/my_day" className={css.link} activeClassName={css["active-link"]}>
-                        <LiaSunSolid />
-                        My Day
+                        <div className={css["link-icon"]}>
+                            <LiaSunSolid />
+                        </div>
+                        <div className={css["link-text"]}>My Day</div>
                     </NavLink>
                     <NavLink href="/lists/tasks" className={css.link} activeClassName={css["active-link"]}>
-                        <AiOutlineHome />
-                        Tasks
+                        <div className={css["link-icon"]}>
+                            <AiOutlineHome />
+                        </div>
+                        <div className={css["link-text"]}>Tasks</div>
                     </NavLink>
                     {lists.map((list) => (
                         <NavLink
@@ -30,8 +34,10 @@ export default async function Sidebar() {
                             className={css.link}
                             activeClassName={css["active-link"]}
                         >
-                            <AiOutlineUnorderedList />
-                            {list.name}
+                            <div className={css["link-icon"]}>
+                                <AiOutlineUnorderedList />
+                            </div>
+                            <div className={css["link-text"]}>{list.name}</div>
                         </NavLink>
                     ))}
                 </div>

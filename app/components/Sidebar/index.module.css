@@ -28,6 +28,14 @@
     padding: var(--space-s) 0;
     text-decoration: none;
     color: rgb(75, 75, 75);
+    flex: 1;
+}
+
+.link-icon {
+    flex-shrink: 0;
+}
+
+.link-text {
     word-break: break-word;
 }
 
