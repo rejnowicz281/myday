@@ -9,7 +9,7 @@ import { useContext } from "react";
 import css from "./index.module.css";
 
 export default function Task({ task }) {
-    const { showList, editingTaskId, setEditingTaskId } = useContext(TasksContext);
+    const { isMyDayPage, editingTaskId, setEditingTaskId } = useContext(TasksContext);
 
     return (
         <div
@@ -22,7 +22,7 @@ export default function Task({ task }) {
                 <CompleteButton className={css["complete-button"]} taskId={task._id} completed={task.completed} />
                 <h3 className={css.name}>{task.name}</h3>
             </div>
-            {showList && (
+            {isMyDayPage && (
                 <li>
                     From{" "}
                     {task.list ? (
@@ -36,7 +36,7 @@ export default function Task({ task }) {
                     )}
                 </li>
             )}
-            {!showList && task.my_day && <li>My Day</li>}
+            {!isMyDayPage && task.my_day && <li>My Day</li>}
             {task.repeat > 0 && (
                 <li className={css.repeat}>
                     <RepeatDisplay repeat={task.repeat} />

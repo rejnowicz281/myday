@@ -5,7 +5,7 @@ import { createContext, experimental_useOptimistic as useOptimistic, useState } 
 
 const TasksContext = createContext();
 
-export function TasksProvider({ children, tasks, showList = false }) {
+export function TasksProvider({ children, tasks, isMyDayPage = false }) {
     const [optimisticTasks, setOptimisticTasks] = useOptimistic(tasks);
     const [editingTaskId, setEditingTaskId] = useState(null);
 
@@ -101,7 +101,7 @@ export function TasksProvider({ children, tasks, showList = false }) {
                 setRepeat,
                 editingTaskId,
                 setEditingTaskId,
-                showList,
+                isMyDayPage,
             }}
         >
             {children}

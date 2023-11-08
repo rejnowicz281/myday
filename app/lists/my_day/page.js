@@ -9,12 +9,12 @@ export default async function MyDayPage() {
 
     return (
         <div className={css.container}>
-            <TasksProvider tasks={tasks} showList={true}>
+            <TasksProvider tasks={tasks} isMyDayPage={true}>
                 <div className={css["main-wrapper"]}>
                     <div className={css.main}>
                         <div className={css["main-top"]}>
                             <h1>My Day</h1>
-                            <AddTaskButton forceMyDay={true} />
+                            <AddTaskButton />
                         </div>
                         {tasks.length > 0 && <Tasks />}
                     </div>
