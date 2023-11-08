@@ -37,11 +37,15 @@
     transition: 0.1s;
 }
 
+.complete-button:hover {
+    box-shadow: inset 0 0 0 4px white;
+    background-color: rgb(158, 255, 174);
+}
+
 .complete-button:checked {
     box-shadow: inset 0 0 0 4px white;
     background-color: rgb(79, 255, 109);
 }
-
 .link-list {
     color: inherit;
     font-weight: bold;
