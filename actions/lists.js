@@ -23,9 +23,9 @@ export async function getMyDayList() {
 
     const user = await getCurrentUser();
 
-    const tasks = await Task.find({ my_day: true, owner: user?.id });
+    const tasks = await Task.find({ my_day: true, owner: user?.id }).populate("list");
 
-    return tasks;
+    return JSON.stringify(tasks);
 }
 
 export async function getListlessTasks() {

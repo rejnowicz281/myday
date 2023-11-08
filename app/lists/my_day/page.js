@@ -5,7 +5,7 @@ import Tasks from "../components/Tasks";
 import css from "../page.module.css";
 
 export default async function MyDayPage() {
-    const tasks = await getMyDayList();
+    const tasks = JSON.parse(await getMyDayList());
 
     return (
         <div className={css.container}>
