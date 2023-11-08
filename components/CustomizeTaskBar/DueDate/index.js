@@ -14,22 +14,32 @@ export default function DueDate({ dueDate, taskId }) {
     const { setDueDate } = useContext(TasksContext);
 
     function today() {
-        const today = DateTime.now().toJSDate();
+        let today = DateTime.now();
+        const taskDate = DateTime.fromJSDate(dueDate);
 
-        setDueDate(taskId, today);
-        updateTaskDueDate(taskId, today);
+        if (taskDate.toFormat("yyyy-MM-dd") != today.toFormat("yyyy-MM-dd")) {
+            today = today.toJSDate();
+            setDueDate(taskId, today);
+            updateTaskDueDate(taskId, today);
+        }
     }
 
     function tomorrow() {
-        const tomorrow = DateTime.now().plus({ days: 1 }).toJSDate();
+        let tomorrow = DateTime.now().plus({ days: 1 });
+        const taskDate = DateTime.fromJSDate(dueDate);
 
-        setDueDate(taskId, tomorrow);
-        updateTaskDueDate(taskId, tomorrow);
+        if (taskDate.toFormat("yyyy-MM-dd") != tomorrow.toFormat("yyyy-MM-dd")) {
+            tomorrow = tomorrow.toJSDate();
+            setDueDate(taskId, tomorrow);
+            updateTaskDueDate(taskId, tomorrow);
+        }
     }
 
     function none() {
-        setDueDate(taskId, null);
-        updateTaskDueDate(taskId, null);
+        if (dueDate != null) {
+            setDueDate(taskId, null);
+            updateTaskDueDate(taskId, null);
+        }
     }
 
     return (

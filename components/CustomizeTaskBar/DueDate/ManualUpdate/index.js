@@ -12,10 +12,14 @@ export default function ManualUpdate({ taskId, dueDate }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const newDate = DateTime.fromISO(input).toJSDate();
+        let newDate = DateTime.fromISO(input);
+        const taskDate = DateTime.fromJSDate(dueDate);
 
-        setDueDate(taskId, newDate);
-        updateTaskDueDate(taskId, newDate);
+        if (taskDate.toFormat("yyyy-MM-dd") != newDate.toFormat("yyyy-MM-dd")) {
+            newDate = newDate.toJSDate();
+            setDueDate(taskId, newDate);
+            updateTaskDueDate(taskId, newDate);
+        }
     }
 
     return (

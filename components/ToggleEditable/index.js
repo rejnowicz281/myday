@@ -34,7 +34,7 @@ export default function ToggleEditable({ action, display, inputClass, displayCla
     function handleSubmit() {
         setEditing(false);
 
-        if (input == "") setInput(display);
+        if (input == "" || input == display) setInput(display);
         else action(input);
     }
 

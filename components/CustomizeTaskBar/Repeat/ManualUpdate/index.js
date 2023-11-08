@@ -19,7 +19,7 @@ export default function ManualUpdate({ taskId, repeat }) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        if (input > -1 && everyX > 0) {
+        if (input > -1 && input != repeat && everyX > 0) {
             const final = input * everyX;
 
             setRepeat(taskId, final);

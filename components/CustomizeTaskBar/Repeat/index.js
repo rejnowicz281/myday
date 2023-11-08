@@ -12,10 +12,10 @@ export default function Repeat({ repeat, taskId }) {
     const { setRepeat } = useContext(TasksContext);
     const [expanded, setExpanded] = useState(false);
 
-    function handleChange(amount) {
-        if (amount > -1) {
-            setRepeat(taskId, amount);
-            updateTaskRepeat(taskId, amount);
+    function handleUpdate(value) {
+        if (value > -1 && value != repeat) {
+            setRepeat(taskId, value);
+            updateTaskRepeat(taskId, value);
         }
     }
 
@@ -27,19 +27,19 @@ export default function Repeat({ repeat, taskId }) {
             </button>
             {expanded && (
                 <>
-                    <button className={css.button} onClick={() => handleChange(0)}>
+                    <button className={css.button} onClick={() => handleUpdate(0)}>
                         No Repeat
                     </button>
-                    <button className={css.button} onClick={() => handleChange(1)}>
+                    <button className={css.button} onClick={() => handleUpdate(1)}>
                         Daily
                     </button>
-                    <button className={css.button} onClick={() => handleChange(7)}>
+                    <button className={css.button} onClick={() => handleUpdate(7)}>
                         Weekly
                     </button>
-                    <button className={css.button} onClick={() => handleChange(30)}>
+                    <button className={css.button} onClick={() => handleUpdate(30)}>
                         Monthly
                     </button>
-                    <button className={css.button} onClick={() => handleChange(365)}>
+                    <button className={css.button} onClick={() => handleUpdate(365)}>
                         Yearly
                     </button>
                     <ManualUpdate repeat={repeat} taskId={taskId} />
