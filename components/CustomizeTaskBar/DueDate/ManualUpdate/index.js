@@ -4,9 +4,9 @@ import { updateTaskDueDate } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
 import { DateTime } from "luxon";
 import { useContext, experimental_useOptimistic as useOptimistic } from "react";
-import css from "../index.module.css";
+import css from "./index.module.css";
 
-export default function Options({ taskId, dueDate }) {
+export default function ManualUpdate({ taskId, dueDate }) {
     const { setDueDate } = useContext(TasksContext);
     const [input, setInput] = useOptimistic(DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd"));
 
@@ -19,7 +19,7 @@ export default function Options({ taskId, dueDate }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={css.form} onSubmit={handleSubmit}>
             <input className={css.input} type="date" value={input} onChange={(e) => setInput(e.target.value)} />
             <button className={css.button}>Save</button>
         </form>

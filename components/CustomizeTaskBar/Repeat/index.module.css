@@ -1,24 +1,23 @@
-.button {
-    background-color: var(--bg-color-taupe);
-    border: none;
-    box-shadow: var(--shadow);
-    outline: none;
-    padding: var(--space-xs);
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-s);
+    border: var(--border-grey);
+}
+
+.expand-button {
+    padding: var(--space-s);
     color: inherit;
     cursor: pointer;
     font-weight: bold;
-}
-
-.button:hover {
-    background-color: var(--bg-color-taupe-dimmed);
-}
-
-.input {
-    background-color: var(--bg-color-taupe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
-    box-shadow: var(--shadow);
-    outline: none;
-    padding: var(--space-xs);
-    margin: var(--space-xs) 0;
-    color: inherit;
+}
+
+.button {
+    padding: var(--space-s);
+    cursor: pointer;
+    border: none;
 }

@@ -8,9 +8,9 @@ export default async function MyDayPage() {
     const tasks = await getMyDayList();
 
     return (
-        <div className={css.wrapper}>
-            <div className={css.container}>
-                <TasksProvider tasks={tasks} showList={true}>
+        <div className={css.container}>
+            <TasksProvider tasks={tasks} showList={true}>
+                <div className={css["main-wrapper"]}>
                     <div className={css.main}>
                         <div className={css["main-top"]}>
                             <h1>My Day</h1>
@@ -18,8 +18,8 @@ export default async function MyDayPage() {
                         </div>
                         {tasks.length > 0 && <Tasks />}
                     </div>
-                </TasksProvider>
-            </div>
+                </div>
+            </TasksProvider>
         </div>
     );
 }

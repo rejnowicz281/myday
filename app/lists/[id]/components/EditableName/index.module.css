@@ -1,8 +1,9 @@
 .display {
-    background-color: inherit;
+    background-color: inherit !important;
     border: none;
     font-size: var(--font-size-xxxxl);
     color: inherit;
+    text-align: left;
     font-weight: bold;
     line-height: var(--line-height-headers);
     display: block;

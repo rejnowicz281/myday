@@ -10,13 +10,12 @@
 
 .button {
     border: none;
-    outline: none;
     padding: var(--space-xs);
     color: inherit;
     cursor: pointer;
     font-weight: bold;
     line-height: var(--line-height-headers);
-    background-color: inherit;
+    background-color: inherit !important;
 }
 
 .button:hover {

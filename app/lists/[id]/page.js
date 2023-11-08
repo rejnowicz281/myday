@@ -10,9 +10,9 @@ export default async function ListPage({ params: { id } }) {
     const list = await getList(id);
 
     return (
-        <div className={css.wrapper}>
-            <div className={css.container}>
-                <TasksProvider tasks={list.tasks}>
+        <div className={css.container}>
+            <TasksProvider tasks={list.tasks}>
+                <div className={css["main-wrapper"]}>
                     <div className={css.main}>
                         <div className={css["main-top"]}>
                             <EditableName listId={id} name={list.name} />
@@ -23,8 +23,8 @@ export default async function ListPage({ params: { id } }) {
                         </div>
                         {list.tasks.length > 0 && <Tasks />}
                     </div>
-                </TasksProvider>
-            </div>
+                </div>
+            </TasksProvider>
         </div>
     );
 }

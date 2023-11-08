@@ -23,7 +23,7 @@ export async function getMyDayList() {
 
     const user = await getCurrentUser();
 
-    const tasks = await Task.find({ my_day: true, owner: user?.id }).populate("list");
+    const tasks = await Task.find({ my_day: true, owner: user?.id });
 
     return tasks;
 }

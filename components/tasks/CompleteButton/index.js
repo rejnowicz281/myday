@@ -3,9 +3,8 @@
 import { updateTaskCompleted } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
-import css from "./index.module.css";
 
-export default function CompleteButton({ taskId, completed }) {
+export default function CompleteButton({ className, taskId, completed }) {
     const { setCompleted } = useContext(TasksContext);
 
     function handleAction(e) {
@@ -14,5 +13,5 @@ export default function CompleteButton({ taskId, completed }) {
         updateTaskCompleted(taskId, !completed);
     }
 
-    return <input type="checkbox" className={css.checkbox} onClick={handleAction} checked={completed} />;
+    return <input className={className} type="checkbox" onChange={handleAction} checked={completed} />;
 }

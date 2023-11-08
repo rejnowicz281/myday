@@ -1,11 +1,7 @@
-"use client";
-
+import MyDay from "@/components/CustomizeTaskBar/MyDay";
 import CompleteButton from "@/components/tasks/CompleteButton";
-import MyDay from "@/components/tasks/MyDay";
-import TasksContext from "@/providers/TasksContext";
-import { formatDate } from "@/utils/date";
-import Link from "next/link";
-import { useContext } from "react";
+import { formatDateWithTime } from "@/utils/date";
+import CloseButton from "./CloseButton";
 import DeleteButton from "./DeleteButton";
 import DueDate from "./DueDate";
 import EditableName from "./EditableName";
@@ -15,30 +11,19 @@ import Repeat from "./Repeat";
 import css from "./index.module.css";
 
 export default function CustomizeTaskBar({ task }) {
-    const { showList } = useContext(TasksContext);
-
     return (
         <div className={css.wrapper}>
             <div className={css.container}>
-                <EditableName name={task.name} taskId={task._id} />
-                {showList && (
-                    <div>
-                        List:
-                        {task.list ? (
-                            <Link className={css["link-list"]} href={`/lists/${task.list._id}`}>
-                                {task.list.name}
-                            </Link>
-                        ) : (
-                            <Link className={css["link-list"]} href="/lists/tasks">
-                                Tasks
-                            </Link>
-                        )}
-                    </div>
-                )}
-                <div>Created: {formatDate(task.createdAt)}</div>
-                <div>Last updated: {formatDate(task.updatedAt)}</div>
-                <DeleteButton taskId={task._id} />
-                <CompleteButton taskId={task._id} completed={task.completed} />
+                <div className={css["top-buttons"]}>
+                    <CloseButton />
+                    <DeleteButton taskId={task._id} />
+                </div>
+                <div>Created: {formatDateWithTime(task.createdAt)}</div>
+                <div>Last updated: {formatDateWithTime(task.updatedAt)}</div>
+                <div className={css["name-box"]}>
+                    <CompleteButton className={css["complete-button"]} taskId={task._id} completed={task.completed} />
+                    <EditableName name={task.name} taskId={task._id} />
+                </div>
                 <MyDay taskId={task._id} my_day={task.my_day} />
                 <Repeat taskId={task._id} repeat={task.repeat} />
                 <Priority priority={task.priority} taskId={task._id} />

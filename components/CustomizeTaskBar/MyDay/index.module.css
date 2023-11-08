@@ -1,0 +1,15 @@
+.button {
+    padding: var(--space-xs);
+    margin: var(--space-s) 0;
+    color: inherit;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.added {
+    background-color: rgb(255, 154, 154);
+}
+
+.added:hover {
+    background-color: rgb(255, 134, 134);
+}

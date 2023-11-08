@@ -13,11 +13,8 @@ export default function MyDay({ taskId, my_day }) {
     }
 
     return (
-        <div>
-            My Day:
-            <button className={css.button} onClick={handleAction}>
-                {my_day.toString()}
-            </button>
-        </div>
+        <button className={`${css.button}${my_day ? ` ${css.added}` : ""}`} onClick={handleAction}>
+            {my_day ? "Remove From My Day" : "Add To My Day"}
+        </button>
     );
 }

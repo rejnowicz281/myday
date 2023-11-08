@@ -4,11 +4,13 @@ import { updateTaskDueDate } from "@/actions/tasks";
 import DueDateDisplay from "@/components/tasks/DueDateDisplay";
 import TasksContext from "@/providers/TasksContext";
 import { DateTime } from "luxon";
-import { useContext } from "react";
-import Options from "./Options";
+import { useContext, useState } from "react";
+import { MdExpandLess, MdExpandMore } from "react-icons/md";
+import ManualUpdate from "./ManualUpdate";
 import css from "./index.module.css";
 
 export default function DueDate({ dueDate, taskId }) {
+    const [expanded, setExpanded] = useState(false);
     const { setDueDate } = useContext(TasksContext);
 
     function today() {
@@ -31,18 +33,25 @@ export default function DueDate({ dueDate, taskId }) {
     }
 
     return (
-        <div>
-            <DueDateDisplay dueDate={dueDate} />
-            <button className={css.button} onClick={none}>
-                None
+        <div className={css.container}>
+            <button className={css["expand-button"]} onClick={() => setExpanded(!expanded)}>
+                <DueDateDisplay dueDate={dueDate} />
+                {expanded ? <MdExpandLess /> : <MdExpandMore />}
             </button>
-            <button className={css.button} onClick={today}>
-                Today
-            </button>
-            <button className={css.button} onClick={tomorrow}>
-                Tomorrow
-            </button>
-            <Options taskId={taskId} dueDate={dueDate} />
+            {expanded && (
+                <>
+                    <button className={css.button} onClick={none}>
+                        None
+                    </button>
+                    <button className={css.button} onClick={today}>
+                        Today
+                    </button>
+                    <button className={css.button} onClick={tomorrow}>
+                        Tomorrow
+                    </button>
+                    <ManualUpdate taskId={taskId} dueDate={dueDate} />
+                </>
+            )}
         </div>
     );
 }

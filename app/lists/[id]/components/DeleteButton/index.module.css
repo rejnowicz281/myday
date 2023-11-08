@@ -1,6 +1,6 @@
 .button {
     font-size: var(--font-size-xl);
-    background-color: inherit;
+    background-color: inherit !important;
     border: none;
     cursor: pointer;
     transition: 0.3s;

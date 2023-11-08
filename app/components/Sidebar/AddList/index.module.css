@@ -15,7 +15,7 @@
 }
 
 .submit {
-    background-color: inherit;
+    background-color: inherit !important;
     color: inherit;
     border: none;
     font-size: var(--font-size-xl);

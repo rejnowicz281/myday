@@ -1,10 +1,23 @@
 .button {
-    background-color: inherit;
-    color: var(--color-danger);
+    font-size: var(--font-size-xl);
+    background-color: inherit !important;
     border: none;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 .button:hover {
-    color: var(--color-danger-dimmed);
+    color: rgb(189, 189, 189);
+}
+
+.sure {
+    text-align: center;
+    font-size: var(--font-size-xl);
+}
+
+.delete {
+    width: 100%;
+    padding: var(--space-xs);
+    margin-top: var(--space-xxs);
+    cursor: pointer;
 }

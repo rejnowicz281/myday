@@ -2,16 +2,16 @@ export default function RepeatDisplay({ repeat }) {
     return (
         <span>
             {repeat == 0
-                ? "Not"
+                ? "Not Repeating"
                 : repeat == 1
-                ? "Daily"
+                ? "Repeating Daily"
                 : repeat == 7
-                ? "Weekly"
+                ? "Repeating Weekly"
                 : repeat == 30
-                ? "Monthly"
+                ? "Repeating Monthly"
                 : repeat == 365
-                ? "Yearly"
-                : `every ${repeat} days`}
+                ? "Repeating Yearly"
+                : `Repeating every ${repeat} days`}
         </span>
     );
 }

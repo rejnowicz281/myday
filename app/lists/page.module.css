@@ -1,27 +1,27 @@
-.wrapper {
+.container {
+    display: flex;
+    flex: 1;
+}
+
+.main-wrapper {
     flex: 1;
     display: flex;
     position: relative;
     word-break: break-word;
 }
 
-.container {
+.main {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    padding: var(--space-xxl);
     overflow-y: scroll;
-    display: flex;
+    padding: var(--space-xxl);
 }
 
 .main-top {
     padding-left: var(--space-xl);
-}
-
-.main {
-    flex: 1;
 }
 
 .buttons {
