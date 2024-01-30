@@ -3,7 +3,6 @@ import { createList } from "@/actions/lists";
 import SubmitButton from "@/components/SubmitButton";
 import { useRef } from "react";
 import { VscAdd } from "react-icons/vsc";
-import css from "./index.module.css";
 
 export default function AddList() {
     const formRef = useRef(null);
@@ -14,9 +13,17 @@ export default function AddList() {
     }
 
     return (
-        <form className={css.form} action={handleAction} ref={formRef}>
-            <input placeholder="Add List" className={css.input} type="text" name="name" />
-            <SubmitButton className={css.submit} content={<VscAdd />} />
+        <form className="flex py-4 gap-4" action={handleAction} ref={formRef}>
+            <input
+                placeholder="Add List"
+                className="flex-1 text-xl border-b border-b-slate-600 outline-none"
+                type="text"
+                name="name"
+            />
+            <SubmitButton
+                className="hover:text-stone-400 disabled:text-stone-400 disabled:animate-[spin_2s_linear_infinite] text-xl transition-colors"
+                content={<VscAdd />}
+            />
         </form>
     );
 }

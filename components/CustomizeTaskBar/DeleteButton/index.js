@@ -5,7 +5,6 @@ import useModalContext from "@/providers/ModalContext";
 import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
 import { BsTrash } from "react-icons/bs";
-import css from "./index.module.css";
 
 export default function DeleteButton({ taskId }) {
     const { setModalContent, closeModal } = useModalContext();
@@ -23,14 +22,17 @@ export default function DeleteButton({ taskId }) {
             onClick={() =>
                 setModalContent(
                     <>
-                        <p className={css.sure}>Are you sure?</p>
-                        <button className={css.delete} onClick={handleDelete}>
+                        <p className="text-center text-xl">Are you sure?</p>
+                        <button
+                            className="font-bold rounded disabled:cursor-not-allowed disabled:bg-red-200 disabled:text-gray-600 hover:bg-red-300 transition-colors bg-red-400 w-full mt-6 p-3"
+                            onClick={handleDelete}
+                        >
                             Delete Task
                         </button>
                     </>
                 )
             }
-            className={css.button}
+            className="text-3xl transition-colors hover:text-stone-400"
         >
             <BsTrash />
         </button>

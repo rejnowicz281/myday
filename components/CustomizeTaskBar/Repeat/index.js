@@ -6,7 +6,6 @@ import TasksContext from "@/providers/TasksContext";
 import { useContext, useState } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import ManualUpdate from "./ManualUpdate";
-import css from "./index.module.css";
 
 export default function Repeat({ repeat, taskId }) {
     const { setRepeat } = useContext(TasksContext);
@@ -20,29 +19,34 @@ export default function Repeat({ repeat, taskId }) {
     }
 
     return (
-        <div className={css.container}>
-            <button className={css["expand-button"]} onClick={() => setExpanded(!expanded)}>
+        <div className="flex flex-col">
+            <button
+                className="hover:text-gray-500 font-bold flex items-center justify-center"
+                onClick={() => setExpanded(!expanded)}
+            >
                 <RepeatDisplay repeat={repeat} />
                 {expanded ? <MdExpandLess /> : <MdExpandMore />}
             </button>
             {expanded && (
                 <>
-                    <button className={css.button} onClick={() => handleUpdate(0)}>
+                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(0)}>
                         No Repeat
                     </button>
-                    <button className={css.button} onClick={() => handleUpdate(1)}>
+                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(1)}>
                         Daily
                     </button>
-                    <button className={css.button} onClick={() => handleUpdate(7)}>
+                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(7)}>
                         Weekly
                     </button>
-                    <button className={css.button} onClick={() => handleUpdate(30)}>
+                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(30)}>
                         Monthly
                     </button>
-                    <button className={css.button} onClick={() => handleUpdate(365)}>
+                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(365)}>
                         Yearly
                     </button>
-                    <ManualUpdate repeat={repeat} taskId={taskId} />
+                    <div className="border-t border-b">
+                        <ManualUpdate repeat={repeat} taskId={taskId} />
+                    </div>
                 </>
             )}
         </div>

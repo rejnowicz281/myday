@@ -1,5 +1,4 @@
 "use client";
-import css from "./index.module.css";
 
 export default function SortBy({ sortKey, setSortKey, sortOrder, setSortOrder }) {
     function handleOrderChange() {
@@ -11,13 +10,17 @@ export default function SortBy({ sortKey, setSortKey, sortOrder, setSortOrder })
     }
 
     return (
-        <div className={css.container}>
-            Sort by
-            <div className={css.buttons}>
-                <button className={css.button} onClick={handleOrderChange}>
+        <div className="flex gap-3">
+            <div>Sort by</div>
+            <div className="flex gap-3 items-center">
+                <button className="font-bold hover:text-gray-500 cursor-default" onClick={handleOrderChange}>
                     {sortOrder}
                 </button>
-                <select className={css.button} onChange={handleKeyChange} defaultValue={sortKey}>
+                <select
+                    className="font-bold bg-inherit outline-none hover:text-gray-500"
+                    onChange={handleKeyChange}
+                    defaultValue={sortKey}
+                >
                     <option value="created_at">Created At</option>
                     <option value="due_date">Due Date</option>
                     <option value="priority">Priority</option>

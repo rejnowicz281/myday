@@ -1,7 +1,6 @@
 import { updateTaskRepeat } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
 import { useContext, experimental_useOptimistic as useOptimistic, useState } from "react";
-import css from "./index.module.css";
 
 export default function ManualUpdate({ taskId, repeat }) {
     const { setRepeat } = useContext(TasksContext);
@@ -28,24 +27,27 @@ export default function ManualUpdate({ taskId, repeat }) {
     }
 
     return (
-        <form className={css.form} onSubmit={handleSubmit}>
-            <div className={css.container}>
-                <p className={css.every}>Every</p>
+        <form className="p-1 flex flex-col gap-1 items-center" onSubmit={handleSubmit}>
+            <div className="flex gap-3 items-center">
+                <span>Every</span>
                 <input
-                    className={css.input}
+                    className="p-1 cursor-default hover:text-gray-500 font-bold outline-none"
                     type="number"
                     value={input}
                     placeholder="every x"
                     onChange={handleInputChange}
                 />
-                <select className={css.button} onChange={(e) => setEveryX(e.target.value)}>
+                <select
+                    className="font-bold bg-inherit outline-none hover:text-gray-500"
+                    onChange={(e) => setEveryX(e.target.value)}
+                >
                     <option value={1}>Days</option>
                     <option value={7}>Weeks</option>
                     <option value={30}>Months</option>
                     <option value={365}>Years</option>
                 </select>
             </div>
-            <button className={css["save-button"]}>Save</button>
+            <button className="w-full font-bold hover:text-gray-500">Save</button>
         </form>
     );
 }

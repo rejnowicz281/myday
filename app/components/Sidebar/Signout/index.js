@@ -1,13 +1,10 @@
 import Link from "next/link";
 import { ImExit } from "react-icons/im";
-import css from "./index.module.css";
 
 export default function Signout() {
     return (
-        <div>
-            <Link className={css.signout} href="/api/auth/signout">
-                <ImExit />
-            </Link>
-        </div>
+        <Link className="hover:text-stone-400 text-4xl cursor-pointer transition-colors" href="/api/auth/signout">
+            <ImExit />
+        </Link>
     );
 }

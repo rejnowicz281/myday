@@ -6,45 +6,51 @@ import RepeatDisplay from "@/components/tasks/RepeatDisplay";
 import TasksContext from "@/providers/TasksContext";
 import Link from "next/link";
 import { useContext } from "react";
-import css from "./index.module.css";
 
 export default function Task({ task }) {
     const { isMyDayPage, editingTaskId, setEditingTaskId } = useContext(TasksContext);
 
     return (
         <div
-            className={`${css.container}${editingTaskId == task._id ? ` ${css.editing}` : ""}${
-                task.completed ? ` ${css.completed}` : ""
-            }`}
+            className={`group px-3 py-5 cursor-pointer border rounded text-lg${
+                editingTaskId == task._id ? ` bg-gray-100` : ""
+            }${task.completed ? ` text-gray-300` : ""}`}
             onClick={() => setEditingTaskId(task._id)}
         >
-            <div className={css["top-box"]}>
-                <CompleteButton className={css["complete-button"]} taskId={task._id} completed={task.completed} />
-                <h3 className={css.name}>{task.name}</h3>
+            <div className="flex items-center gap-2">
+                <CompleteButton
+                    className="cursor-pointer appearance-none m-0 p-4 border border-green-300 transition-all duration-100 hover:bg-green-400 hover:shadow-[inset_0_0_0_4px_White] checked:bg-green-500 checked:shadow-[inset_0_0_0_4px_White]"
+                    taskId={task._id}
+                    completed={task.completed}
+                />
+                <h3 className={`group-hover:text-gray-500 text-3xl font-bold${task.completed ? " line-through" : ""}`}>
+                    {task.name}
+                </h3>
             </div>
+
             {isMyDayPage && (
-                <li>
+                <li className="first-of-type:pt-4">
                     From{" "}
                     {task.list ? (
-                        <Link className={css["link-list"]} href={`/lists/${task.list._id}`}>
+                        <Link className="font-bold hover:text-gray-500" href={`/lists/${task.list._id}`}>
                             {task.list.name}
                         </Link>
                     ) : (
-                        <Link className={css["link-list"]} href="/lists/tasks">
+                        <Link className="font-bold hover:text-gray-500" href="/lists/tasks">
                             Tasks
                         </Link>
                     )}
                 </li>
             )}
-            {!isMyDayPage && task.my_day && <li>My Day</li>}
+            {!isMyDayPage && task.my_day && <li className="first-of-type:pt-4">My Day</li>}
             {task.repeat > 0 && (
-                <li className={css.repeat}>
+                <li className="first-of-type:pt-4">
                     <RepeatDisplay repeat={task.repeat} />
                 </li>
             )}
-            {task.priority > 0 && <li>{task.priority} Priority</li>}
+            {task.priority > 0 && <li className="first-of-type:pt-4">{task.priority} Priority</li>}
             {task.due_date && (
-                <li>
+                <li className="first-of-type:pt-4">
                     <DueDateDisplay dueDate={task.due_date} taskId={task._id} />
                 </li>
             )}

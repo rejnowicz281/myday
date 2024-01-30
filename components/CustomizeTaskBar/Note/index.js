@@ -4,7 +4,6 @@ import { updateTaskNote } from "@/actions/tasks";
 import ToggleEditable from "@/components/ToggleEditable";
 import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
-import css from "./index.module.css";
 
 export default function Note({ note, taskId }) {
     const { setNote } = useContext(TasksContext);
@@ -16,8 +15,8 @@ export default function Note({ note, taskId }) {
                 updateTaskNote(taskId, input);
             }}
             display={note}
-            inputClass={css.input}
-            displayClass={css.display}
+            displayClass="text-left font-bold hover:text-gray-500"
+            inputClass="leading-[inherit] w-full font-bold outline-0"
             defaultDisplay="(Empty note)"
             inputType="textarea"
         />

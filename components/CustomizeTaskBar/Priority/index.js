@@ -4,7 +4,6 @@ import { updateTaskPriority } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
 import { useContext, useState } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
-import css from "./index.module.css";
 
 export default function Priority({ priority, taskId }) {
     const { setPriority } = useContext(TasksContext);
@@ -18,17 +17,23 @@ export default function Priority({ priority, taskId }) {
     }
 
     return (
-        <div className={css.container}>
-            <button className={css["expand-button"]} onClick={() => setExpanded(!expanded)}>
+        <div className="flex flex-col">
+            <button
+                className="hover:text-gray-500 font-bold flex items-center justify-center"
+                onClick={() => setExpanded(!expanded)}
+            >
                 {priority <= 0 ? "No" : priority} Priority
                 {expanded ? <MdExpandLess /> : <MdExpandMore />}
             </button>
             {expanded && (
-                <div className={css.buttons}>
-                    <button className={css.plus} onClick={() => handleChange(priority + 1)}>
+                <div className="flex gap-4">
+                    <button className="flex-1 text-end hover:text-gray-500" onClick={() => handleChange(priority + 1)}>
                         +1
                     </button>
-                    <button className={css.minus} onClick={() => handleChange(priority - 1)}>
+                    <button
+                        className="flex-1 text-start hover:text-gray-500"
+                        onClick={() => handleChange(priority - 1)}
+                    >
                         -1
                     </button>
                 </div>

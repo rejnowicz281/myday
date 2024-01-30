@@ -5,7 +5,6 @@ import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
 import { IoAddCircleOutline } from "react-icons/io5";
 import AddTask from "./AddTask";
-import css from "./index.module.css";
 
 export default function AddTaskButton({ listId }) {
     const { isMyDayPage } = useContext(TasksContext);
@@ -13,7 +12,7 @@ export default function AddTaskButton({ listId }) {
 
     return (
         <button
-            className={css.button}
+            className="text-3xl transition-colors hover:text-stone-400"
             onClick={() => setModalContent(<AddTask forceMyDay={isMyDayPage} listId={listId} />)}
         >
             <IoAddCircleOutline />

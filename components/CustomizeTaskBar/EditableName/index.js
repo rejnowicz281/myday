@@ -4,7 +4,6 @@ import { updateTaskName } from "@/actions/tasks";
 import ToggleEditable from "@/components/ToggleEditable";
 import TasksContext from "@/providers/TasksContext";
 import { useContext } from "react";
-import css from "./index.module.css";
 
 export default function EditableName({ name, taskId }) {
     const { setName } = useContext(TasksContext);
@@ -16,8 +15,8 @@ export default function EditableName({ name, taskId }) {
                 updateTaskName(taskId, input);
             }}
             display={name}
-            inputClass={css.input}
-            displayClass={css.display}
+            displayClass="text-[1.875rem] leading-[inherit] text-left font-bold hover:text-gray-500"
+            inputClass="text-[1.875rem] leading-[inherit] w-full font-bold outline-0"
         />
     );
 }

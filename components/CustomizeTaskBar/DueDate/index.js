@@ -7,7 +7,6 @@ import { DateTime } from "luxon";
 import { useContext, useState } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import ManualUpdate from "./ManualUpdate";
-import css from "./index.module.css";
 
 export default function DueDate({ dueDate, taskId }) {
     const [expanded, setExpanded] = useState(false);
@@ -43,23 +42,28 @@ export default function DueDate({ dueDate, taskId }) {
     }
 
     return (
-        <div className={css.container}>
-            <button className={css["expand-button"]} onClick={() => setExpanded(!expanded)}>
+        <div className="flex flex-col">
+            <button
+                className="hover:text-gray-500 font-bold flex items-center justify-center"
+                onClick={() => setExpanded(!expanded)}
+            >
                 <DueDateDisplay dueDate={dueDate} />
                 {expanded ? <MdExpandLess /> : <MdExpandMore />}
             </button>
             {expanded && (
                 <>
-                    <button className={css.button} onClick={none}>
+                    <button className="p-1 hover:text-gray-500" onClick={none}>
                         None
                     </button>
-                    <button className={css.button} onClick={today}>
+                    <button className="p-1 hover:text-gray-500" onClick={today}>
                         Today
                     </button>
-                    <button className={css.button} onClick={tomorrow}>
+                    <button className="p-1 hover:text-gray-500" onClick={tomorrow}>
                         Tomorrow
                     </button>
-                    <ManualUpdate taskId={taskId} dueDate={dueDate} />
+                    <div className="border-t border-b">
+                        <ManualUpdate taskId={taskId} dueDate={dueDate} />
+                    </div>
                 </>
             )}
         </div>

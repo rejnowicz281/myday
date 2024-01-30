@@ -4,40 +4,44 @@ import { AiOutlineHome, AiOutlineUnorderedList } from "react-icons/ai";
 import { LiaSunSolid } from "react-icons/lia";
 import AddList from "./AddList";
 import Signout from "./Signout";
-import css from "./index.module.css";
 
 export default async function Sidebar() {
     const lists = await getLists();
 
     return (
-        <div className={css.container}>
+        <div className="flex flex-col py-12 pl-8 flex-shrink-0 flex-grow-0 basis-[350px]">
             <Signout />
             <AddList />
-            <div className={css["lists-wrapper"]}>
-                <div className={css.lists}>
-                    <NavLink href="/lists/my_day" className={css.link} activeClassName={css["active-link"]}>
-                        <div className={css["link-icon"]}>
-                            <LiaSunSolid />
-                        </div>
-                        <div className={css["link-text"]}>My Day</div>
+            <div className="flex flex-1 relative">
+                <div className="absolute overflow-y-auto inset-0">
+                    <NavLink
+                        href="/lists/my_day"
+                        className="hover:text-black flex items-center gap-4 text-lg py-2 text-gray-700 flex-1"
+                        activeClassName="font-bold text-black"
+                    >
+                        <LiaSunSolid />
+
+                        <div className="break-words">My Day</div>
                     </NavLink>
-                    <NavLink href="/lists/tasks" className={css.link} activeClassName={css["active-link"]}>
-                        <div className={css["link-icon"]}>
-                            <AiOutlineHome />
-                        </div>
-                        <div className={css["link-text"]}>Tasks</div>
+                    <NavLink
+                        href="/lists/tasks"
+                        className="hover:text-black flex items-center gap-4 text-lg py-2 text-gray-700 flex-1"
+                        activeClassName="font-bold text-black"
+                    >
+                        <AiOutlineHome />
+
+                        <div className="break-words">Tasks</div>
                     </NavLink>
                     {lists.map((list) => (
                         <NavLink
                             key={list.id}
                             href={`/lists/${list.id}`}
-                            className={css.link}
-                            activeClassName={css["active-link"]}
+                            className="hover:text-black flex items-center gap-4 text-lg py-2 text-gray-700 flex-1"
+                            activeClassName="font-bold text-black"
                         >
-                            <div className={css["link-icon"]}>
-                                <AiOutlineUnorderedList />
-                            </div>
-                            <div className={css["link-text"]}>{list.name}</div>
+                            <AiOutlineUnorderedList className="flex-shrink-0" />
+
+                            <div className="break-words">{list.name}</div>
                         </NavLink>
                     ))}
                 </div>
