@@ -1,11 +1,23 @@
 "use client";
 
-import { useEffect, experimental_useOptimistic as useOptimistic, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function ToggleEditable({ action, display, inputClass, displayClass, defaultDisplay, inputType }) {
+export default function ToggleEditable({
+    action,
+    display,
+    inputClass,
+    displayClass,
+    defaultDisplay,
+    inputType,
+    required = true,
+}) {
     const inputRef = useRef(null);
-    const [input, setInput] = useOptimistic(display);
+    const submitRef = useRef(null);
     const [editing, setEditing] = useState(false);
+
+    useEffect(() => {
+        if (inputRef.current) inputRef.current.value = display;
+    }, [display]);
 
     useEffect(() => {
         if (editing) inputRef.current.focus();
@@ -29,31 +41,32 @@ export default function ToggleEditable({ action, display, inputClass, displayCla
             document.removeEventListener("click", submitOnMouseClick);
             document.removeEventListener("keydown", submitOnEnter);
         };
-    }, [editing, input]);
+    }, [editing, inputRef?.current?.value]);
 
     function handleSubmit() {
+        submitRef.current.click();
         setEditing(false);
+    }
 
-        if (input == "" || input == display) setInput(display);
-        else action(input);
+    function handleAction(formData) {
+        const input = formData.get("input");
+
+        if ((required && input === "") || input === display) return;
+
+        action(input);
     }
 
     if (editing)
-        return inputType == "textarea" ? (
-            <textarea
-                className={inputClass}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                ref={inputRef}
-            ></textarea>
-        ) : (
-            <input
-                className={inputClass}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                ref={inputRef}
-            />
+        return (
+            <form action={handleAction}>
+                {inputType == "textarea" ? (
+                    <textarea className={inputClass} defaultValue={display} name="input" ref={inputRef}></textarea>
+                ) : (
+                    <input className={inputClass} defaultValue={display} type="text" name="input" ref={inputRef} />
+                )}
+
+                <button type="submit" ref={submitRef} className="hidden"></button>
+            </form>
         );
     else
         return (

@@ -1,7 +1,7 @@
 "use client";
 
 import CustomizeTaskBar from "@/components/CustomizeTaskBar";
-import { createContext, experimental_useOptimistic as useOptimistic, useState } from "react";
+import { createContext, useOptimistic, useState } from "react";
 
 const TasksContext = createContext();
 

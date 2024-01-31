@@ -3,15 +3,20 @@
 import { updateTaskDueDate } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
 import { DateTime } from "luxon";
-import { useContext, experimental_useOptimistic as useOptimistic } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 export default function ManualUpdate({ taskId, dueDate }) {
     const { setDueDate } = useContext(TasksContext);
-    const [input, setInput] = useOptimistic(DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd"));
+    const inputRef = useRef(null);
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        let newDate = DateTime.fromISO(input);
+    useEffect(() => {
+        inputRef.current.value = DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd");
+    }, [dueDate]);
+
+    function handleAction(formData) {
+        const dateInput = formData.get("dueDate");
+
+        let newDate = DateTime.fromISO(dateInput);
         const taskDate = DateTime.fromJSDate(dueDate);
 
         if (taskDate.toFormat("yyyy-MM-dd") != newDate.toFormat("yyyy-MM-dd")) {
@@ -22,12 +27,13 @@ export default function ManualUpdate({ taskId, dueDate }) {
     }
 
     return (
-        <form className="p-1 flex flex-col gap-1 items-center" onSubmit={handleSubmit}>
+        <form className="p-1 flex flex-col gap-1 items-center" action={handleAction}>
             <input
+                ref={inputRef}
                 className="hover:text-gray-500"
                 type="date"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
+                defaultValue={DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd")}
+                name="dueDate"
             />
             <button className="w-full font-bold hover:text-gray-500">Save Due Date</button>
         </form>

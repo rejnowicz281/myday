@@ -1,46 +1,52 @@
 import { updateTaskRepeat } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
-import { useContext, experimental_useOptimistic as useOptimistic, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 export default function ManualUpdate({ taskId, repeat }) {
     const { setRepeat } = useContext(TasksContext);
-    const [input, setInput] = useOptimistic(repeat);
-    const [everyX, setEveryX] = useState(1);
+    const inputRef = useRef(null);
+    const everyXRef = useRef(null);
+
+    useEffect(() => {
+        inputRef.current.value = repeat;
+    }, [repeat]);
 
     function handleInputChange(e) {
         const value = e.target.value;
 
-        if (value == "") setInput(0);
-        else if (value.toString().length > 1 && value.toString()[0] == "0") setInput(value.substring(1));
-        else if (value > -1) setInput(value);
+        if (value == "") e.target.value = 0;
+        else if (value.toString().length > 1 && value.toString()[0] == "0") e.target.value = value.substring(1);
+        else if (value > -1) e.target.value = value;
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    function handleAction(formData) {
+        const taskId = formData.get("taskId");
+        const everyX = formData.get("everyX");
+        formData.set("repeat", formData.get("repeat") * everyX);
+        const repeatInput = formData.get("repeat");
 
-        if (input > -1 && input != repeat && everyX > 0) {
-            const final = input * everyX;
-
-            setRepeat(taskId, final);
-            updateTaskRepeat(taskId, final);
+        if (repeatInput > -1 && repeatInput != repeat && everyX > 0) {
+            setRepeat(taskId, repeatInput);
+            updateTaskRepeat(formData);
+            everyXRef.current.value = 1;
         }
     }
 
     return (
-        <form className="p-1 flex flex-col gap-1 items-center" onSubmit={handleSubmit}>
+        <form className="p-1 flex flex-col gap-1 items-center" action={handleAction}>
+            <input type="hidden" name="taskId" value={taskId} />
             <div className="flex gap-3 items-center">
                 <span>Every</span>
                 <input
                     className="p-1 cursor-default hover:text-gray-500 font-bold outline-none"
                     type="number"
-                    value={input}
+                    name="repeat"
                     placeholder="every x"
+                    defaultValue={repeat}
                     onChange={handleInputChange}
+                    ref={inputRef}
                 />
-                <select
-                    className="font-bold bg-inherit outline-none hover:text-gray-500"
-                    onChange={(e) => setEveryX(e.target.value)}
-                >
+                <select ref={everyXRef} className="font-bold bg-inherit outline-none hover:text-gray-500" name="everyX">
                     <option value={1}>Days</option>
                     <option value={7}>Weeks</option>
                     <option value={30}>Months</option>

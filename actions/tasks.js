@@ -103,10 +103,13 @@ export async function updateTaskCompleted(id, completed) {
     }
 }
 
-export async function updateTaskMyDay(id, my_day) {
+export async function updateTaskMyDay(formData) {
     await connectToDB();
 
     const user = await getCurrentUser();
+
+    const id = formData.get("taskId");
+    const my_day = formData.get("my_day") === "true";
 
     try {
         const updatedTask = await Task.findOneAndUpdate(
@@ -208,10 +211,13 @@ export async function updateTaskNote(id, note) {
     }
 }
 
-export async function updateTaskRepeat(id, repeat) {
+export async function updateTaskRepeat(formData) {
     await connectToDB();
 
     const user = await getCurrentUser();
+
+    const id = formData.get("taskId");
+    const repeat = formData.get("repeat");
 
     try {
         const updatedTask = await Task.findOneAndUpdate(
@@ -243,8 +249,11 @@ export async function updateTaskRepeat(id, repeat) {
     }
 }
 
-export async function updateTaskPriority(id, priority) {
+export async function updateTaskPriority(formData) {
     await connectToDB();
+
+    const id = formData.get("taskId");
+    const priority = formData.get("priority");
 
     const user = await getCurrentUser();
 
@@ -288,7 +297,7 @@ export async function updateTaskDueDate(id, due_date) {
             { _id: id, owner: user?.id },
             {
                 due_date,
-                my_day: isDateToday(due_date) || undefined,
+                my_day: (due_date !== null && isDateToday(due_date)) || undefined,
             },
             { new: true, runValidators: true }
         );
@@ -314,10 +323,12 @@ export async function updateTaskDueDate(id, due_date) {
     }
 }
 
-export async function deleteTask(id) {
+export async function deleteTask(formData) {
     await connectToDB();
 
     const user = await getCurrentUser();
+
+    const id = formData.get("taskId");
 
     const deletedTask = await Task.findOneAndDelete({ _id: id, owner: user?.id });
 

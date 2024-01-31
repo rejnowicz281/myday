@@ -9,10 +9,15 @@ export default function Priority({ priority, taskId }) {
     const { setPriority } = useContext(TasksContext);
     const [expanded, setExpanded] = useState(false);
 
-    async function handleChange(priority) {
+    async function handleAction(formData) {
+        const priority = formData.get("priority");
+
         if (priority > -1) {
+            const taskId = formData.get("taskId");
+
             setPriority(taskId, priority);
-            updateTaskPriority(taskId, priority);
+
+            updateTaskPriority(formData);
         }
     }
 
@@ -27,15 +32,17 @@ export default function Priority({ priority, taskId }) {
             </button>
             {expanded && (
                 <div className="flex gap-4">
-                    <button className="flex-1 text-end hover:text-gray-500" onClick={() => handleChange(priority + 1)}>
-                        +1
-                    </button>
-                    <button
-                        className="flex-1 text-start hover:text-gray-500"
-                        onClick={() => handleChange(priority - 1)}
-                    >
-                        -1
-                    </button>
+                    <form action={handleAction} className="flex-1 flex">
+                        <input type="hidden" name="taskId" value={taskId} />
+                        <input type="hidden" name="priority" value={parseInt(priority) + 1} />
+                        <button className="flex-1 text-end hover:text-gray-500">+1</button>
+                    </form>
+
+                    <form action={handleAction} className="flex-1 flex">
+                        <input type="hidden" name="taskId" value={taskId} />
+                        <input type="hidden" name="priority" value={parseInt(priority) - 1} />
+                        <button className="flex-1 text-start hover:text-gray-500">-1</button>
+                    </form>
                 </div>
             )}
         </div>

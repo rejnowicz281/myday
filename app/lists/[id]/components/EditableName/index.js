@@ -2,7 +2,7 @@
 
 import { updateListName } from "@/actions/lists";
 import ToggleEditable from "@/components/ToggleEditable";
-import { experimental_useOptimistic as useOptimistic } from "react";
+import { useOptimistic } from "react";
 
 export default function EditableName({ name, listId }) {
     const [optimisticName, setOptimisticName] = useOptimistic(name);

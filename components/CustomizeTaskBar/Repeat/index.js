@@ -11,10 +11,13 @@ export default function Repeat({ repeat, taskId }) {
     const { setRepeat } = useContext(TasksContext);
     const [expanded, setExpanded] = useState(false);
 
-    function handleUpdate(value) {
-        if (value > -1 && value != repeat) {
-            setRepeat(taskId, value);
-            updateTaskRepeat(taskId, value);
+    function handleUpdate(formData) {
+        const repeatInput = formData.get("repeat");
+        const taskId = formData.get("taskId");
+
+        if (repeatInput > -1 && repeatInput != repeat) {
+            setRepeat(taskId, repeatInput);
+            updateTaskRepeat(formData);
         }
     }
 
@@ -28,26 +31,41 @@ export default function Repeat({ repeat, taskId }) {
                 {expanded ? <MdExpandLess /> : <MdExpandMore />}
             </button>
             {expanded && (
-                <>
-                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(0)}>
-                        No Repeat
-                    </button>
-                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(1)}>
-                        Daily
-                    </button>
-                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(7)}>
-                        Weekly
-                    </button>
-                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(30)}>
-                        Monthly
-                    </button>
-                    <button className="p-1 hover:text-gray-500" onClick={() => handleUpdate(365)}>
-                        Yearly
-                    </button>
+                <div className="flex flex-col items-center justify-center">
+                    <form action={handleUpdate}>
+                        <input type="hidden" name="taskId" value={taskId} />
+                        <input type="hidden" name="repeat" value={0} />
+                        <button className="p-1 hover:text-gray-500">No Repeat</button>
+                    </form>
+
+                    <form action={handleUpdate}>
+                        <input type="hidden" name="taskId" value={taskId} />
+                        <input type="hidden" name="repeat" value={1} />
+                        <button className="p-1 hover:text-gray-500">Daily</button>
+                    </form>
+
+                    <form action={handleUpdate}>
+                        <input type="hidden" name="taskId" value={taskId} />
+                        <input type="hidden" name="repeat" value={7} />
+                        <button className="p-1 hover:text-gray-500">Weekly</button>
+                    </form>
+
+                    <form action={handleUpdate}>
+                        <input type="hidden" name="taskId" value={taskId} />
+                        <input type="hidden" name="repeat" value={30} />
+                        <button className="p-1 hover:text-gray-500">Monthly</button>
+                    </form>
+
+                    <form action={handleUpdate}>
+                        <input type="hidden" name="taskId" value={taskId} />
+                        <input type="hidden" name="repeat" value={365} />
+                        <button className="p-1 hover:text-gray-500">Yearly</button>
+                    </form>
+
                     <div className="border-t border-b">
                         <ManualUpdate repeat={repeat} taskId={taskId} />
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

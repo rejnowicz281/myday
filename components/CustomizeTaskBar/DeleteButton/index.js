@@ -10,11 +10,16 @@ export default function DeleteButton({ taskId }) {
     const { setModalContent, closeModal } = useModalContext();
     const { removeTask, setEditingTaskId } = useContext(TasksContext);
 
-    function handleDelete() {
-        setEditingTaskId(null);
-        closeModal();
+    function handleAction(formData) {
+        const taskId = formData.get("taskId");
+
         removeTask(taskId);
-        deleteTask(taskId);
+        deleteTask(formData);
+    }
+
+    function handleBeforeAction() {
+        closeModal();
+        setEditingTaskId(null);
     }
 
     return (
@@ -23,12 +28,12 @@ export default function DeleteButton({ taskId }) {
                 setModalContent(
                     <>
                         <p className="text-center text-xl">Are you sure?</p>
-                        <button
-                            className="font-bold rounded disabled:cursor-not-allowed disabled:bg-red-200 disabled:text-gray-600 hover:bg-red-300 transition-colors bg-red-400 w-full mt-6 p-3"
-                            onClick={handleDelete}
-                        >
-                            Delete Task
-                        </button>
+                        <form onSubmit={handleBeforeAction} action={handleAction}>
+                            <input type="hidden" name="taskId" value={taskId} />
+                            <button className="font-bold rounded disabled:cursor-not-allowed disabled:bg-red-200 disabled:text-gray-600 hover:bg-red-300 transition-colors bg-red-400 w-full mt-6 p-3">
+                                Delete Task
+                            </button>
+                        </form>
                     </>
                 )
             }

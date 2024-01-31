@@ -5,26 +5,31 @@ import { useContext } from "react";
 export default function MyDay({ taskId, my_day }) {
     const { setMyDay, isMyDayPage, removeTask, setEditingTaskId } = useContext(TasksContext);
 
-    function handleAction(e) {
-        e.stopPropagation();
+    function handleAction(formData) {
+        const taskId = formData.get("taskId");
+        const myDayInput = formData.get("my_day") === "true";
 
-        setMyDay(taskId, !my_day);
-        updateTaskMyDay(taskId, !my_day);
+        setMyDay(taskId, myDayInput);
+        if (isMyDayPage && my_day) removeTask(taskId);
 
-        if (isMyDayPage && my_day) {
-            setEditingTaskId(null);
-            removeTask(taskId);
-        }
+        updateTaskMyDay(formData);
+    }
+
+    function handleBeforeAction() {
+        if (isMyDayPage && my_day) setEditingTaskId(null);
     }
 
     return (
-        <button
-            className={`rounded hover:bg-emerald-300 transition-colors bg-emerald-400 p-3 font-bold${
-                my_day ? ` bg-red-500 hover:bg-red-400` : ""
-            }`}
-            onClick={handleAction}
-        >
-            {my_day ? "Remove From My Day" : "Add To My Day"}
-        </button>
+        <form className="flex" onSubmit={handleBeforeAction} action={handleAction}>
+            <input type="hidden" name="taskId" value={taskId} />
+            <input type="hidden" name="my_day" value={!my_day} />
+            <button
+                className={`flex-1 rounded hover:bg-emerald-300 transition-colors bg-emerald-400 p-3 font-bold${
+                    my_day ? ` bg-red-500 hover:bg-red-400` : ""
+                }`}
+            >
+                {my_day ? "Remove From My Day" : "Add To My Day"}
+            </button>
+        </form>
     );
 }

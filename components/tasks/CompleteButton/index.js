@@ -2,16 +2,28 @@
 
 import { updateTaskCompleted } from "@/actions/tasks";
 import TasksContext from "@/providers/TasksContext";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 
 export default function CompleteButton({ className, taskId, completed }) {
     const { setCompleted } = useContext(TasksContext);
+    const submitRef = useRef(null);
 
-    function handleAction(e) {
-        e.stopPropagation();
+    function handleAction() {
         setCompleted(taskId, !completed);
         updateTaskCompleted(taskId, !completed);
     }
 
-    return <input className={className} type="checkbox" onChange={handleAction} checked={completed} />;
+    return (
+        <form action={handleAction}>
+            <input
+                className={className}
+                type="checkbox"
+                onChange={() => {
+                    submitRef.current.click();
+                }}
+                checked={completed}
+            />
+            <button className="hidden" ref={submitRef}></button>
+        </form>
+    );
 }

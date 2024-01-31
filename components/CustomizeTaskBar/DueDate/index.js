@@ -4,13 +4,14 @@ import { updateTaskDueDate } from "@/actions/tasks";
 import DueDateDisplay from "@/components/tasks/DueDateDisplay";
 import TasksContext from "@/providers/TasksContext";
 import { DateTime } from "luxon";
-import { useContext, useState } from "react";
+import { useContext, useState, useTransition } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import ManualUpdate from "./ManualUpdate";
 
 export default function DueDate({ dueDate, taskId }) {
     const [expanded, setExpanded] = useState(false);
     const { setDueDate } = useContext(TasksContext);
+    const [isPending, startTransition] = useTransition();
 
     function today() {
         let today = DateTime.now();
@@ -18,8 +19,10 @@ export default function DueDate({ dueDate, taskId }) {
 
         if (taskDate.toFormat("yyyy-MM-dd") != today.toFormat("yyyy-MM-dd")) {
             today = today.toJSDate();
-            setDueDate(taskId, today);
-            updateTaskDueDate(taskId, today);
+            startTransition(() => {
+                setDueDate(taskId, today);
+                updateTaskDueDate(taskId, today);
+            });
         }
     }
 
@@ -29,15 +32,19 @@ export default function DueDate({ dueDate, taskId }) {
 
         if (taskDate.toFormat("yyyy-MM-dd") != tomorrow.toFormat("yyyy-MM-dd")) {
             tomorrow = tomorrow.toJSDate();
-            setDueDate(taskId, tomorrow);
-            updateTaskDueDate(taskId, tomorrow);
+            startTransition(() => {
+                setDueDate(taskId, tomorrow);
+                updateTaskDueDate(taskId, tomorrow);
+            });
         }
     }
 
     function none() {
         if (dueDate != null) {
-            setDueDate(taskId, null);
-            updateTaskDueDate(taskId, null);
+            startTransition(() => {
+                setDueDate(taskId, null);
+                updateTaskDueDate(taskId, null);
+            });
         }
     }
 

@@ -19,6 +19,7 @@ export default function Note({ note, taskId }) {
             inputClass="leading-[inherit] w-full font-bold outline-0"
             defaultDisplay="(Empty note)"
             inputType="textarea"
+            required={false}
         />
     );
 }
