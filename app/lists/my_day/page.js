@@ -4,7 +4,7 @@ import AddTaskButton from "../components/AddTaskButton";
 import Tasks from "../components/Tasks";
 
 export default async function MyDayPage() {
-    const tasks = JSON.parse(await getMyDayList());
+    const tasks = await getMyDayList();
 
     return (
         <div className="flex flex-1">
