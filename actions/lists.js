@@ -26,12 +26,9 @@ export async function getMyDayList() {
     const tasks = await Task.find({ my_day: true, owner: user?.id }).populate("list");
 
     const formattedTasks = tasks.map((task) => {
-        if (task.list) {
-            const list = JSON.stringify(task.list);
-            return { ...task._doc, list: JSON.parse(list) };
-        } else {
-            return task;
-        }
+        const formattedTask = { ...task._doc };
+        if (task.list) formattedTask.list = task.list._doc;
+        return formattedTask;
     });
 
     return formattedTasks;
