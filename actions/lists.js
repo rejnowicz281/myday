@@ -2,11 +2,12 @@
 
 import List from "@/models/list";
 import Task from "@/models/task";
-import { connectToDB } from "@/utils/database";
-import formatValidationError from "@/utils/formatValidationError";
-import getCurrentUser from "@/utils/getServerSession";
+import actionError from "@/utils/actions/actionError";
+import actionSuccess from "@/utils/actions/actionSuccess";
+import formatValidationError from "@/utils/actions/formatValidationError";
+import { connectToDB } from "@/utils/general/database";
+import getCurrentUser from "@/utils/general/getServerSession";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export async function getLists() {
     await connectToDB();
@@ -62,6 +63,8 @@ export async function getList(id) {
 export async function createList(formData) {
     await connectToDB();
 
+    const actionName = "createList";
+
     const user = await getCurrentUser();
 
     const name = formData.get("name");
@@ -76,27 +79,16 @@ export async function createList(formData) {
 
         revalidatePath("/");
 
-        const data = {
-            action: "createList",
-            success: true,
-            list: JSON.stringify(list),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { list: JSON.stringify(list) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "createTimer",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function updateListName(new_name, id) {
     await connectToDB();
+
+    const actionName = "updateListName";
 
     const user = await getCurrentUser();
 
@@ -109,27 +101,16 @@ export async function updateListName(new_name, id) {
 
         revalidatePath(`/lists/${id}`);
 
-        const data = {
-            action: "updateListName",
-            success: true,
-            list: JSON.stringify(newList),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { list: JSON.stringify(newList) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "updateListName",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function deleteList(formData) {
     await connectToDB();
+
+    const actionName = "deleteList";
 
     const user = await getCurrentUser();
 
@@ -140,11 +121,5 @@ export async function deleteList(formData) {
         Task.deleteMany({ list, owner: user?.id }),
     ]);
 
-    const data = {
-        action: "deleteList",
-        success: true,
-        list,
-    };
-    console.log(data);
-    redirect("/");
+    return actionSuccess(actionName, { list }, "/");
 }

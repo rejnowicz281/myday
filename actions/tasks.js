@@ -1,16 +1,18 @@
 "use server";
 
 import Task from "@/models/task";
-import { connectToDB } from "@/utils/database";
-import { isDateToday } from "@/utils/date";
-import formatValidationError from "@/utils/formatValidationError";
-import getCurrentUser from "@/utils/getServerSession";
+import formatValidationError from "@/utils/actions/formatValidationError";
+import { connectToDB } from "@/utils/general/database";
+import { isDateToday } from "@/utils/general/date";
+import getCurrentUser from "@/utils/general/getServerSession";
 import { DateTime } from "luxon";
 import { revalidatePath } from "next/cache";
 import repeatTask from "./helpers/repeatTask";
 
 export async function createTask(formData, forceMyDay = false) {
     await connectToDB();
+
+    const actionName = "createTask";
 
     const user = await getCurrentUser();
 
@@ -47,27 +49,16 @@ export async function createTask(formData, forceMyDay = false) {
 
         revalidatePath(`/lists/${list}`);
 
-        const data = {
-            action: "createTask",
-            success: true,
-            task: JSON.stringify(task),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { task: JSON.stringify(task) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "createTask",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function updateTaskCompleted(id, completed) {
     await connectToDB();
+
+    const actionName = "updateTaskCompleted";
 
     const user = await getCurrentUser();
 
@@ -84,27 +75,16 @@ export async function updateTaskCompleted(id, completed) {
 
         revalidatePath(`/lists/${updatedTask?.list}`);
 
-        const data = {
-            action: "updateTaskCompleted",
-            success: true,
-            task: JSON.stringify(updatedTask),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "updateTaskCompleted",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function updateTaskMyDay(formData) {
     await connectToDB();
+
+    const actionName = "updateTaskMyDay";
 
     const user = await getCurrentUser();
 
@@ -122,27 +102,16 @@ export async function updateTaskMyDay(formData) {
 
         revalidatePath(`/lists/${updatedTask?.list}`);
 
-        const data = {
-            action: "updateTaskMyDay",
-            success: true,
-            task: JSON.stringify(updatedTask),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "updateTaskMyDay",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function updateTaskName(id, name) {
     await connectToDB();
+
+    const actionName = "updateTaskName";
 
     const user = await getCurrentUser();
 
@@ -157,27 +126,16 @@ export async function updateTaskName(id, name) {
 
         revalidatePath(`/lists/${updatedTask?.list}`);
 
-        const data = {
-            action: "updateTaskName",
-            success: true,
-            task: JSON.stringify(updatedTask),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "updateTaskName",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function updateTaskNote(id, note) {
     await connectToDB();
+
+    const actionName = "updateTaskNote";
 
     const user = await getCurrentUser();
 
@@ -192,27 +150,16 @@ export async function updateTaskNote(id, note) {
 
         revalidatePath(`/lists/${updatedTask?.list}`);
 
-        const data = {
-            action: "updateTaskNote",
-            success: true,
-            task: JSON.stringify(updatedTask),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "updateTaskNote",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function updateTaskRepeat(formData) {
     await connectToDB();
+
+    const actionName = "updateTaskRepeat";
 
     const user = await getCurrentUser();
 
@@ -230,27 +177,16 @@ export async function updateTaskRepeat(formData) {
 
         revalidatePath(`/lists/${updatedTask?.list}`);
 
-        const data = {
-            action: "updateTaskRepeat",
-            success: true,
-            task: JSON.stringify(updatedTask),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "updateTaskRepeat",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function updateTaskPriority(formData) {
     await connectToDB();
+
+    const actionName = "updateTaskPriority";
 
     const id = formData.get("taskId");
     const priority = formData.get("priority");
@@ -268,27 +204,16 @@ export async function updateTaskPriority(formData) {
 
         revalidatePath(`/lists/${updatedTask?.list}`);
 
-        const data = {
-            action: "updateTaskPriority",
-            success: true,
-            task: JSON.stringify(updatedTask),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "updateTaskPriority",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function updateTaskDueDate(id, due_date) {
     await connectToDB();
+
+    const actionName = "updateTaskDueDate";
 
     const user = await getCurrentUser();
 
@@ -304,27 +229,16 @@ export async function updateTaskDueDate(id, due_date) {
 
         revalidatePath(`/lists/${updatedTask?.list}`);
 
-        const data = {
-            action: "updateTaskDueDate",
-            success: true,
-            task: JSON.stringify(updatedTask),
-        };
-        console.log(data);
-        return data;
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
     } catch (err) {
-        const validationError = formatValidationError(err);
-        const data = {
-            action: "updateTaskDueDate",
-            success: false,
-            errors: validationError,
-        };
-        console.error(data);
-        return data;
+        return actionError(actionName, { errors: formatValidationError(err) });
     }
 }
 
 export async function deleteTask(formData) {
     await connectToDB();
+
+    const actionName = "deleteTask";
 
     const user = await getCurrentUser();
 
@@ -334,11 +248,5 @@ export async function deleteTask(formData) {
 
     revalidatePath(`/lists/${deletedTask?.list}`);
 
-    const data = {
-        action: "deleteTask",
-        success: true,
-        task: id,
-    };
-    console.log(data);
-    return data;
+    return actionSuccess(actionName, { task: id });
 }

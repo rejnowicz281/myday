@@ -1,4 +1,4 @@
-import { formatDate, isOverdue } from "@/utils/date";
+import { formatDate, isOverdue } from "@/utils/general/date";
 
 export default function DueDateDisplay({ dueDate }) {
     if (dueDate instanceof Date)

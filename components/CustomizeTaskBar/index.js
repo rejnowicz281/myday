@@ -1,6 +1,6 @@
 import MyDay from "@/components/CustomizeTaskBar/MyDay";
 import CompleteButton from "@/components/tasks/CompleteButton";
-import { formatDateWithTime } from "@/utils/date";
+import { formatDateWithTime } from "@/utils/general/date";
 import CloseButton from "./CloseButton";
 import DeleteButton from "./DeleteButton";
 import DueDate from "./DueDate";
