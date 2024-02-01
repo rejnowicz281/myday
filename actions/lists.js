@@ -7,7 +7,6 @@ import actionSuccess from "@/utils/actions/actionSuccess";
 import formatValidationError from "@/utils/actions/formatValidationError";
 import { connectToDB } from "@/utils/general/database";
 import getCurrentUser from "@/utils/general/getServerSession";
-import { revalidatePath } from "next/cache";
 
 export async function getLists() {
     await connectToDB();
@@ -77,9 +76,7 @@ export async function createList(formData) {
     try {
         await list.save();
 
-        revalidatePath("/");
-
-        return actionSuccess(actionName, { list: JSON.stringify(list) });
+        return actionSuccess(actionName, { list: JSON.stringify(list) }, "/");
     } catch (err) {
         return actionError(actionName, { errors: formatValidationError(err) });
     }
@@ -99,9 +96,7 @@ export async function updateListName(new_name, id) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${id}`);
-
-        return actionSuccess(actionName, { list: JSON.stringify(newList) });
+        return actionSuccess(actionName, { list: JSON.stringify(newList) }, `/lists/${id}`);
     } catch (err) {
         return actionError(actionName, { errors: formatValidationError(err) });
     }
@@ -121,5 +116,5 @@ export async function deleteList(formData) {
         Task.deleteMany({ list, owner: user?.id }),
     ]);
 
-    return actionSuccess(actionName, { list }, "/");
+    return actionSuccess(actionName, { list }, null, "/");
 }

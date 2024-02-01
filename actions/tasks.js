@@ -1,12 +1,13 @@
 "use server";
 
 import Task from "@/models/task";
+import actionError from "@/utils/actions/actionError";
+import actionSuccess from "@/utils/actions/actionSuccess";
 import formatValidationError from "@/utils/actions/formatValidationError";
 import { connectToDB } from "@/utils/general/database";
 import { isDateToday } from "@/utils/general/date";
 import getCurrentUser from "@/utils/general/getServerSession";
 import { DateTime } from "luxon";
-import { revalidatePath } from "next/cache";
 import repeatTask from "./helpers/repeatTask";
 
 export async function createTask(formData, forceMyDay = false) {
@@ -47,9 +48,7 @@ export async function createTask(formData, forceMyDay = false) {
 
         await task.save();
 
-        revalidatePath(`/lists/${list}`);
-
-        return actionSuccess(actionName, { task: JSON.stringify(task) });
+        return actionSuccess(actionName, { task: JSON.stringify(task) }, "/lists/[slug]");
     } catch (err) {
         return actionError(actionName, { errors: formatValidationError(err) });
     }
@@ -73,11 +72,9 @@ export async function updateTaskCompleted(id, completed) {
 
         await repeatTask(updatedTask); // repeat task if possible
 
-        revalidatePath(`/lists/${updatedTask?.list}`);
-
-        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) }, "/lists/[slug]");
     } catch (err) {
-        return actionError(actionName, { errors: formatValidationError(err) });
+        return actionError(actionName, { errors: formatValidationError(err) }, "/lists/[slug]");
     }
 }
 
@@ -100,11 +97,9 @@ export async function updateTaskMyDay(formData) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${updatedTask?.list}`);
-
-        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) }, "/lists/[slug]");
     } catch (err) {
-        return actionError(actionName, { errors: formatValidationError(err) });
+        return actionError(actionName, { errors: formatValidationError(err) }, "/lists/[slug]");
     }
 }
 
@@ -124,11 +119,9 @@ export async function updateTaskName(id, name) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${updatedTask?.list}`);
-
-        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) }, "/lists/[slug]");
     } catch (err) {
-        return actionError(actionName, { errors: formatValidationError(err) });
+        return actionError(actionName, { errors: formatValidationError(err) }, "/lists/[slug]");
     }
 }
 
@@ -148,11 +141,9 @@ export async function updateTaskNote(id, note) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${updatedTask?.list}`);
-
-        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) }, "/lists/[slug]");
     } catch (err) {
-        return actionError(actionName, { errors: formatValidationError(err) });
+        return actionError(actionName, { errors: formatValidationError(err) }, "/lists/[slug]");
     }
 }
 
@@ -170,16 +161,14 @@ export async function updateTaskRepeat(formData) {
         const updatedTask = await Task.findOneAndUpdate(
             { _id: id, owner: user?.id },
             {
-                repeat,
+                repeat: null,
             },
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${updatedTask?.list}`);
-
-        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) }, "/lists/[slug]");
     } catch (err) {
-        return actionError(actionName, { errors: formatValidationError(err) });
+        return actionError(actionName, { errors: formatValidationError(err) }, "/lists/[slug]");
     }
 }
 
@@ -202,11 +191,9 @@ export async function updateTaskPriority(formData) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${updatedTask?.list}`);
-
-        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) }, "/lists/[slug]");
     } catch (err) {
-        return actionError(actionName, { errors: formatValidationError(err) });
+        return actionError(actionName, { errors: formatValidationError(err) }, "/lists/[slug]");
     }
 }
 
@@ -227,11 +214,9 @@ export async function updateTaskDueDate(id, due_date) {
             { new: true, runValidators: true }
         );
 
-        revalidatePath(`/lists/${updatedTask?.list}`);
-
-        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) });
+        return actionSuccess(actionName, { task: JSON.stringify(updatedTask) }, "/lists/[slug]");
     } catch (err) {
-        return actionError(actionName, { errors: formatValidationError(err) });
+        return actionError(actionName, { errors: formatValidationError(err) }, "/lists/[slug]");
     }
 }
 
@@ -246,7 +231,5 @@ export async function deleteTask(formData) {
 
     const deletedTask = await Task.findOneAndDelete({ _id: id, owner: user?.id });
 
-    revalidatePath(`/lists/${deletedTask?.list}`);
-
-    return actionSuccess(actionName, { task: id });
+    return actionSuccess(actionName, { task: id }, "/lists/[slug]");
 }
