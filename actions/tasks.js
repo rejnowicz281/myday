@@ -161,7 +161,7 @@ export async function updateTaskRepeat(formData) {
         const updatedTask = await Task.findOneAndUpdate(
             { _id: id, owner: user?.id },
             {
-                repeat: null,
+                repeat,
             },
             { new: true, runValidators: true }
         );
