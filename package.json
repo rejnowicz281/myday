@@ -11,7 +11,15 @@
     },
     "dependencies": {
         "@auth/mongodb-adapter": "^2.0.2",
+        "@radix-ui/react-alert-dialog": "^1.0.5",
+        "@radix-ui/react-checkbox": "^1.0.4",
+        "@radix-ui/react-dialog": "^1.0.5",
+        "@radix-ui/react-label": "^2.0.2",
+        "@radix-ui/react-slot": "^1.0.2",
         "autoprefixer": "^10.0.1",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.0",
+        "lucide-react": "^0.321.0",
         "luxon": "^3.4.3",
         "mongoose": "^6.12.1",
         "next": "^14.1.0",
@@ -20,6 +28,8 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-icons": "^4.11.0",
-        "tailwindcss": "^3.3.0"
+        "tailwind-merge": "^2.2.1",
+        "tailwindcss": "^3.3.0",
+        "tailwindcss-animate": "^1.0.7"
     }
 }
