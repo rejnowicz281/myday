@@ -40,6 +40,7 @@ export default function ManualUpdate({ taskId, repeat }) {
             <div className="flex gap-3 items-center">
                 <span>Every</span>
                 <Input
+                    min="0"
                     className="border-none hover:text-gray-500 font-bold"
                     type="number"
                     name="repeat"
