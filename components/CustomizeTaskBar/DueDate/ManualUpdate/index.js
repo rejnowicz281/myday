@@ -12,7 +12,7 @@ export default function ManualUpdate({ taskId, dueDate }) {
     const inputRef = useRef(null);
 
     useEffect(() => {
-        if (dueDate !== null) inputRef.current.value = DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd");
+        inputRef.current.value = DateTime.fromJSDate(dueDate).toFormat("yyyy-MM-dd");
     }, [dueDate]);
 
     function handleAction(formData) {
