@@ -1,6 +1,9 @@
 import MyDay from "@/components/CustomizeTaskBar/MyDay";
 import CompleteButton from "@/components/tasks/CompleteButton";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { formatDateWithTime } from "@/utils/general/date";
+import DueDateDisplay from "../tasks/DueDateDisplay";
+import RepeatDisplay from "../tasks/RepeatDisplay";
 import CloseButton from "./CloseButton";
 import DeleteButton from "./DeleteButton";
 import DueDate from "./DueDate";
@@ -29,9 +32,33 @@ export default function CustomizeTaskBar({ task }) {
                         <EditableName name={task.name} taskId={task._id} />
                     </div>
                     <MyDay taskId={task._id} my_day={task.my_day} />
-                    <Repeat taskId={task._id} repeat={task.repeat} />
-                    <Priority priority={task.priority} taskId={task._id} />
-                    <DueDate dueDate={task.due_date} taskId={task._id} />
+                    <Accordion type="single" collapsible>
+                        <AccordionItem value="item-1">
+                            <AccordionTrigger className="hover:no-underline hover:text-gray-500 justify-center gap-2 font-bold">
+                                <RepeatDisplay repeat={task.repeat} />
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                <Repeat taskId={task._id} repeat={task.repeat} />
+                            </AccordionContent>
+                        </AccordionItem>
+                        <AccordionItem value="item-2">
+                            <AccordionTrigger className="hover:no-underline hover:text-gray-500 justify-center gap-2 font-bold">
+                                {task.priority <= 0 ? "No" : task.priority} Priority
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                <Priority taskId={task._id} priority={task.priority} />
+                            </AccordionContent>
+                        </AccordionItem>
+                        <AccordionItem value="item-3">
+                            <AccordionTrigger className="hover:no-underline hover:text-gray-500 justify-center gap-2 font-bold">
+                                <DueDateDisplay dueDate={task.due_date} />
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                <DueDate taskId={task._id} dueDate={task.due_date} />
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
+
                     <Note taskId={task._id} note={task.note} />
                 </div>
             </div>

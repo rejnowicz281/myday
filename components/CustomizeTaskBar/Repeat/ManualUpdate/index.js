@@ -1,4 +1,6 @@
 import { updateTaskRepeat } from "@/actions/tasks";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import TasksContext from "@/providers/TasksContext";
 import { useContext, useEffect, useRef } from "react";
 
@@ -37,8 +39,8 @@ export default function ManualUpdate({ taskId, repeat }) {
             <input type="hidden" name="taskId" value={taskId} />
             <div className="flex gap-3 items-center">
                 <span>Every</span>
-                <input
-                    className="p-1 cursor-default hover:text-gray-500 font-bold outline-none"
+                <Input
+                    className="border-none hover:text-gray-500 font-bold"
                     type="number"
                     name="repeat"
                     placeholder="every x"
@@ -46,14 +48,20 @@ export default function ManualUpdate({ taskId, repeat }) {
                     onChange={handleInputChange}
                     ref={inputRef}
                 />
-                <select ref={everyXRef} className="font-bold bg-inherit outline-none hover:text-gray-500" name="everyX">
+                <select
+                    ref={everyXRef}
+                    className="font-bold cursor-pointer bg-inherit outline-none hover:text-gray-500"
+                    name="everyX"
+                >
                     <option value={1}>Days</option>
                     <option value={7}>Weeks</option>
                     <option value={30}>Months</option>
                     <option value={365}>Years</option>
                 </select>
             </div>
-            <button className="w-full font-bold hover:text-gray-500">Save</button>
+            <Button className="w-full font-bold" variant="ghost">
+                Save
+            </Button>
         </form>
     );
 }

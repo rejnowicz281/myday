@@ -1,13 +1,12 @@
 "use client";
 
 import { updateTaskPriority } from "@/actions/tasks";
+import { Button } from "@/components/ui/button";
 import TasksContext from "@/providers/TasksContext";
-import { useContext, useState } from "react";
-import { MdExpandLess, MdExpandMore } from "react-icons/md";
+import { useContext } from "react";
 
 export default function Priority({ priority, taskId }) {
     const { setPriority } = useContext(TasksContext);
-    const [expanded, setExpanded] = useState(false);
 
     async function handleAction(formData) {
         const priority = formData.get("priority");
@@ -22,29 +21,24 @@ export default function Priority({ priority, taskId }) {
     }
 
     return (
-        <div className="flex flex-col">
-            <button
-                className="hover:text-gray-500 font-bold flex items-center justify-center"
-                onClick={() => setExpanded(!expanded)}
-            >
-                {priority <= 0 ? "No" : priority} Priority
-                {expanded ? <MdExpandLess /> : <MdExpandMore />}
-            </button>
-            {expanded && (
-                <div className="flex gap-4">
-                    <form action={handleAction} className="flex-1 flex">
-                        <input type="hidden" name="taskId" value={taskId} />
-                        <input type="hidden" name="priority" value={parseInt(priority) + 1} />
-                        <button className="flex-1 text-end hover:text-gray-500">+1</button>
-                    </form>
+        <>
+            <div className="flex">
+                <form action={handleAction} className="flex-1 flex">
+                    <input type="hidden" name="taskId" value={taskId} />
+                    <input type="hidden" name="priority" value={parseInt(priority) + 1} />
+                    <Button className="flex justify-end flex-1" variant="ghost">
+                        +1
+                    </Button>
+                </form>
 
-                    <form action={handleAction} className="flex-1 flex">
-                        <input type="hidden" name="taskId" value={taskId} />
-                        <input type="hidden" name="priority" value={parseInt(priority) - 1} />
-                        <button className="flex-1 text-start hover:text-gray-500">-1</button>
-                    </form>
-                </div>
-            )}
-        </div>
+                <form action={handleAction} className="flex-1 flex">
+                    <input type="hidden" name="taskId" value={taskId} />
+                    <input type="hidden" name="priority" value={parseInt(priority) - 1} />
+                    <Button className="flex justify-start flex-1" variant="ghost">
+                        -1
+                    </Button>
+                </form>
+            </div>
+        </>
     );
 }
