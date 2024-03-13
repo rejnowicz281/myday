@@ -13,8 +13,8 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import TasksContext from "@/providers/TasksContext";
+import { BsTrash } from "@react-icons/all-files/bs/BsTrash";
 import { useContext } from "react";
-import { BsTrash } from "react-icons/bs";
 
 export default function DeleteButton({ taskId }) {
     const { removeTask, setEditingTaskId } = useContext(TasksContext);

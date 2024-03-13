@@ -1,3 +1,4 @@
+import NextTopLoader from "nextjs-toploader";
 import Sidebar from "./components/Sidebar";
 import "./globals.css";
 
@@ -10,6 +11,7 @@ export default function RootLayout({ children }) {
     return (
         <html className="h-full" lang="en">
             <body className="min-h-full flex flex-col">
+                <NextTopLoader showSpinner={false} height={4} />
                 <div className="flex-1 flex">
                     <Sidebar />
                     {children}

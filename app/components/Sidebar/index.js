@@ -1,7 +1,8 @@
 import { getLists } from "@/actions/lists";
 import NavLink from "@/components/NavLink";
-import { AiOutlineHome, AiOutlineUnorderedList } from "react-icons/ai";
-import { LiaSunSolid } from "react-icons/lia";
+import { AiOutlineHome } from "@react-icons/all-files/ai/AiOutlineHome";
+import { AiOutlineUnorderedList } from "@react-icons/all-files/ai/AiOutlineUnorderedList";
+import { LiaSunSolid } from "@react-icons/all-files/lia/LiaSunSolid";
 import AddList from "./AddList";
 import Signout from "./Signout";
 

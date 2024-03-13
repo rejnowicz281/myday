@@ -1,8 +1,8 @@
 "use client";
 
 import TasksContext from "@/providers/TasksContext";
+import { IoExitOutline } from "@react-icons/all-files/io5/IoExitOutline";
 import { useContext } from "react";
-import { IoExitOutline } from "react-icons/io5";
 
 export default function CloseButton() {
     const { setEditingTaskId } = useContext(TasksContext);

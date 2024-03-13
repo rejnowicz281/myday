@@ -1,5 +1,5 @@
+import { ImExit } from "@react-icons/all-files/im/ImExit";
 import Link from "next/link";
-import { ImExit } from "react-icons/im";
 
 export default function Signout() {
     return (

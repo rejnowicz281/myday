@@ -1,8 +1,8 @@
 "use client";
 import { createList } from "@/actions/lists";
 import SubmitButton from "@/components/SubmitButton";
+import { VscAdd } from "@react-icons/all-files/vsc/VscAdd";
 import { useRef } from "react";
-import { VscAdd } from "react-icons/vsc";
 
 export default function AddList() {
     const formRef = useRef(null);

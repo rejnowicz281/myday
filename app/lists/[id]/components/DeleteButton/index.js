@@ -12,8 +12,8 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { BsTrash } from "@react-icons/all-files/bs/BsTrash";
 import { useState } from "react";
-import { BsTrash } from "react-icons/bs";
 
 export default function DeleteButton({ listId }) {
     const [open, setOpen] = useState(false);

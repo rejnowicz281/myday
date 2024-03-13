@@ -17,8 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import TasksContext from "@/providers/TasksContext";
+import { IoAddCircleOutline } from "@react-icons/all-files/io5/IoAddCircleOutline";
 import { useContext, useState } from "react";
-import { IoAddCircleOutline } from "react-icons/io5";
 
 export default function AddTaskButton({ listId }) {
     const [open, setOpen] = useState(false);
